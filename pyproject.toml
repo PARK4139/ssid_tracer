@@ -1,0 +1,359 @@
+[build-system]
+# requires = ["uv"]
+# build-backend = "uv.build"
+# uv.build 는 아직임.
+#requires = ["setuptools", "wheel"]
+requires = ["setuptools>=69", "wheel", "setuptools-scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+
+
+
+
+[project]
+name = "pk_system"
+dynamic = ["version"] #  -> 동적 version
+description = "cli utilty program"
+authors = [
+    { name = "junghoon.park", email = "park4139@google.com" }
+]
+requires-python = ">=3.12, <3.14"
+readme = "README.md"
+license = "MIT"   # 임시로 MIT로 설정, 추후 변경 가능
+
+dependencies = [
+    "altair==5.5.0",
+    "annotated-types==0.7.0",
+    "anyio==4.7.0",
+    "appdirs==1.4.4",
+    "asttokens==3.0.0",
+    "attrs==24.3.0",
+    "bcrypt==4.2.1",
+    "beautifulsoup4==4.12.3",
+    "behave==1.2.6",
+    "blinker==1.9.0",
+    "bs4==0.0.2",
+    "cachetools==5.5.2",
+    "certifi==2024.12.14",
+    "cffi==1.17.1",
+    "cfscrape==2.1.1",
+    "chardet==5.2.0",
+    "charset-normalizer==3.4.1",
+    "click==8.1.8",
+    "clipboard==0.0.4",
+    "cloudscraper==1.2.71",
+    "colorama==0.4.6",
+    "comm==0.2.2",
+    "contourpy==1.3.1",
+    "cryptography==44.0.0",
+    "cssselect==1.2.0",
+    "cycler==0.12.1",
+    "dataclasses-json==0.6.7", # Added to fix ModuleNotFoundError
+    "debugpy==1.8.11",
+    "decorator==5.1.1",
+    "dirsync==2.2.5",
+    "docker==7.1.0",
+    "easyocr==1.7.2",
+    "exceptiongroup==1.2.2",
+    "execnet==2.1.1",
+    "executing==2.1.0",
+    "fake-useragent==2.0.3",
+    "fasteners==0.19",
+    "filelock==3.16.1",
+    "fonttools==4.56.0",
+    "frozendict==2.4.6",
+    "fsspec==2024.12.0",
+    "gitdb==4.0.12",
+    "GitPython==3.1.44",
+    "greenlet==3.1.1",
+    "gtts==2.5.4",
+    "h11==0.14.0",
+    "httpcore==1.0.7",
+    "httpx==0.28.1",
+    "idna==3.10",
+    "imageio==2.36.1",
+    "imageio-ffmpeg==0.5.1",
+    "importlib_metadata==8.5.0",
+    "iniconfig==2.0.0",
+    "ipdb==0.13.13",
+    "ipykernel==6.29.5",
+    "ipython==8.31.0",
+    "itsdangerous==2.2.0",
+    "jedi==0.19.2",
+    "Jinja2==3.1.5",
+    "jpype1==1.5.2",
+    "jsonschema==4.23.0",
+    "jsonschema-specifications==2024.10.1",
+    "jupyter_client==8.6.3",
+    "jupyter_core==5.7.2",
+    "keyboard==0.13.5",
+    "kiwisolver==1.4.8",
+    "konlpy==0.6.0",
+    "lazy_loader==0.4",
+    "lxml==5.3.1",
+    # "lz4==4.3.3",  # annotated for uv sync trouble...
+    # "browser-cookie3==0.20.1", # annotated for uv sync trouble...
+    "markdown-it-py==3.0.0",
+    "MarkupSafe==3.0.2",
+    "matplotlib~=3.10.1",
+    "matplotlib-inline==0.1.7",
+    "mdurl==0.1.2",
+    "moviepy==2.1.1",
+    "mpmath==1.3.0",
+    "multitasking==0.0.11",
+    "mutagen==1.47.0",
+    "mycdp==1.1.0",
+    # "mysql==0.0.3",
+    # "mysql-connector-python==9.2.0",
+    # "mysqlclient==2.2.7",
+    "narwhals==1.28.0",
+    "nest-asyncio==1.6.0",
+    "networkx==3.4.2",
+    "ninja==1.11.1.3",
+    "numpy==2.2.1",
+    "nvidia-ml-py==12.570.86",
+    "opencv-python-headless==4.10.0.84",
+    "outcome==1.3.0.post0",
+    "packaging==24.2",
+    "pandas==2.2.3",
+    "parameterized==0.9.0",
+    "paramiko==3.5.0",
+    "parse==1.20.2",
+    "parse_type==0.6.4",
+    "parso==0.8.4",
+    "passlib==1.7.4",
+    "pdbp==1.6.1",
+    "peewee==3.17.9",
+    "pex==2.28.0",
+    "pillow==10.4.0",
+    "platformdirs==4.3.6",
+    "plotly==6.0.0",
+    "pluggy==1.5.0",
+    "proglog==0.1.10",
+    "prompt_toolkit==3.0.48",
+    "protobuf==5.29.3",
+    "psutil==6.1.1",
+    "pure_eval==0.2.3",
+    "pyaes==1.6.1",
+    "pyarrow==19.0.1",
+    "pyasn1~=0.4.8",
+    "pyclipper==1.3.0.post6",
+    "pycparser==2.22",
+    "pydantic==2.10.4",
+    "pydantic_core==2.27.2",
+    "pydeck==0.9.1",
+    "pyglet~=2.0.20",
+    "Pygments==2.18.0",
+    "PyMsgBox==1.0.9",
+    "PyNaCl==1.5.0",
+    "pynose==1.5.3",
+    "pynput>=1.7.7",
+    "pyotp==2.9.0",
+    "pyparsing==3.2.0",
+    "pyperclip==1.9.0",
+    "pyserial==3.5",
+    #    "pyppeteer~=2.0.0",
+    #    "pyppeteer==1.0.2",
+    #    "pyppeteer==1.0.2",  # 낮춰서 충돌 해결시도
+    "pyee==12.0.0",
+    "playwright==1.49.1", # pyppeteer 를 완전히 대체함
+    #    "playwright==1.48.0",
+    "playwright-stealth==1.0.6",
+    "PyScreeze==1.0.1",
+    "PySide6==6.8.1",
+    "PySide6_Addons==6.8.1",
+    "PySide6_Essentials==6.8.1",
+    "PySocks==1.7.1",
+    "pytest==8.3.4",
+    "pytest-html==4.0.2",
+    "pytest-metadata==3.1.1",
+    "pytest-ordering==0.6",
+    "pytest-rerunfailures==15.0",
+    "pytest-xdist==3.6.1",
+    "python-bidi==0.6.3",
+    "python-dateutil==2.9.0.post0",
+    "python-dotenv==1.0.1",
+    "python-multipart==0.0.20",
+    "python-telegram-bot==21.10",
+    "pytube==15.0.0",
+    "pytweening==1.2.0",
+    "pytz==2024.2",
+    "PyYAML==6.0.2",
+    "pyzmq==26.2.0",
+    "referencing==0.36.2",
+    "requests==2.32.3",
+    "requests-toolbelt==1.0.0",
+    "rich==13.9.4",
+    "rpds-py==0.23.1",
+    "rsa==4.9",
+    "sbvirtualdisplay==1.4.0",
+    "scikit-image==0.25.0",
+    "scipy==1.14.1",
+    "screeninfo==0.8.1",
+    "selenium==4.27.1",
+    "selenium-stealth==1.0.6",
+    "seleniumbase==4.33.12",
+    "Send2Trash==1.8.3",
+    #    "setuptools~=75.6.0",
+    "shapely==2.0.6",
+    "shiboken6==6.8.1",
+    "six==1.17.0",
+    "smmap==5.0.2",
+    "sniffio==1.3.1",
+    "sortedcontainers==2.4.0",
+    "soupsieve==2.6",
+    "SQLAlchemy==2.0.38",
+    "stack-data==0.6.3",
+    "sympy==1.13.1",
+    "tabcompleter==1.4.0",
+    "Telethon==1.38.1",
+    "tenacity==9.0.0",
+    "tifffile==2024.12.12",
+    "toml==0.10.2",
+    "tornado==6.4.2",
+    "tqdm==4.67.1",
+    "traitlets==5.14.3",
+    "trio==0.27.0",
+    "trio-websocket==0.11.1",
+    "typing_extensions==4.12.2",
+    "tzdata==2024.2",
+    "undetected-chromedriver==3.5.5",
+    "urllib3==1.26.20",
+    "watchdog==6.0.0",
+    "wcwidth==0.2.13",
+    "webdriver-manager==4.0.2",
+    "websocket-client==1.8.0",
+    #    "websockets~=10.4",
+    "websockets>=14.1,<15.1", # seleniumbase와 호환되는 범위
+    #    "wheel==0.45.1",
+    "wordcloud==1.9.4",
+    "wsproto==1.2.0",
+    "yfinance==0.2.54",
+    "zipp==3.21.0",
+    "pymysql~=1.1.1",
+    #    "pip~=24.3.1",
+    "python-jose~=3.4.0",
+    "ecdsa~=0.19.0",
+    #    "pyee~=11.1.1",
+    #    "pyee>=11.1.1,<13.0.0",
+    #    "pyee==12.0.0",  # playwright==1.49.1과 호환
+    "openpyxl~=3.1.5",
+    "starlette~=0.41.3",
+    "et_xmlfile~=2.0.0",
+    "pycryptodomex~=3.22.0",
+    # Windows 전용 패키지들
+    "PyAutoGUI==0.9.54; sys_platform == 'win32'",
+    "PyGetWindow==0.0.9; sys_platform == 'win32'",
+    "MouseInfo==0.1.3; sys_platform == 'win32'",
+    "blurwindow==1.2.1; sys_platform == 'win32'",
+    "pyreadline3==3.5.4; sys_platform == 'win32'",
+    "PyRect==0.2.0; sys_platform == 'win32'",
+    "shadowcopy==0.0.4; sys_platform == 'win32'",
+    # Windows 전용 SSL 관련 패키지들 (passlib 성능 향상 및 SSL 오류 해결)
+    "cryptg>=0.4.0; sys_platform == 'win32'",
+    "pyOpenSSL>=24.0.0; sys_platform == 'win32'",
+    # Linux/WSL 전용 패키지들
+    "python-xlib>=0.33; sys_platform == 'linux'",
+    # 크로스 플랫폼 패키지들
+    "browser-cookie3>=0.20.1",
+    "pyttsx3>=2.99",
+    "pydub>=0.25.1",
+    "structlog>=25.4.0",
+    "torch>=2.6.0",
+    "black>=25.1.0",
+    "logging>=0.4.9.6",
+    "pygame>=2.6.1",
+    "elevenlabs>=2.12.1",
+    "playsound!=1.3.0,>=1.2.2; sys_platform == 'win32'",
+    "openai>=1.102.0",
+    "speechrecognition>=3.14.3",
+    "yt-dlp>=2025.9.5",
+    "pyaudio>=0.2.14",
+    "pywin32>=311 ; sys_platform == 'win32'",
+    "uv>=0.9.15",
+    "pytest-asyncio>=1.3.0",
+    "google-cloud-speech>=2.34.0",
+    "flet>=0.28.3",
+    "fastapi>=0.124.4",
+    "mysql>=0.0.3",
+    "pandas-stubs==2.3.3.251201",
+    "mysql-connector-python>=9.5.0",
+    "uvicorn>=0.38.0",
+    "yeelight>=0.7.16",
+    "pywinauto>=0.6.9",
+    "pystray>=0.19.5",
+    "pywin32>=311",
+    #    "ruff>=0.14.10",
+    "apscheduler>=3.11.2",
+    "google-generativeai>=0.8.6",
+    "google-genai>=1.4.0",
+    "opencv-python>=4.12.0.88",
+    "mss>=10.1.0",
+    "pyautogui>=0.9.54",
+    "ruff>=0.14.13",
+    "dotenv>=0.9.9",
+    "paho-mqtt>=2.1.0",
+    "tapo>=0.8.8",
+    "winotify>=1.1.0",
+    "psycopg2-binary>=2.9.11",
+    "esptool>=5.2.0",
+]
+
+[tool.setuptools]
+# pk_system은 독립 실행형 유틸리티 _program_이므로 패키지로 설치되지 않도록 설정
+packages = []
+
+
+[tool.setuptools_scm]
+fallback_version = "0.0.0" # 태그가 없을 때 임시 버전
+version_file = "pk_tools/pk_info/_version.py"  # version file path
+tag_regex = "^v?(?P<version>\\d{4}\\.\\d{1,2}\\.\\d{1,2})$" # 날짜 태그만 인식하도록 정규식 고정 (v2025.9.18 형태)
+# (옵션) 날짜 태그 매치 강화 – 1자리/2자리 월·일을 모두 커버
+git_describe_command = [
+  "git","describe","--dirty","--tags","--long",
+  "--match","v[0-9][0-9][0-9][0-9].[0-9].[0-9]",
+  "--match","v[0-9][0-9][0-9][0-9].[0-9][0-9].[0-9]",
+  "--match","v[0-9][0-9][0-9][0-9].[0-9].[0-9][0-9]",
+  "--match","v[0-9][0-9][0-9][0-9].[0-9][0-9].[0-9][0-9]"
+]
+version_scheme = "no-guess-dev"
+local_scheme   = "node-and-date"
+# local_scheme = "node-and-date"
+#태그 일치: 2025.9.18
+#태그 뒤: 2025.9.18.post1+g<hash>.dYYYYMMDD
+#dirty: 2025.9.18+g<hash>.dYYYYMMDD
+#👉 git 해시와 날짜가 붙음. CI/CD, 내부 빌드 추적에 가장 흔히 씀.
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "isort>=7.0.0",
+    "pytest-cov>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+# Single source of truth (pytest.ini removed). Requires pytest-asyncio from project dev deps — run pytest via `uv run pytest` (or `.venv` interpreter).
+# cacheprovider mkdtemp(prefix=pytest-cache-files-)는 이 디렉터리 안에만 생성되게 함 (레포 루트 오염 방지).
+cache_dir = "pk_tmp/.pytest_cache"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "creation: tests related to creation",
+    "stats: tests related to statistics",
+    "integration: integration tests (network/DB, may be slow); live external services (e.g. WezTerm mux)",
+]
+# OTA release management tests: pytest pk_tools/switch_bot/tests -v
+# With coverage: pytest pk_tools/switch_bot/tests -v --cov=pk_tools.pk_functions --cov=pk_tools.pk_objects --cov-report=term-missing -k ota
+
+[tool.coverage.run]
+source = ["pk_tools/pk_functions", "pk_tools/pk_objects"]
+# OTA modules: ensure_ota_*, ota_* in pk_functions and pk_objects
+
+[tool.coverage.report]
+exclude_lines = ["def __repr__", "if __name__ == .__main__.:", "raise NotImplementedError"]
+
+[tool.isort]
+profile = "black"
+#line_length = 88
+#line_length = 111
+line_length = 333
