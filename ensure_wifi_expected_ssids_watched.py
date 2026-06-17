@@ -1221,12 +1221,13 @@ def build_trace_verdict_section(trace_verdict):
                 )
             )
             if reason_detail != "":
-                renderables.append(
-                    Text(
-                        f"      {reason_detail}",
-                        style=get_rich_style("red"),
+                for detail_item in reason_detail.split(", "):
+                    renderables.append(
+                        Text(
+                            f"        - {detail_item}",
+                            style=get_rich_style("red"),
+                        )
                     )
-                )
 
     return build_rich_section(
         title="RESULT",
@@ -1834,7 +1835,7 @@ def ensure_wifi_expected_ssids_watched():
         Text("Starting Wi-Fi SSID tracer..."),
         console=console,
         refresh_per_second=4,
-        screen=False,
+        screen=True,
         auto_refresh=False,
     ) as live:
         while True:
