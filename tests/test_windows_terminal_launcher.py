@@ -52,7 +52,8 @@ def test_windows_terminal_arguments_launch_bootstrap_in_every_pane():
     assert len(pane_commands) == 4
     for command in pane_commands:
         assert "_pane_bootstrap.cmd" in command
-        assert command.startswith("call ")
+        assert command.startswith("_pane_bootstrap.cmd ")
+        assert '"' not in command
 
 
 def test_cmd_launchers_delegate_to_python_launcher():
