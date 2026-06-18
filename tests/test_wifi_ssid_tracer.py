@@ -195,11 +195,11 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             "FAILED",
         )
         self.assertIn(
-            "unexpected 2.4G SSID(s): NEIGHBOR_WIFI(channel=6)",
+            "unexpected SSID(s): NEIGHBOR_WIFI(channel=6)",
             verdict_text,
         )
         self.assertIn(
-            "confirmed expected count: 5G=1/1, 2.4G=0/0",
+            "confirmed expected count: 1/1",
             verdict_text,
         )
 
@@ -220,11 +220,11 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             "FAILED",
         )
         self.assertIn(
-            "missing expected 5G SSID(s): PRODUCT_5G",
+            "missing expected SSID(s): PRODUCT_5G",
             verdict_text,
         )
         self.assertIn(
-            "confirmed expected count: 5G=0/1, 2.4G=1/1",
+            "confirmed expected count: 1/2",
             verdict_text,
         )
 
@@ -254,7 +254,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             "FAILED",
         )
         self.assertIn(
-            "previously confirmed 5G SSID(s) not visible now: PRODUCT_5G",
+            "previously confirmed SSID(s) not visible now: PRODUCT_5G",
             verdict_text,
         )
         self.assertIn(
