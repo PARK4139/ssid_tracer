@@ -72,7 +72,15 @@ def test_pane_bootstrap_starts_requested_tracer_section():
     text = (PROJECT_ROOT / "_pane_bootstrap.cmd").read_text(encoding="utf-8")
 
     assert "title %~1" in text
+    assert "SSID_TRACER_PYTHON_EXE" in text
     assert 'set "PYTHON_EXE=python"' in text
     assert "VIRTUAL_ENV" not in text
     assert '"%PYTHON_EXE%" ensure_wifi_expected_ssids_watched.py --section %~1' in text
     assert "exited with %ERRORLEVEL%" in text
+
+
+def test_launcher_passes_current_python_to_panes():
+    text = LAUNCHER_PATH.read_text(encoding="utf-8")
+
+    assert 'env["SSID_TRACER_PYTHON_EXE"] = sys.executable' in text
+    assert "subprocess.Popen([wt, *args], env=env)" in text

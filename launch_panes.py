@@ -50,11 +50,15 @@ def _find_windows_terminal() -> str:
 
 
 def _run_main() -> None:
+    import os
     import subprocess
+    import sys
 
     wt = _find_windows_terminal()
     args = _get_windows_terminal_arguments()
-    subprocess.Popen([wt, *args])
+    env = os.environ.copy()
+    env["SSID_TRACER_PYTHON_EXE"] = sys.executable
+    subprocess.Popen([wt, *args], env=env)
 
 
 if __name__ == "__main__":
