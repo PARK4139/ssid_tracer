@@ -79,8 +79,18 @@ def test_pane_bootstrap_starts_requested_tracer_section():
     assert "exited with %ERRORLEVEL%" in text
 
 
-def test_launcher_passes_current_python_to_panes():
+def test_launcher_passes_python_with_rich_to_panes():
     text = LAUNCHER_PATH.read_text(encoding="utf-8")
 
-    assert 'env["SSID_TRACER_PYTHON_EXE"] = sys.executable' in text
+    assert "def _find_python_with_rich()" in text
+    assert "[python_exe, \"-c\", \"import rich\"]" in text
+    assert 'env["SSID_TRACER_PYTHON_EXE"] = _find_python_with_rich()' in text
     assert "subprocess.Popen([wt, *args], env=env)" in text
+
+
+def test_python_detector_finds_interpreter_with_rich():
+    launcher = load_launcher_module()
+
+    python_exe = launcher._find_python_with_rich()
+
+    assert launcher._can_import_rich(python_exe)
