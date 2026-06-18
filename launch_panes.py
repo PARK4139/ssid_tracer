@@ -5,7 +5,7 @@ _SECTIONS = ["result", "detected", "statistics", "config"]
 
 
 def _bootstrap(title: str) -> str:
-    return f"_pane_bootstrap.cmd {title}"
+    return f"call _pane_bootstrap.cmd {title}"
 
 
 def _section_command(section: str) -> list[str]:

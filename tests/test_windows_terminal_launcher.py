@@ -52,7 +52,7 @@ def test_windows_terminal_arguments_launch_bootstrap_in_every_pane():
     assert len(pane_commands) == 4
     for command in pane_commands:
         assert "_pane_bootstrap.cmd" in command
-        assert command.startswith("_pane_bootstrap.cmd ")
+        assert command.startswith("call _pane_bootstrap.cmd ")
         assert '"' not in command
 
 
@@ -72,6 +72,7 @@ def test_pane_bootstrap_starts_requested_tracer_section():
     text = (PROJECT_ROOT / "_pane_bootstrap.cmd").read_text(encoding="utf-8")
 
     assert "title %~1" in text
-    assert 'set "PYTHON_EXE=%VIRTUAL_ENV%\\Scripts\\python.exe"' in text
+    assert 'set "PYTHON_EXE=python"' in text
+    assert "VIRTUAL_ENV" not in text
     assert '"%PYTHON_EXE%" ensure_wifi_expected_ssids_watched.py --section %~1' in text
     assert "exited with %ERRORLEVEL%" in text
