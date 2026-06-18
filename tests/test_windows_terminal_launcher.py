@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-LAUNCHER_PATH = PROJECT_ROOT / "개발.windows_terminal_실행_as_lateral_panes.py"
+LAUNCHER_PATH = PROJECT_ROOT / "launch_panes.py"
 
 
 def load_launcher_module():
@@ -24,11 +24,12 @@ def test_windows_terminal_arguments_create_expected_section_panes():
     assert args.count("new-tab") == 1
     assert args.count("split-pane") == 3
     assert args.count("--size") == 3
-    assert args.count("0.5") == 3
-    assert args.count("move-focus") == 1
-    assert "left" in args
-    assert "-H" in args
-    assert args.count("-V") == 2
+    assert "0.75" in args
+    assert "0.6667" in args
+    assert "0.5" in args
+    assert "move-focus" not in args
+    assert args.count("-V") == 3
+    assert "-H" not in args
     joined_args = "\n".join(args)
     assert joined_args.count(" result") == 1
     assert joined_args.count(" detected") == 1
@@ -61,7 +62,7 @@ def test_cmd_launchers_delegate_to_python_launcher():
     ]:
         text = (PROJECT_ROOT / filename).read_text(encoding="utf-8")
 
-        assert 'python "%D%\\개발.windows_terminal_실행_as_lateral_panes.py"' in text
+        assert 'python "%~dp0launch_panes.py"' in text
         assert "split-pane" not in text
         assert "_pane_bootstrap.cmd" not in text
 
@@ -70,4 +71,6 @@ def test_pane_bootstrap_starts_requested_tracer_section():
     text = (PROJECT_ROOT / "_pane_bootstrap.cmd").read_text(encoding="utf-8")
 
     assert "title %~1" in text
-    assert "python ensure_wifi_expected_ssids_watched.py --section %~1" in text
+    assert 'set "PYTHON_EXE=%VIRTUAL_ENV%\\Scripts\\python.exe"' in text
+    assert '"%PYTHON_EXE%" ensure_wifi_expected_ssids_watched.py --section %~1' in text
+    assert "exited with %ERRORLEVEL%" in text

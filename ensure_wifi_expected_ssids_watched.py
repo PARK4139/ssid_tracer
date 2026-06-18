@@ -6,9 +6,6 @@ import threading
 import time
 from ctypes import wintypes
 
-from rich.live import Live
-from rich.text import Text
-
 from ssid_config import ENABLE_ANSI_COLOR, WATCH_INTERVAL_SEC
 from ssid_analyzer import (
     EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY,
@@ -83,6 +80,13 @@ def ensure_ansi_color_enabled():
         return
 
 
+def clear_console():
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+
 def ensure_wifi_expected_ssids_watched(section_name="all"):
     ensure_ansi_color_enabled()
     setup_console_drag()
@@ -98,37 +102,28 @@ def ensure_wifi_expected_ssids_watched(section_name="all"):
 
     console = get_rich_console()
 
-    with Live(
-        Text("Starting Wi-Fi SSID tracer..."),
-        console=console,
-        refresh_per_second=4,
-        screen=False,
-        vertical_overflow="visible",
-        auto_refresh=False,
-    ) as live:
-        while True:
-            loop_started_at = time.time()
+    while True:
+        loop_started_at = time.time()
 
-            detected_wifi_entries, scan_ok, scan_message, error_message = get_detected_wifi_entries_with_retry()
-
-            live.update(
-                build_result_screen(
-                    expected_5g_ssids=expected_5g_ssids,
-                    expected_2_4g_ssids=expected_2_4g_ssids,
-                    ignored_ssids=ignored_ssids,
-                    planned_ssids=planned_ssids,
-                    detected_wifi_entries=detected_wifi_entries,
-                    scan_ok=scan_ok,
-                    scan_message=scan_message,
-                    error_message=error_message,
-                    section_name=section_name,
-                ),
-                refresh=True,
+        detected_wifi_entries, scan_ok, scan_message, error_message = get_detected_wifi_entries_with_retry()
+        clear_console()
+        console.print(
+            build_result_screen(
+                expected_5g_ssids=expected_5g_ssids,
+                expected_2_4g_ssids=expected_2_4g_ssids,
+                ignored_ssids=ignored_ssids,
+                planned_ssids=planned_ssids,
+                detected_wifi_entries=detected_wifi_entries,
+                scan_ok=scan_ok,
+                scan_message=scan_message,
+                error_message=error_message,
+                section_name=section_name,
             )
+        )
 
-            elapsed_sec = time.time() - loop_started_at
-            sleep_sec = max(0.0, WATCH_INTERVAL_SEC - elapsed_sec)
-            time.sleep(sleep_sec)
+        elapsed_sec = time.time() - loop_started_at
+        sleep_sec = max(0.0, WATCH_INTERVAL_SEC - elapsed_sec)
+        time.sleep(sleep_sec)
 
 
 def main():

@@ -3,6 +3,7 @@ from pathlib import Path
 from rich.console import Console
 
 import ssid_analyzer
+import ssid_config
 from ssid_renderer import build_result_screen
 import ensure_wifi_expected_ssids_watched as tracer
 
@@ -80,10 +81,18 @@ def test_config_section_only_renders_config_panel():
     assert "STATISTICS" not in text
 
 
-def test_live_display_does_not_use_alternate_screen_for_scrollback():
+def test_refresh_loop_does_not_use_rich_live_alternate_screen():
     source_path = Path(tracer.__file__)
     source = source_path.read_text(encoding="utf-8")
 
-    assert "screen=False" in source
+    assert "from rich.live import Live" not in source
     assert "screen=True" not in source
-    assert 'vertical_overflow="visible"' in source
+
+
+def test_refresh_loop_runs_cls_before_each_print_and_uses_three_second_interval():
+    source_path = Path(tracer.__file__)
+    source = source_path.read_text(encoding="utf-8")
+
+    assert 'os.system("cls")' in source
+    assert "clear_console()" in source
+    assert ssid_config.WATCH_INTERVAL_SEC == 3.0
