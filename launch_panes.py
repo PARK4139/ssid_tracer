@@ -4,31 +4,29 @@ _PROJECT_ROOT = Path(__file__).parent.resolve()
 _SECTIONS = ["result", "detected", "statistics", "config"]
 
 
-def _bootstrap(title: str) -> str:
-    return f"call _pane_bootstrap.cmd {title}"
-
-
-def _section_command(section: str) -> list[str]:
+def _section_command(section: str, python_exe: str) -> list[str]:
     return [
         "--title", section,
         "-d", str(_PROJECT_ROOT),
-        "cmd.exe", "/k", _bootstrap(section).replace(";", r"\;"),
+        python_exe,
+        str(_PROJECT_ROOT / "ensure_wifi_expected_ssids_watched.py"),
+        "--section", section,
     ]
 
 
-def _get_windows_terminal_arguments() -> list[str]:
+def _get_windows_terminal_arguments(python_exe: str = "python") -> list[str]:
     args = [
         "new-tab",
-        *_section_command("result"),
+        *_section_command("result", python_exe),
         ";",
         "split-pane", "-V", "--size", "0.75",
-        *_section_command("detected"),
+        *_section_command("detected", python_exe),
         ";",
         "split-pane", "-V", "--size", "0.6667",
-        *_section_command("statistics"),
+        *_section_command("statistics", python_exe),
         ";",
         "split-pane", "-V", "--size", "0.5",
-        *_section_command("config"),
+        *_section_command("config", python_exe),
     ]
 
     return args
@@ -119,14 +117,12 @@ def _find_python_with_rich() -> str:
 
 
 def _run_main() -> None:
-    import os
     import subprocess
 
     wt = _find_windows_terminal()
-    args = _get_windows_terminal_arguments()
-    env = os.environ.copy()
-    env["SSID_TRACER_PYTHON_EXE"] = _find_python_with_rich()
-    subprocess.Popen([wt, *args], env=env)
+    python_exe = _find_python_with_rich()
+    args = _get_windows_terminal_arguments(python_exe=python_exe)
+    subprocess.Popen([wt, *args])
 
 
 if __name__ == "__main__":

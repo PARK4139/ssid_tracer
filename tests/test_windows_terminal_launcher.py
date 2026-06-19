@@ -30,30 +30,23 @@ def test_windows_terminal_arguments_create_expected_section_panes():
     assert "move-focus" not in args
     assert args.count("-V") == 3
     assert "-H" not in args
-    joined_args = "\n".join(args)
-    assert joined_args.count(" result") == 1
-    assert joined_args.count(" detected") == 1
-    assert joined_args.count(" statistics") == 1
-    assert joined_args.count(" config") == 1
-    assert args.count("cmd.exe") == 4
-    assert args.count("/k") == 4
+    assert args.count("result") == 2
+    assert args.count("detected") == 2
+    assert args.count("statistics") == 2
+    assert args.count("config") == 2
+    assert "cmd.exe" not in args
+    assert "/k" not in args
 
 
-def test_windows_terminal_arguments_launch_bootstrap_in_every_pane():
+def test_windows_terminal_arguments_launch_tracer_directly_in_every_pane():
     launcher = load_launcher_module()
 
-    args = launcher._get_windows_terminal_arguments()
-    pane_commands = [
-        args[index + 2]
-        for index, value in enumerate(args)
-        if value == "cmd.exe"
-    ]
+    args = launcher._get_windows_terminal_arguments(python_exe="C:\\Python\\python.exe")
 
-    assert len(pane_commands) == 4
-    for command in pane_commands:
-        assert "_pane_bootstrap.cmd" in command
-        assert command.startswith("call _pane_bootstrap.cmd ")
-        assert '"' not in command
+    assert args.count("C:\\Python\\python.exe") == 4
+    assert args.count(str(PROJECT_ROOT / "ensure_wifi_expected_ssids_watched.py")) == 4
+    assert args.count("--section") == 4
+    assert "_pane_bootstrap.cmd" not in args
 
 
 def test_cmd_launchers_delegate_to_python_launcher():
@@ -84,8 +77,8 @@ def test_launcher_passes_python_with_rich_to_panes():
 
     assert "def _find_python_with_rich()" in text
     assert "[python_exe, \"-c\", \"import rich\"]" in text
-    assert 'env["SSID_TRACER_PYTHON_EXE"] = _find_python_with_rich()' in text
-    assert "subprocess.Popen([wt, *args], env=env)" in text
+    assert "args = _get_windows_terminal_arguments(python_exe=python_exe)" in text
+    assert "subprocess.Popen([wt, *args])" in text
 
 
 def test_python_detector_finds_interpreter_with_rich():
