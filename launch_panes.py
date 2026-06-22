@@ -2,6 +2,7 @@ from pathlib import Path
 
 _PROJECT_ROOT = Path(__file__).parent.resolve()
 _SECTIONS = ["result", "detected", "statistics", "config"]
+_SELECTED_SSID_CONFIG_PATH = _PROJECT_ROOT / "pk_tmp" / "selected_ssid_config.txt"
 
 
 def _section_command(section: str, python_exe: str) -> list[str]:
@@ -116,9 +117,14 @@ def _find_python_with_rich() -> str:
     return sys.executable
 
 
+def _reset_selected_ssid_config() -> None:
+    _SELECTED_SSID_CONFIG_PATH.unlink(missing_ok=True)
+
+
 def _run_main() -> None:
     import subprocess
 
+    _reset_selected_ssid_config()
     wt = _find_windows_terminal()
     python_exe = _find_python_with_rich()
     args = _get_windows_terminal_arguments(python_exe=python_exe)

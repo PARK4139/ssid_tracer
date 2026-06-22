@@ -76,10 +76,22 @@ def test_pane_bootstrap_starts_requested_tracer_section():
 def test_launcher_passes_python_with_rich_to_panes():
     text = LAUNCHER_PATH.read_text(encoding="utf-8")
 
+    assert "_reset_selected_ssid_config()" in text
     assert "def _find_python_with_rich()" in text
     assert "[python_exe, \"-c\", \"import rich\"]" in text
     assert "args = _get_windows_terminal_arguments(python_exe=python_exe)" in text
     assert "subprocess.Popen([wt, *args])" in text
+
+
+def test_launcher_resets_selected_config_before_opening_panes(tmp_path):
+    launcher = load_launcher_module()
+    selected_config_path = tmp_path / "selected_ssid_config.txt"
+    selected_config_path.write_text("config_26_ssids", encoding="utf-8")
+
+    launcher._SELECTED_SSID_CONFIG_PATH = selected_config_path
+    launcher._reset_selected_ssid_config()
+
+    assert not selected_config_path.exists()
 
 
 def test_python_detector_finds_interpreter_with_rich():
