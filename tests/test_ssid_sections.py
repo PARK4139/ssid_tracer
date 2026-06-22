@@ -51,7 +51,7 @@ def test_result_section_only_renders_result_panel():
     text = build_text_for_section("result")
 
     assert "RESULT" in text
-    assert "DETECTED SSIDS" not in text
+    assert "LIVE SSIDS" not in text
     assert "STATISTICS" not in text
     assert "CONFIG" not in text
 
@@ -59,7 +59,7 @@ def test_result_section_only_renders_result_panel():
 def test_detected_section_only_renders_detected_panel():
     text = build_text_for_section("detected")
 
-    assert "DETECTED SSIDS(2)" in text
+    assert "LIVE SSIDS(2)" in text
     assert "PRODUCT_5G CONFIRMED band=5G ch=36" in text
     assert "PRODUCT_2G CONFIRMED band=2_4G ch=6" in text
     assert "bssid_count" not in text
@@ -82,7 +82,49 @@ def test_empty_detected_section_title_includes_zero_count():
         )
     )
 
-    assert "DETECTED SSIDS(0)" in text
+    assert "LIVE SSIDS(0)" in text
+
+
+def test_live_ssids_section_excludes_missing_and_dead_rows():
+    text = render_text(
+        build_detected_ssid_section(
+            live_confirmed_5g_ssids=[],
+            live_confirmed_2_4g_ssids=[],
+            dead_confirmed_5g_ssids=["DEAD_5G"],
+            dead_confirmed_2_4g_ssids=["DEAD_2G"],
+            dead_detected_wifi_entries=[
+                {
+                    "ssid": "DEAD_DETECTED",
+                    "band": "5G",
+                    "channels": [36],
+                    "bssid_count": 1,
+                }
+            ],
+            action_required_items=[
+                {
+                    "status_label": "MISSING_5G",
+                    "ssid": "MISSING_5G",
+                    "band": "5G",
+                    "channel": "",
+                },
+                {
+                    "status_label": "NOT_CONFIRMED_5G",
+                    "ssid": "LIVE_UNEXPECTED",
+                    "band": "5G",
+                    "channel": "36",
+                },
+            ],
+            ignored_detected_wifi_entries=[],
+            planned_ssids=[],
+        )
+    )
+
+    assert "LIVE SSIDS(1)" in text
+    assert "LIVE_UNEXPECTED UNEXPECTED band=5G ch=36" in text
+    assert "MISSING_5G" not in text
+    assert "DEAD_5G" not in text
+    assert "DEAD_2G" not in text
+    assert "DEAD_DETECTED" not in text
 
 
 def test_detected_ssid_rows_are_green_only_for_live_confirmed_statuses():
@@ -111,7 +153,7 @@ def test_statistics_section_only_renders_statistics_panel():
 
     assert "STATISTICS" in text
     assert "RESULT" not in text
-    assert "DETECTED SSIDS" not in text
+    assert "LIVE SSIDS" not in text
     assert "CONFIG" not in text
 
 
@@ -122,7 +164,7 @@ def test_config_section_only_renders_config_panel():
     assert "Expected(2)" in text
     assert "Expected 5G" not in text
     assert "RESULT" not in text
-    assert "DETECTED SSIDS" not in text
+    assert "LIVE SSIDS" not in text
     assert "STATISTICS" not in text
 
 
@@ -241,7 +283,7 @@ def test_missing_selected_config_non_result_panes_do_not_render_result_panel(mon
         current_ssid_configuration = tracer.get_current_ssid_configuration()
 
         expected_titles_by_section = {
-            "detected": "DETECTED SSIDS(0)",
+            "detected": "LIVE SSIDS(0)",
             "statistics": "STATISTICS",
             "config": "CONFIG",
         }

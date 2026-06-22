@@ -62,7 +62,7 @@ def get_detected_ssid_status_sort_rank(item, planned_ssid_set):
 
 
 def get_detected_ssid_section_title(detected_ssid_count):
-    return f"DETECTED SSIDS({detected_ssid_count})"
+    return f"LIVE SSIDS({detected_ssid_count})"
 
 
 def build_detected_ssid_section(
@@ -86,17 +86,11 @@ def build_detected_ssid_section(
         channels_text = ", ".join(str(ch) for ch in wifi_entry.get("channels", []))
         rows.append({"status_label": "CONFIRMED_2_4G", "ssid": wifi_entry.get("ssid", ""), "band": "2_4G", "channel": channels_text, "reason": f"bssid_count={wifi_entry.get('bssid_count', 0)}"})
 
-    for ssid in dead_confirmed_5g_ssids:
-        rows.append({"status_label": "DEAD_CONFIRMED_5G", "ssid": ssid, "band": "5G", "channel": "", "reason": "Expected 5GHz SSID was detected before but not now"})
-
-    for ssid in dead_confirmed_2_4g_ssids:
-        rows.append({"status_label": "DEAD_CONFIRMED_2_4G", "ssid": ssid, "band": "2_4G", "channel": "", "reason": "Expected 2.4GHz SSID was detected before but not now"})
-
-    rows.extend(action_required_items)
-
-    for wifi_entry in dead_detected_wifi_entries:
-        channels_text = ", ".join(str(ch) for ch in wifi_entry.get("channels", []))
-        rows.append({"status_label": "DEAD_DETECTED", "ssid": wifi_entry.get("ssid", ""), "band": wifi_entry.get("band", ""), "channel": channels_text, "reason": f"Previously detected, not present now; bssid_count={wifi_entry.get('bssid_count', 0)}"})
+    rows.extend(
+        item
+        for item in action_required_items
+        if "NOT_CONFIRMED" in item.get("status_label", "")
+    )
 
     if SHOW_IGNORED_SSIDS:
         for wifi_entry in get_grouped_wifi_entries_by_ssid_and_band(wifi_entries=ignored_detected_wifi_entries):

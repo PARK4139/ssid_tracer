@@ -111,7 +111,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         output_text = output_buffer.getvalue()
 
         self.assertIn(
-            "DETECTED SSIDS",
+            "LIVE SSIDS",
             output_text,
         )
         self.assertIn(
@@ -124,7 +124,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         )
         self.assertLess(
             output_text.index("RESULT"),
-            output_text.index("DETECTED SSIDS"),
+            output_text.index("LIVE SSIDS"),
         )
 
     def test_print_trace_verdict_lists_failure_ssids(self):
