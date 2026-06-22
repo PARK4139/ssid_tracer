@@ -6,7 +6,13 @@ import threading
 import time
 from ctypes import wintypes
 
-from ssid_config import ENABLE_ANSI_COLOR, SKIP_TBD, WATCH_INTERVAL_SEC
+from ssid_config import (
+    ENABLE_ANSI_COLOR,
+    SELECTED_SSID_CONFIG_PATH,
+    SKIP_TBD,
+    SSID_CONFIGS,
+    WATCH_INTERVAL_SEC,
+)
 from ssid_analyzer import (
     EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY,
     EVER_LIVE_CONFIRMED_SSID_BAND_SET,
@@ -15,14 +21,13 @@ from ssid_analyzer import (
     get_trace_verdict_text,
 )
 from ssid_renderer import DISPLAY_SECTIONS, build_result_screen, get_rich_console, print_result
-from ssid_renderer_result import print_trace_verdict
+from ssid_renderer_result import build_not_tested_result_section, print_trace_verdict
 from ssid_scanner import get_detected_wifi_entries_with_retry
 from ssid_utils import (
     ensure_selected_ssid_config_name_written,
     get_band_from_channel,
     get_available_ssid_config_names,
     get_completed_ssid_config_name,
-    get_selected_ssid_config_name,
     get_ssid_config_by_name,
     get_unique_ssids,
 )
@@ -130,14 +135,32 @@ def ensure_ssid_config_selected_interactively():
     return ensure_selected_ssid_config_name_written(ssid_config_name=selected_ssid_config_name)
 
 
+def get_raw_selected_ssid_config_name():
+    if not SELECTED_SSID_CONFIG_PATH.exists():
+        return None
+
+    selected_ssid_config_name = SELECTED_SSID_CONFIG_PATH.read_text(encoding="utf-8").strip()
+    if selected_ssid_config_name not in SSID_CONFIGS:
+        return None
+
+    return selected_ssid_config_name
+
+
 def get_current_ssid_configuration():
-    selected_ssid_config_name = get_selected_ssid_config_name()
-    is_ssid_config_selected = selected_ssid_config_name in get_available_ssid_config_names()
-    config_name = selected_ssid_config_name if is_ssid_config_selected else "NOT SET"
-    selected_ssid_config = get_ssid_config_by_name(ssid_config_name=selected_ssid_config_name)
+    config_name = get_raw_selected_ssid_config_name()
+    if config_name is None:
+        return {
+            "config_name": None,
+            "expected_5g_ssids": [],
+            "expected_2_4g_ssids": [],
+            "ignored_ssids": [],
+            "planned_ssids": [],
+        }
+
+    config_name = get_completed_ssid_config_name(ssid_config_name=config_name)
+    selected_ssid_config = get_ssid_config_by_name(ssid_config_name=config_name)
     return {
         "config_name": config_name,
-        "is_ssid_config_selected": is_ssid_config_selected,
         "expected_5g_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["expected_5g_ssids"], skip_tbd=SKIP_TBD),
         "expected_2_4g_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["expected_2_4g_ssids"], skip_tbd=SKIP_TBD),
         "ignored_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["ignored_ssids"], skip_tbd=True),
@@ -147,6 +170,10 @@ def get_current_ssid_configuration():
 
 def print_current_result_screen(console, current_ssid_configuration, detected_wifi_entries, scan_ok, scan_message, error_message, section_name):
     clear_console()
+    if current_ssid_configuration["config_name"] is None:
+        console.print(build_not_tested_result_section())
+        return
+
     console.print(
         build_result_screen(
             config_name=current_ssid_configuration["config_name"],
@@ -187,7 +214,22 @@ def ensure_wifi_expected_ssids_watched(section_name="all"):
         loop_started_at = time.time()
         current_ssid_configuration = get_current_ssid_configuration()
 
-        if current_ssid_configuration["is_ssid_config_selected"] and len(current_ssid_configuration["expected_5g_ssids"]) <= 0 and len(current_ssid_configuration["expected_2_4g_ssids"]) <= 0:
+        if current_ssid_configuration["config_name"] is None:
+            print_current_result_screen(
+                console=console,
+                current_ssid_configuration=current_ssid_configuration,
+                detected_wifi_entries=[],
+                scan_ok=False,
+                scan_message="config not selected",
+                error_message="",
+                section_name=section_name,
+            )
+            elapsed_sec = time.time() - loop_started_at
+            sleep_sec = max(0.0, WATCH_INTERVAL_SEC - elapsed_sec)
+            time.sleep(sleep_sec)
+            continue
+
+        if len(current_ssid_configuration["expected_5g_ssids"]) <= 0 and len(current_ssid_configuration["expected_2_4g_ssids"]) <= 0:
             print("No expected SSID defined")
             sys.exit(1)
 

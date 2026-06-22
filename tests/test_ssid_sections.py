@@ -4,6 +4,7 @@ from rich.console import Console
 
 import ssid_analyzer
 import ssid_config
+from ssid_utils import get_unique_ssids
 from ssid_renderer import build_result_screen
 import ensure_wifi_expected_ssids_watched as tracer
 
@@ -28,7 +29,7 @@ def build_text_for_section(section_name):
     ssid_analyzer.EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY.clear()
     return render_text(
         build_result_screen(
-            config_name="config_60_ssids",
+            config_name="config_55_ssids",
             expected_5g_ssids=["PRODUCT_5G"],
             expected_2_4g_ssids=["PRODUCT_2G"],
             ignored_ssids=["OFFICE"],
@@ -94,7 +95,61 @@ def test_config_section_merges_expected_planned_and_ignored_counts():
     assert "Expected 2.4G" not in text
 
 
-def test_missing_selected_config_renders_not_tested_result_pane():
+def test_config_55_ssids_has_55_expected_ssids_and_expected_inclusions():
+    selected_config = ssid_config.SSID_CONFIGS["config_55_ssids"]
+    expected_5g_ssids = get_unique_ssids(
+        raw_ssids=selected_config["expected_5g_ssids"],
+        skip_tbd=ssid_config.SKIP_TBD,
+    )
+    expected_2_4g_ssids = get_unique_ssids(
+        raw_ssids=selected_config["expected_2_4g_ssids"],
+        skip_tbd=ssid_config.SKIP_TBD,
+    )
+
+    assert len(expected_5g_ssids) + len(expected_2_4g_ssids) == 55
+    assert "MERCUSYS_BA30_5G" in expected_5g_ssids
+    assert "MERCUSYS_C027_5G" in expected_5g_ssids
+    assert "MERCUSYS_C027" in expected_2_4g_ssids
+    assert "Keenetic-1947" not in expected_5g_ssids
+    assert "Keenetic-1947" not in expected_2_4g_ssids
+
+
+def test_config_26_ssids_uses_13_expected_pairs_with_5g_suffix_for_same_names():
+    selected_config = ssid_config.SSID_CONFIGS["config_26_ssids"]
+
+    assert selected_config["expected_5g_ssids"] == [
+        "ASUS_F6_5G",
+        "NETGEAR11-5G",
+        "NETGEAR56-5G",
+        "Tenda_EFFAA0_5G",
+        "TP-Link_A2B2_5G",
+        "TP-Link_35E8_5G",
+        "TP-Link_5GHz_138BD2",
+        "TP-Link_3B54_5G",
+        "ASUS_00_EBR63_5G",
+        "ASUS_C8_5G",
+        "ASUS_60_5G",
+        "Tenda_EFE220_5G",
+        "Linksys00711_5G",
+    ]
+    assert selected_config["expected_2_4g_ssids"] == [
+        "ASUS_F6",
+        "NETGEAR11",
+        "NETGEAR56",
+        "Tenda_EFFAA0",
+        "TP-Link_A2B2",
+        "TP-Link_35E8",
+        "TP-Link_2.4GHz_138BD1",
+        "TP-Link_3B54",
+        "ASUS_00_EBR63",
+        "ASUS_C8",
+        "ASUS_60",
+        "Tenda_EFE220",
+        "Linksys00711",
+    ]
+
+
+def test_missing_selected_config_returns_not_tested_result_pane(monkeypatch):
     selected_config_path = ssid_config.SELECTED_SSID_CONFIG_PATH
     original_config_text = selected_config_path.read_text(encoding="utf-8") if selected_config_path.exists() else None
 
@@ -102,21 +157,19 @@ def test_missing_selected_config_renders_not_tested_result_pane():
         if selected_config_path.exists():
             selected_config_path.unlink()
 
+        monkeypatch.setattr(tracer, "clear_console", lambda: None)
         current_ssid_configuration = tracer.get_current_ssid_configuration()
-        text = render_text(
-            build_result_screen(
-                config_name=current_ssid_configuration["config_name"],
-                expected_5g_ssids=current_ssid_configuration["expected_5g_ssids"],
-                expected_2_4g_ssids=current_ssid_configuration["expected_2_4g_ssids"],
-                ignored_ssids=current_ssid_configuration["ignored_ssids"],
-                planned_ssids=current_ssid_configuration["planned_ssids"],
-                detected_wifi_entries=[],
-                scan_ok=False,
-                scan_message="scan pending",
-                error_message="",
-                section_name="result",
-            )
+        console = Console(record=True, width=160, no_color=True)
+        tracer.print_current_result_screen(
+            console=console,
+            current_ssid_configuration=current_ssid_configuration,
+            detected_wifi_entries=[],
+            scan_ok=False,
+            scan_message="scan pending",
+            error_message="",
+            section_name="result",
         )
+        text = console.export_text()
     finally:
         if original_config_text is None:
             if selected_config_path.exists():
@@ -124,11 +177,10 @@ def test_missing_selected_config_renders_not_tested_result_pane():
         else:
             tracer.ensure_selected_ssid_config_name_written(ssid_config_name=original_config_text)
 
-    assert current_ssid_configuration["config_name"] == "NOT SET"
-    assert len(current_ssid_configuration["expected_5g_ssids"]) > 0
+    assert current_ssid_configuration["config_name"] is None
+    assert current_ssid_configuration["expected_5g_ssids"] == []
     assert "RESULT" in text
-    assert "NOT TESTED" in text
-    assert "FAILED" not in text
+    assert 'Status               : "NOT TESTED"' in text
 
 
 def test_refresh_loop_does_not_use_rich_live_alternate_screen():

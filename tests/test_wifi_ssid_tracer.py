@@ -91,7 +91,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         try:
             with contextlib.redirect_stdout(output_buffer):
                 tracer.print_result(
-                    config_name="config_60_ssids",
+                    config_name="config_55_ssids",
                     expected_5g_ssids=["PRODUCT_5G"],
                     expected_2_4g_ssids=["PRODUCT_2G"],
                     ignored_ssids=[],

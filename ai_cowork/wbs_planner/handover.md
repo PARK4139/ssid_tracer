@@ -7,7 +7,7 @@ _______________________________________________________________ 분배예정
     change RESULT section color to white
     keep only FAILED/PASSED text red/green in RESULT section
     make Config pane selectable as interactive fzf-like selector via ensure_value_completed
-    selector options: config_26_ssids, config_60_ssids
+    selector options: config_26_ssids, config_55_ssids
     selected config must apply to result/detected/statistics/config panes
     merge Config pane Expected 5G and Expected 2.4G into Expected({ssid cnt})
     merge Config pane Planned band sections into Planned({ssid cnt})

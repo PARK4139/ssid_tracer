@@ -62,5 +62,15 @@ def build_trace_verdict_section(trace_verdict):
     )
 
 
+def build_not_tested_result_section():
+    status_text = Text("Status               : ")
+    status_text.append('"NOT TESTED"', style=get_rich_style("white"))
+    return build_rich_section(
+        title="RESULT",
+        renderables=[status_text],
+        border_style=get_rich_style("white"),
+    )
+
+
 def print_trace_verdict(trace_verdict):
     get_rich_console().print(build_trace_verdict_section(trace_verdict=trace_verdict))
