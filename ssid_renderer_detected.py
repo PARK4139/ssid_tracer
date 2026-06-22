@@ -34,19 +34,13 @@ def get_compact_detected_ssid_status_label(status_label):
 
 
 def get_detected_ssid_status_color_name(item, planned_ssid_set):
-    status_label = item["status_label"]
-    comparable_ssid = normalize_ssid_for_compare(ssid=item.get("ssid", ""))
-    if is_action_required_status_label(status_label) and comparable_ssid in planned_ssid_set:
-        return "orange"
-    if "MISSING" in status_label or "NOT_CONFIRMED" in status_label:
-        return "red"
-    if "DEAD" in status_label:
-        return "gray"
-    if "CONFIRMED" in status_label:
+    status_label = get_detected_ssid_display_status_label(
+        item=item,
+        planned_ssid_set=planned_ssid_set,
+    )
+    if "CONFIRMED" in status_label and "DEAD" not in status_label:
         return "green"
-    if status_label == "IGNORED":
-        return "green"
-    return ""
+    return "gray"
 
 
 def get_detected_ssid_status_sort_rank(item, planned_ssid_set):
@@ -121,7 +115,7 @@ def build_detected_ssid_section(
     title = get_detected_ssid_section_title(detected_ssid_count=len(rows))
 
     if len(rows) <= 0:
-        return build_rich_section(title=title, renderables=[], border_style="cyan")
+        return build_rich_section(title=title, renderables=[], border_style="white")
 
     renderables = []
     for index, item in enumerate(rows, start=1):
@@ -141,7 +135,17 @@ def build_detected_ssid_section(
             f"ch={channel_text}"
         )
 
-        renderables.append(Text(line, style=get_rich_style("white")))
+        renderables.append(
+            Text(
+                line,
+                style=get_rich_style(
+                    get_detected_ssid_status_color_name(
+                        item=item,
+                        planned_ssid_set=planned_ssid_set,
+                    )
+                ),
+            )
+        )
 
     return build_rich_section(title=title, renderables=renderables, border_style="white")
 

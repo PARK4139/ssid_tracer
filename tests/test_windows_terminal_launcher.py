@@ -26,13 +26,16 @@ def test_windows_terminal_arguments_create_expected_section_panes():
     assert args.count("--size") == 3
     assert args.count("0.5") == 2
     assert args.count("0.6667") == 1
-    assert "move-focus" not in args
+    assert args.count("move-focus") == 1
+    assert "right" in args
     assert args.count("-V") == 1
     assert args.count("-H") == 2
     assert args.count("result") == 2
     assert args.count("detected") == 2
     assert args.count("statistics") == 2
     assert args.count("config") == 2
+    assert args.index("-V") < args.index("move-focus")
+    assert args.index("move-focus") < args.index("-H")
     assert args.index("config") < args.index("detected")
     assert args.index("detected") < args.index("statistics")
     assert "cmd.exe" not in args

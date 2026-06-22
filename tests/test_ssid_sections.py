@@ -6,7 +6,7 @@ import ssid_analyzer
 import ssid_config
 from ssid_utils import get_unique_ssids
 from ssid_renderer import build_result_screen
-from ssid_renderer_detected import build_detected_ssid_section
+from ssid_renderer_detected import build_detected_ssid_section, get_detected_ssid_status_color_name
 import ensure_wifi_expected_ssids_watched as tracer
 
 
@@ -83,6 +83,27 @@ def test_empty_detected_section_title_includes_zero_count():
     )
 
     assert "DETECTED SSIDS(0)" in text
+
+
+def test_detected_ssid_rows_are_green_only_for_live_confirmed_statuses():
+    planned_ssid_set = set()
+
+    assert get_detected_ssid_status_color_name(
+        item={"status_label": "CONFIRMED_5G", "ssid": "LIVE"},
+        planned_ssid_set=planned_ssid_set,
+    ) == "green"
+    assert get_detected_ssid_status_color_name(
+        item={"status_label": "CONFIRMED_2_4G", "ssid": "LIVE"},
+        planned_ssid_set=planned_ssid_set,
+    ) == "green"
+    assert get_detected_ssid_status_color_name(
+        item={"status_label": "DEAD_CONFIRMED_5G", "ssid": "DEAD"},
+        planned_ssid_set=planned_ssid_set,
+    ) == "gray"
+    assert get_detected_ssid_status_color_name(
+        item={"status_label": "MISSING_5G", "ssid": "MISSING"},
+        planned_ssid_set=planned_ssid_set,
+    ) == "gray"
 
 
 def test_statistics_section_only_renders_statistics_panel():
