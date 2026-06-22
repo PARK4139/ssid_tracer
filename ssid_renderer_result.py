@@ -3,11 +3,16 @@ from rich.text import Text
 from ssid_renderer_base import build_rich_section, get_rich_console, get_rich_style
 
 
-def split_failure_reason(failure_reason):
-    reason_label, separator, reason_detail = failure_reason.partition(": ")
-    if separator == "":
-        return failure_reason, ""
-    return reason_label, reason_detail
+def get_failure_ssid_renderables(failure_ssids):
+    if len(failure_ssids) <= 0:
+        return [Text("  - [UNKNOWN] unknown reason", style=get_rich_style("white"))]
+
+    renderables = []
+    for failure_ssid in failure_ssids:
+        status_label = failure_ssid.get("status_label", "UNKNOWN")
+        ssid = failure_ssid.get("ssid", "")
+        renderables.append(Text(f"  - [{status_label}] {ssid}", style=get_rich_style("white")))
+    return renderables
 
 
 def build_trace_verdict_section(trace_verdict):
@@ -35,25 +40,15 @@ def build_trace_verdict_section(trace_verdict):
             border_style=get_rich_style("white"),
         )
 
-    failure_reasons = trace_verdict.get("failure_reasons", [])
+    failure_ssids = trace_verdict.get("failure_ssids", [])
     status_text = Text("Status               : ")
     status_text.append("FAILED", style=get_rich_style("red"))
     renderables = [
         status_text,
-        Text(f"Failure Reason Count : {len(failure_reasons)}", style=get_rich_style("white")),
         Text(""),
-        Text("Failure Reasons", style=get_rich_style("white")),
+        Text("Failure SSIDS", style=get_rich_style("white")),
     ]
-
-    if len(failure_reasons) <= 0:
-        renderables.append(Text("  - unknown reason", style=get_rich_style("white")))
-    else:
-        for index, failure_reason in enumerate(failure_reasons, start=1):
-            reason_label, reason_detail = split_failure_reason(failure_reason=failure_reason)
-            renderables.append(Text(f"  {index:02d}. {reason_label}", style=get_rich_style("white")))
-            if reason_detail != "":
-                for detail_item in reason_detail.split(", "):
-                    renderables.append(Text(f"        - {detail_item}", style=get_rich_style("white")))
+    renderables.extend(get_failure_ssid_renderables(failure_ssids=failure_ssids))
 
     return build_rich_section(
         title="RESULT",
@@ -64,7 +59,7 @@ def build_trace_verdict_section(trace_verdict):
 
 def build_not_tested_result_section():
     status_text = Text("Status               : ")
-    status_text.append('"NOT TESTED"', style=get_rich_style("white"))
+    status_text.append("NOT TESTED", style=get_rich_style("white"))
     return build_rich_section(
         title="RESULT",
         renderables=[status_text],

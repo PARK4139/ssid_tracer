@@ -6,6 +6,7 @@ import ssid_analyzer
 import ssid_config
 from ssid_utils import get_unique_ssids
 from ssid_renderer import build_result_screen
+from ssid_renderer_detected import build_detected_ssid_section
 import ensure_wifi_expected_ssids_watched as tracer
 
 
@@ -58,12 +59,29 @@ def test_result_section_only_renders_result_panel():
 def test_detected_section_only_renders_detected_panel():
     text = build_text_for_section("detected")
 
-    assert "DETECTED SSID" in text
+    assert "DETECTED SSID(2)" in text
     assert "band=" not in text
     assert "bssid_count" not in text
     assert "RESULT" not in text
     assert "STATISTICS" not in text
     assert "CONFIG" not in text
+
+
+def test_empty_detected_section_title_includes_zero_count():
+    text = render_text(
+        build_detected_ssid_section(
+            live_confirmed_5g_ssids=[],
+            live_confirmed_2_4g_ssids=[],
+            dead_confirmed_5g_ssids=[],
+            dead_confirmed_2_4g_ssids=[],
+            dead_detected_wifi_entries=[],
+            action_required_items=[],
+            ignored_detected_wifi_entries=[],
+            planned_ssids=[],
+        )
+    )
+
+    assert "DETECTED SSID(0)" in text
 
 
 def test_statistics_section_only_renders_statistics_panel():
@@ -180,7 +198,8 @@ def test_missing_selected_config_returns_not_tested_result_pane(monkeypatch):
     assert current_ssid_configuration["config_name"] is None
     assert current_ssid_configuration["expected_5g_ssids"] == []
     assert "RESULT" in text
-    assert 'Status               : "NOT TESTED"' in text
+    assert "Status               : NOT TESTED" in text
+    assert '"NOT TESTED"' not in text
 
 
 def test_refresh_loop_does_not_use_rich_live_alternate_screen():

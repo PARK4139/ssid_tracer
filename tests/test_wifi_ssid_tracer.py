@@ -127,7 +127,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             output_text.index("DETECTED SSID"),
         )
 
-    def test_print_trace_verdict_linefeeds_failed_reasons(self):
+    def test_print_trace_verdict_lists_failure_ssids(self):
         original_enable_ansi_color = tracer.ENABLE_ANSI_COLOR
         output_buffer = io.StringIO()
 
@@ -142,41 +142,22 @@ class WifiSsidTracerTestCase(unittest.TestCase):
                             "missing expected 5G SSID(s): PRODUCT_5G",
                             "unexpected 2.4G SSID(s): NEIGHBOR_WIFI(channel=6)",
                         ],
+                        "failure_ssids": [
+                            {"status_label": "MISSING", "ssid": "PRODUCT_5G"},
+                            {"status_label": "UNEXPECTED", "ssid": "NEIGHBOR_WIFI(channel=6)"},
+                        ],
                     }
                 )
         finally:
             tracer.ENABLE_ANSI_COLOR = original_enable_ansi_color
 
-        output_lines = output_buffer.getvalue().splitlines()
-        first_reason_label_line = next(
-            line
-            for line in output_lines
-            if "01. missing expected 5G SSID(s)" in line
-        )
-        first_reason_detail_line = next(
-            line
-            for line in output_lines
-            if "PRODUCT_5G" in line
-        )
-        second_reason_label_line = next(
-            line
-            for line in output_lines
-            if "02. unexpected 2.4G SSID(s)" in line
-        )
-        second_reason_detail_line = next(
-            line
-            for line in output_lines
-            if "NEIGHBOR_WIFI(channel=6)" in line
-        )
+        output_text = output_buffer.getvalue()
 
-        self.assertNotEqual(
-            first_reason_label_line,
-            first_reason_detail_line,
-        )
-        self.assertNotEqual(
-            second_reason_label_line,
-            second_reason_detail_line,
-        )
+        self.assertIn("Failure SSIDS", output_text)
+        self.assertIn("- [MISSING] PRODUCT_5G", output_text)
+        self.assertIn("- [UNEXPECTED] NEIGHBOR_WIFI(channel=6)", output_text)
+        self.assertNotIn("Failure Reason Count", output_text)
+        self.assertNotIn("Failure Reasons", output_text)
 
     def test_trace_verdict_fails_with_unexpected_ssid_reason(self):
         trace_verdict = self.get_trace_verdict(
@@ -203,6 +184,10 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             "confirmed expected count: 1/1",
             verdict_text,
         )
+        self.assertIn(
+            {"status_label": "UNEXPECTED", "ssid": "NEIGHBOR_WIFI(channel=6)"},
+            trace_verdict["failure_ssids"],
+        )
 
     def test_trace_verdict_fails_with_missing_expected_ssid_reason(self):
         trace_verdict = self.get_trace_verdict(
@@ -227,6 +212,10 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         self.assertIn(
             "confirmed expected count: 1/2",
             verdict_text,
+        )
+        self.assertIn(
+            {"status_label": "MISSING", "ssid": "PRODUCT_5G"},
+            trace_verdict["failure_ssids"],
         )
 
     def test_trace_verdict_fails_with_dead_confirmed_ssid_reason(self):
@@ -265,6 +254,10 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         self.assertIn(
             "scan warning: WlanScan failed for all interfaces",
             verdict_text,
+        )
+        self.assertIn(
+            {"status_label": "DEAD", "ssid": "PRODUCT_5G"},
+            trace_verdict["failure_ssids"],
         )
 
     def test_not_confirmed_entries_are_grouped_by_ssid_and_band(self):

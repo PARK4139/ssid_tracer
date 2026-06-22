@@ -51,6 +51,10 @@ def get_detected_ssid_status_sort_rank(item, planned_ssid_set):
     return len(prefixes)
 
 
+def get_detected_ssid_section_title(detected_ssid_count):
+    return f"DETECTED SSID({detected_ssid_count})"
+
+
 def build_detected_ssid_section(
     live_confirmed_5g_ssids,
     live_confirmed_2_4g_ssids,
@@ -98,8 +102,10 @@ def build_detected_ssid_section(
 
     rows = sorted(rows, key=lambda row: tuple(f(row) for f in sort_key_fields))
 
+    title = get_detected_ssid_section_title(detected_ssid_count=len(rows))
+
     if len(rows) <= 0:
-        return build_rich_section(title="DETECTED SSID", renderables=[], border_style="cyan")
+        return build_rich_section(title=title, renderables=[], border_style="cyan")
 
     renderables = []
     for index, item in enumerate(rows, start=1):
@@ -115,7 +121,7 @@ def build_detected_ssid_section(
 
         renderables.append(Text(line, style=get_rich_style("white")))
 
-    return build_rich_section(title="DETECTED SSID", renderables=renderables, border_style="white")
+    return build_rich_section(title=title, renderables=renderables, border_style="white")
 
 
 def print_detected_ssid_list(

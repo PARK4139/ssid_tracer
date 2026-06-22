@@ -270,6 +270,7 @@ def get_trace_verdict(
     )
 
     failure_reasons = []
+    failure_ssids = []
 
     if error_message:
         failure_reasons.append(f"scan/read error: {error_message}")
@@ -277,17 +278,33 @@ def get_trace_verdict(
     missing_ssids = missing_5g_ssids + missing_2_4g_ssids
     if len(missing_ssids) > 0:
         failure_reasons.append(f"missing expected SSID(s): {', '.join(missing_ssids)}")
+        failure_ssids.extend(
+            {"status_label": "MISSING", "ssid": ssid}
+            for ssid in missing_ssids
+        )
 
     dead_confirmed_ssids = list(dead_confirmed_5g_ssids) + list(dead_confirmed_2_4g_ssids)
     if len(dead_confirmed_ssids) > 0:
         failure_reasons.append(f"previously confirmed SSID(s) not visible now: {', '.join(dead_confirmed_ssids)}")
+        failure_ssids.extend(
+            {"status_label": "DEAD", "ssid": ssid}
+            for ssid in dead_confirmed_ssids
+        )
 
     not_confirmed_ssids = not_confirmed_5g_ssids + not_confirmed_2_4g_ssids
     if len(not_confirmed_ssids) > 0:
         failure_reasons.append(f"unexpected SSID(s): {', '.join(not_confirmed_ssids)}")
+        failure_ssids.extend(
+            {"status_label": "UNEXPECTED", "ssid": ssid}
+            for ssid in not_confirmed_ssids
+        )
 
     if len(not_confirmed_unknown_ssids) > 0:
         failure_reasons.append(f"unexpected unknown-band SSID(s): {', '.join(not_confirmed_unknown_ssids)}")
+        failure_ssids.extend(
+            {"status_label": "UNEXPECTED_UNKNOWN", "ssid": ssid}
+            for ssid in not_confirmed_unknown_ssids
+        )
 
     if len(failure_reasons) > 0:
         total_confirmed = len(live_confirmed_5g_ssids) + len(live_confirmed_2_4g_ssids)
@@ -298,9 +315,13 @@ def get_trace_verdict(
             failure_reasons.append(f"scan warning: {scan_message}")
 
     if len(failure_reasons) <= 0:
-        return {"status_label": "PASSED", "failure_reasons": []}
+        return {"status_label": "PASSED", "failure_reasons": [], "failure_ssids": []}
 
-    return {"status_label": "FAILED", "failure_reasons": failure_reasons}
+    return {
+        "status_label": "FAILED",
+        "failure_reasons": failure_reasons,
+        "failure_ssids": failure_ssids,
+    }
 
 
 def get_trace_verdict_text(trace_verdict):
