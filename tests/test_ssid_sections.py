@@ -28,6 +28,7 @@ def build_text_for_section(section_name):
     ssid_analyzer.EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY.clear()
     return render_text(
         build_result_screen(
+            config_name="config_60_ssids",
             expected_5g_ssids=["PRODUCT_5G"],
             expected_2_4g_ssids=["PRODUCT_2G"],
             ignored_ssids=["OFFICE"],
@@ -75,10 +76,20 @@ def test_config_section_only_renders_config_panel():
     text = build_text_for_section("config")
 
     assert "CONFIG" in text
-    assert "Expected 5G Count" in text
+    assert "Expected(2)" in text
+    assert "Expected 5G" not in text
     assert "RESULT" not in text
     assert "DETECTED SSID" not in text
     assert "STATISTICS" not in text
+
+
+def test_config_section_merges_expected_planned_and_ignored_counts():
+    text = build_text_for_section("config")
+
+    assert "Expected(2)" in text
+    assert "Planned(1)" in text
+    assert "Ignored(1)" in text
+    assert "Expected 2.4G" not in text
 
 
 def test_refresh_loop_does_not_use_rich_live_alternate_screen():

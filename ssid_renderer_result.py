@@ -14,37 +14,41 @@ def build_trace_verdict_section(trace_verdict):
     status_label = trace_verdict.get("status_label", "FAILED")
 
     if status_label == "PASSED":
+        status_text = Text("Status : ")
+        status_text.append("PASSED", style=get_rich_style("green"))
         return build_rich_section(
             title="RESULT",
             renderables=[
-                Text("Status : PASSED", style=get_rich_style("green")),
-                Text("All expected SSIDs are confirmed.", style=get_rich_style("green")),
+                status_text,
+                Text("All expected SSIDs are confirmed.", style=get_rich_style("white")),
             ],
-            border_style=get_rich_style("green"),
+            border_style=get_rich_style("white"),
         )
 
     failure_reasons = trace_verdict.get("failure_reasons", [])
+    status_text = Text("Status               : ")
+    status_text.append("FAILED", style=get_rich_style("red"))
     renderables = [
-        Text("Status               : FAILED", style=get_rich_style("red")),
-        Text(f"Failure Reason Count : {len(failure_reasons)}", style=get_rich_style("red")),
+        status_text,
+        Text(f"Failure Reason Count : {len(failure_reasons)}", style=get_rich_style("white")),
         Text(""),
-        Text("Failure Reasons", style=get_rich_style("red")),
+        Text("Failure Reasons", style=get_rich_style("white")),
     ]
 
     if len(failure_reasons) <= 0:
-        renderables.append(Text("  - unknown reason", style=get_rich_style("red")))
+        renderables.append(Text("  - unknown reason", style=get_rich_style("white")))
     else:
         for index, failure_reason in enumerate(failure_reasons, start=1):
             reason_label, reason_detail = split_failure_reason(failure_reason=failure_reason)
-            renderables.append(Text(f"  {index:02d}. {reason_label}", style=get_rich_style("red")))
+            renderables.append(Text(f"  {index:02d}. {reason_label}", style=get_rich_style("white")))
             if reason_detail != "":
                 for detail_item in reason_detail.split(", "):
-                    renderables.append(Text(f"        - {detail_item}", style=get_rich_style("red")))
+                    renderables.append(Text(f"        - {detail_item}", style=get_rich_style("white")))
 
     return build_rich_section(
         title="RESULT",
         renderables=renderables,
-        border_style=get_rich_style("red"),
+        border_style=get_rich_style("white"),
     )
 
 

@@ -1,0 +1,268 @@
+# coding rules
+# Moved from pk_system.rules. Apply when writing or reviewing code.
+
+---
+
+## PK_PROJECT_RULE_CODE_STYLE_AND_NAMING_2026_02_07
+
+### PEP 8
+- Follow PEP 8 by default.
+
+### Line Length (PK_PROJECT_RULE_LINE_LENGTH_PYPROJECT_2026_03_02)
+- Code line length must follow the limit defined in `pyproject.toml`: **`[tool.isort] line_length`** (현재 값: **333**). 작성·수정 시 이 길이를 초과하지 않는다. 초과 시 줄 나누기 또는 리팩터링으로 맞춘다. 최종 기준은 `pyproject.toml`의 해당 값이다.
+
+### Simplified Error Handling Routines (Context-Based)
+- **앞으로 작성·수정하는 모든 코드**에 반드시 적용한다.
+
+#### 1. For Wrapper Scripts (Entry Points)
+- **함수**: `ensure_pk_wrapper_except_routine_done()`
+- **규칙**: 인자 없이 호출한다. 시스템이 실행 컨텍스트를 자동으로 파악한다.
+
+#### 2. For Functional Modules (Internal Functions)
+- **함수**: `ensure_debugged_with_ai(traceback_obj=traceback)`
+- **규칙**: `traceback` 객체를 명시적으로 전달하여 AI 기반 디버깅을 트리거한다.
+
+### Multi-line string (indentation)
+- For multi-line string values, use `dedent(f""" ... """)` (from `textwrap.dedent`). Prefer this over concatenating multiple f-strings in parentheses.
+
+### Function Naming
+- Side-effect functions must start with `ensure_`.
+- Boolean-returning functions must start with `is_`.
+- Getter functions may start with `get_`.
+- Do not use `check_` for boolean-returning functions.
+
+### ensure_ prefix semantics (완료 의도)
+- `ensure_` prefix implies **completion intent**: the function ensures the named state/condition is **done** or **satisfied**.
+- When the condition is **not** met, the `ensure_` function **must attempt to fix it inside the same function**.
+- Flow: check condition → if not met, attempt fix → return success/failure.
+
+### File Naming
+- Wrapper/executable scripts must start with `ensure_`.
+- Test files must start with `test_`.
+- Exceptions: `is_` and `get_` prefixed files are allowed.
+
+### Variable Naming (preferred)
+- Pattern: `{noun}_{to}_{verb_or_purpose}` — e.g. `title_arg_to_add`, `directory_to_work`.
+- Use **full names** in variable and identifier names; avoid abbreviations. Prefer `directory_`, `configuration_`, `function_` over `dir_`, `config_`, `func_`.
+
+---
+
+## PK_PROJECT_RULE_TERMINOLOGY_FULL_NAMES_2026_02_07
+
+### Placeholder and terminology notation
+- When using underscore-wrapped placeholder notation, use **full names**, not abbreviations.
+- Examples: `_first_argument_` not `_first_arg_`, `_function_` not `_func_`, `_directory_` not `_dir_`.
+
+### File naming (full names in identifiers)
+- File names should use **full names**, not abbreviations.
+- Examples: `get_files_with_positional_first_argument_extracted.py` over `get_files_with_positional_first_arg_extracted.py`.
+
+---
+
+## PK_PROJECT_RULE_FUNCTION_CALL_CONVENTION_2026_02_07
+
+### Named Argument Mandatory
+- All project function calls must use named arguments only.
+- This applies to: single arguments, boolean literals, numeric literals, string literals.
+- Positional arguments are forbidden for project functions.
+
+### Exception
+- Python built-in functions (`print`, `len`, `range`, etc.) may use positional arguments.
+
+---
+
+## PK_PROJECT_RULE_DEFAULT_NONE_FOR_AUTOMATION_2026_02_12
+
+### Default Arguments for Automation
+- For automation-friendly functions, **default arguments must be `None`**.
+- When an argument is `None`, use `ensure_value_completed` to prompt the user and obtain the value.
+
+### Rules
+- Do **not** use concrete default values (e.g. `"100M"`, `35`) in the function signature; use `None`.
+- Do **not** exclude arguments from `ensure_value_completed` unless they are non-interactive.
+
+---
+
+## PK_PROJECT_RULE_IMPORT_STYLE_2026_02_12
+
+### Import Format
+- **단일 import**: 한 줄로 작성. 괄호·여러 줄 사용 금지.
+- **동일 모듈에서 여러 개 import**: 이 경우에만 multi-line import 허용.
+
+### Good (single import, one-line)
+```python
+from pk_tools.pk_functions.ensure_pk_wrapper_except_routine_done import ensure_pk_wrapper_except_routine_done
+```
+
+### Good (multiple imports from same module, multi-line)
+```python
+from pk_tools.pk_functions.ensure_pk_wrapper_helpers import (
+    ensure_pk_wrapper_try_routine_done,
+    ensure_pk_wrapper_except_routine_done,
+)
+```
+
+### Bad (single import with unnecessary multi-line)
+```python
+from pk_tools.pk_functions.ensure_pk_wrapper_except_routine_done import (
+    ensure_pk_wrapper_except_routine_done,
+)
+```
+
+---
+
+## PK_PROJECT_RULE_ACTION_CODE_LANGUAGE_2026_03_03
+
+### Rule
+- **All action code** including function names, variable names, class names, and logic-related comments **must be written in English**.
+- **Exception**: UI labels, user-facing error messages, or documentation intended for non-technical Korean users may remain in Korean.
+
+---
+
+## PK_PROJECT_RULE_WRAPPER_THIN_RUN_MAIN_ONLY_2026_06_20
+
+### Rule
+- New or modified wrapper files under `pk_tools/pk_wrappers/` should define only `_run_main()` plus the required `if __name__ == "__main__":` launcher block.
+- Do not add wrapper-local helper functions, classes, data builders, parsing logic, or subprocess orchestration helpers in wrapper files.
+- If logic beyond direct orchestration is needed, create or update a function under `pk_tools/pk_functions/`, then import and call it from `_run_main()`.
+
+### Good Sample
+```python
+def _run_main():
+    from pk_tools.pk_functions.ensure_git_repo_committed import ensure_git_repo_committed
+    from pk_tools.pk_functions.get_repo_to_work import get_repo_to_work
+
+    repo_to_work = get_repo_to_work()
+    ensure_git_repo_committed(repo_to_commit=repo_to_work)
+
+
+if __name__ == "__main__":
+    from pk_tools.pk_functions.ensure_pk_system_wrapper_standard import ensure_pk_system_wrapper_standard
+    ensure_pk_system_wrapper_standard(func_to_run=_run_main, traced_file=__file__)
+```
+
+---
+
+## PK_PROJECT_RULE_TEST_NO_GUI_MODAL_2026_06_20
+
+### Rule
+- Automated pytest must run without GUI modal popups.
+- Default fast pytest (`pytest -m "not integration and not slow"`) must stay non-interactive.
+
+### Required Setup
+- Root `conftest.py` uses autouse fixture `disable_pk_gui_modals_during_automated_tests`.
+- Helper: `pk_tools/pk_functions/apply_pk_gui_disabled_for_automated_tests.py`
+
+### Disabled Entrypoints During Tests
+- `log_with_pk_gui`
+- `log_with_blocking`
+- `log_without_blocking`
+- `ensure_pk_gui_executed`
+
+### Test Authoring
+- Do not wait for modal close in tests.
+- Prefer asserting function results, `SystemExit`, or monkeypatched side effects.
+- GUI-specific behavior belongs in `@pytest.mark.integration` tests only.
+
+---
+
+### Standard Practice (Strict)
+- **Custom Internal Modules**: All imports from `pk_tools`, `pk_functions`, `pk_objects`, etc., **MUST** be placed inside the function body where they are actually used.
+- **Location**: These imports **MUST** be gathered at the **very top** of the function body (first lines of the function).
+- **Prohibition**: Module-level (top-of-file) imports of any `pk_tools` sub-modules are **strictly forbidden**.
+
+---
+
+## PK_PROJECT_RULE_NO_MAIN_BLOCK_EXCEPT_WRAPPERS_2026_03_03
+
+### Standard Practice (Strict)
+- The `if __name__ == "__main__":` block is **STRICTLY FORBIDDEN** in all files except those located in the `pk_wrappers/` directory.
+- For testing logic, use the official testing framework (Pytest).
+- Any existing `if __name__ == "__main__":` blocks in `pk_functions/` or other non-wrapper directories must be removed.
+
+### Exception
+- Files in `pk_wrappers/` (or equivalent executable entry points like `main.py` in server directories) are the only places where this block is allowed.
+
+---
+
+## PK_PROJECT_RULE_FUNCTION_SIGNATURE_CLARITY_STANDARD_2026_03_21
+
+### Keyword-Only Rule
+- Do not introduce a bare `*` in function signatures by default.
+- Treat keyword-only arguments as an exception, not the standard style.
+- Only use a bare `*` when there is a specific, explicit reason.
+
+### Default Preference
+- Prefer plain, directly callable parameter lists.
+
+---
+
+## PK_PROJECT_RULE_EXPLICIT_NAMING_PREFERRED_2026_04_05
+
+### Rule
+- Avoid non-explicit naming as much as possible.
+- Prefer names that clearly describe role, target, and intent.
+- Do not introduce vague identifiers such as `data`, `value`, `temp`, `obj`, `thing`, `misc`, or similar.
+
+### Application
+- Applies to function names, variable names, class names, file names, constants, and key identifiers.
+
+---
+
+## PK_PROJECT_RULE_NEW_FUNCTION_SECONDS_MEASURED_DECORATOR_2026_03_27
+
+### Rule
+- Every newly created function must include `@ensure_seconds_measured` directly above its `def`.
+- This requirement applies to both top-level functions and newly added nested local functions.
+
+### Exception
+- Skip this decorator only when there is an explicit, documented reason (e.g. import cycle risk or framework callback constraints).
+
+---
+
+## PK_PROJECT_RULE_ALIAS_USAGE_PROHIBITED_WITH_EXPLICIT_USER_EXCEPTION_2026_04_06
+
+### Core Rule (absolute)
+- Alias-style compatibility fields/symbols are **strictly forbidden**.
+- **No exception**: do not add alias shims even when asked for compatibility; fix by canonicalization only (rename + call-site updates).
+
+### Required Direction
+- When a naming-policy conflict is found, fix it by **canonical naming** at the definition and **update all call sites**.
+
+---
+
+## PK_PROJECT_RULE_IMPORT_ALIAS_AND_EXPORT_FILE_1TO1_STRICT_2026_04_17
+
+### Core Rule (very strong)
+- Avoid ambiguous import alias usage as much as possible.
+- Keep file name and primary exported/public function name nearly 1:1 whenever feasible.
+
+### Required Direction
+- Prefer direct canonical imports without aliasing.
+- New files should expose a primary function/class whose name maps directly to the file name intent.
+
+---
+
+## PK_PROJECT_RULE_GLOBAL_ENCODING_UTF8_DEFAULT_2026_04_04
+
+### Global Default
+- Always use UTF-8 as the project default encoding.
+
+### Required
+- Save all Python source files as UTF-8.
+- Explicitly use `encoding="utf-8"` for text file read/write operations.
+- Never depend on OS-default text encodings.
+
+---
+
+## PK_PROJECT_RULE_HARDCODING_AND_MAGIC_LITERALS_PROHIBITED_2026_04_06
+
+### Rule (absolute)
+- Hardcoding that encodes **domain / environment / cross-module semantics** is forbidden.
+- Prohibited: hardcoded paths, URLs, hosts, ports, credentials, tokens, device IDs, model IDs, step IDs, repeated numeric/string literals with semantic meaning.
+
+### Required Direction
+- Centralize semantic values into: `pk_tools.pk_objects.*`, environment variables, `PkTexts`, or subsystem-scoped `pk_objects`.
+
+### Allowed (narrow, local-only)
+- Single-use, local constants that are not reused across files/modules and are purely algorithmic.

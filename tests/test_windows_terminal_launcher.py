@@ -24,12 +24,11 @@ def test_windows_terminal_arguments_create_expected_section_panes():
     assert args.count("new-tab") == 1
     assert args.count("split-pane") == 3
     assert args.count("--size") == 3
-    assert "0.75" in args
-    assert "0.6667" in args
-    assert "0.5" in args
+    assert args.count("0.5") == 2
+    assert args.count("0.6667") == 1
     assert "move-focus" not in args
-    assert args.count("-V") == 3
-    assert "-H" not in args
+    assert args.count("-V") == 1
+    assert args.count("-H") == 2
     assert args.count("result") == 2
     assert args.count("detected") == 2
     assert args.count("statistics") == 2

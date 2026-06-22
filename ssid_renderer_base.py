@@ -24,6 +24,7 @@ def get_rich_style(color_name):
         "gray": "bright_black",
         "red": "red",
         "orange": "orange3",
+        "white": "white",
     }.get(color_name, "")
 
 

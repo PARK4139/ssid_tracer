@@ -1,3 +1,0 @@
-[YYYY-MM-DD HH:MM] [UPSERTER] [START] <task>
-[YYYY-MM-DD HH:MM] [FILE] <path> - <INSERT|UPDATE|DELETE> - <reason>
-[YYYY-MM-DD HH:MM] [UPSERTER] [END] <summary>

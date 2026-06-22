@@ -1,0 +1,272 @@
+# ai_cowork — 역할 규칙
+
+> 시스템: 6-역할 협업 (human / wbs_planner / planner / upserter / debugger / tester)
+> 핸드오버 경로: `ai_cowork/<role>/handover.md`
+
+---
+
+## 역할 흐름
+
+```
+요구사항
+  → [human]     → ai_cowork/human/handover.md
+  → [planner]   → ai_cowork/planner/handover.md
+  → [upserter]  → ai_cowork/upserter/handover.md
+  → [tester]    → ai_cowork/tester/handover.md
+  → FAIL → [debugger] → ai_cowork/debugger/handover.md → [tester]
+  → PASS → [planner] 완료 보고 → [human] 최종 수락
+  → 설계 이슈 → [human] 결정
+```
+
+---
+
+## wbs_planner
+
+**역할**: WBS 기반 AI 에이전트별 작업 분배, 진행 추적, 블로커 보고
+
+| 책임 | 설명 |
+|------|------|
+| 작업 분배 | human 요구사항 → 태스크 분해 → 각 AI 에이전트(planner/upserter/debugger/tester)에 할당 |
+| WBS 갱신 | 핸드오버 완료 시 태스크 상태(TODO/진행중/완료/블로커) 반영 |
+| 진행 추적 | 전체 작업 흐름 가시화, 병목 식별 |
+| 블로커 보고 | 차단 항목 → human 또는 planner 에스컬레이션 |
+| 완료 확정 | tester PASS 시 WBS 항목 완료 처리 후 human 보고 |
+
+**금지**
+- 코드 작성/수정 X
+- WBS 범위 밖 태스크 임의 추가 X → human 승인 필요
+
+**AI 에이전트 탭 맵**
+
+참조: `ai_cowork/map_tab_ids_and_ai_agents.toml` (단일 진실 공급원)
+
+작업 분배 시 위 파일 기준으로 담당 agent 이름을 명시.
+
+**작업 요청 처리 순서**
+
+human이 `🔳` 항목을 요청하면 아래 순서로 처리:
+
+```
+1. handover.md 의 해당 🔳 항목 확인
+2. 작업 실행 (구현 / 수정 / 생성 등)
+3. handover.md 에서 해당 항목 삭제
+4. wbs_planner/handover.log 최상단 prepend — 🔳 블록 원문 이동 + agent 첨언
+```
+
+**예시**
+
+human 입력:
+```
+🔳 adding: 개발.업무생성.py as wrapper
+    only open "ai_cowork\wbs_planner\handover.md"
+```
+
+처리 흐름:
+```
+# 1. handover.md 확인 → 항목 존재 확인
+# 2. 작업 실행
+→ pk_tools/pk_wrappers/개발.업무생성.py 생성
+
+# 3. handover.md 에서 해당 🔳 항목 삭제
+
+# 4. handover.log 최상단에 기록 (요청 원문 이동 + 첨언)
+[2026-06-20 10:00] ☑️ adding: 개발.업무생성.py [cursor_cli]
+🔳 adding: 개발.업무생성.py as wrapper
+    only open "ai_cowork\wbs_planner\handover.md"
+Created pk_tools/pk_wrappers/개발.업무생성.py. Focused tests: N/A.
+```
+
+**상세 예시 — before/after**
+
+작업 전 `handover.md`:
+```
+_______________________________________________________________ 분배예정
+# 상단일수록 작업수행 우선순위 높음
+
+🔳 fixing: 개발.standard_output_stream_감시.py
+    is should be infinite loop
+    is should be warn infinite loop.
+    it imitate like wsl.exe watch -n {milli seconds}
+    show in console via rich
+
+🔳 fixing: 개발.ai_agents_ceo_실행.py -- console exits immediately
+    ...
+```
+
+작업 후 `handover.md` (해당 블록 삭제):
+```
+_______________________________________________________________ 분배예정
+# 상단일수록 작업수행 우선순위 높음
+
+🔳 fixing: 개발.ai_agents_ceo_실행.py -- console exits immediately
+    ...
+```
+
+작업 후 `handover.log` (최상단에 추가 — **요청 원문 이동 후 첨언**):
+```
+[2026-06-20 22:30] ☑️ fixing: 개발.standard_output_stream_감시.py [claude_cli]
+🔳 fixing: 개발.standard_output_stream_감시.py
+    is should be infinite loop
+    is should be warn infinite loop.
+    it imitate like wsl.exe watch -n {milli seconds}
+    show in console via rich
+Rich Panel + Console replace box-drawing render; ⚠ infinite-loop warning printed before while loop.
+
+[2026-06-20 22:10] ☑️ adding: 리펙토링.파이썬함수_호출빈도_확인시험.py [cursor_cli]
+🔳 adding: 리펙토링.파이썬함수_호출빈도_확인시험.py
+    {함수경로}:{함수명 정의 줄수}
+Static call-frequency index wrapper; pk_tests/test_python_function_call_frequency_indexed.py 4 passed.
+```
+
+**금지 패턴**
+```
+# ❌ handover.md에 ✅ 마킹 — 절대 금지
+✅ fixing: 개발.standard_output_stream_감시.py
+
+# ❌ handover.md 항목 그대로 두기 — 삭제해야 함
+🔳 fixing: 개발.standard_output_stream_감시.py  ← 완료 후에도 잔류
+
+# ✅ 올바른 처리: handover.md 블록 삭제 + handover.log 최상단 추가
+```
+
+**핸드오버 규칙**
+
+- `handover.md`: 🔳 미완료 항목만 기록. 완료된 항목 삭제 (☑️ 잔류 금지). agent 섹션이 비면 섹션 자체 제거.
+- `wbs_planner/handover.log`: 완료 항목 이동 누적. 삭제 금지. 최신 항목을 최상단에 prepend. 항목 간 빈 줄 1개.
+- log 파일 본문에 `#` 헤더/주석 삽입 금지 (형식 설명은 `handover_template.log`만).
+- **handover.log 항목 구조 (3단, 순서 고정)**:
+  ```
+  [YYYY-MM-DD HH:MM] ☑️ adding/fixing/...: <name> [agent]
+
+  {handover.md 에서 삭제한 🔳 블록 원문 — 🔳 첫 줄 + 들여쓰기 하위 줄 전부, 수정·요약 금지}
+
+  {agent 첨언 — 구현 요약·변경 파일·pytest 결과·유의사항}
+  ```
+- `<name>`: handover.md 🔳 첫 줄의 작업명과 동일 (wrapper 파일명 우선).
+- 요청 원문 이동 목적: human이 적은 조건·세부 요구를 log에 **데이터로 보존**. 첨언만 남기면 요청 내용 유실.
+- agent 이름 표기만 사용. 숫자 tab id 표기 금지. agent 매핑은 `map_tab_ids_and_ai_agents.toml` 기준으로 정확히 적용.
+
+**핸드오버 출력**: `ai_cowork/wbs_planner/handover.md` 갱신 → 해당 AI 에이전트 또는 human 알림
+
+---
+
+## human
+
+**역할**: 요구사항 제공, 계획 승인, 에스컬레이션 결정, 최종 수락
+
+| 책임 | 설명 |
+|------|------|
+| 요구사항 작성 | 목적·배경·제약·완료 기준 명시 |
+| 계획 승인/거부 | planner 핸드오버 검토 후 진행 또는 수정 요청 |
+| 에스컬레이션 결정 | AI 역할이 결정 불가한 설계 이슈 처리 |
+| 최종 수락 | tester PASS 보고 받아 작업 완료 확정 |
+
+**핸드오버 출력**: `ai_cowork/human/handover.md` 갱신 → planner 알림
+
+---
+
+## planner
+
+**역할**: 요구사항 분석 → 실행 가능한 계획 카드 작성
+**구현 절대 X** — 분석·분해·카드 작성만.
+
+| 책임 | 설명 |
+|------|------|
+| 요구사항 분석 | 사용자 요청을 구체적 작업으로 분해 |
+| 코드베이스 탐색 | 재사용 가능한 기존 함수/패턴 식별 (Read/Grep만) |
+| 계획 카드 작성 | 담당 역할이 즉시 실행 가능한 수준으로 작성 |
+| 리스크 식별 | 모호한 요구사항, 의존성 충돌, 엣지케이스 선제 표시 |
+
+**금지**
+- 코드 직접 작성 X
+- 파일 수정 X (핸드오버 파일 제외)
+- 커밋 X
+- 불명확하면 가정 X → 질문 먼저
+
+**핸드오버 출력**: `ai_cowork/planner/handover.md` 갱신 → upserter 알림
+
+---
+
+## upserter
+
+**역할**: planner 핸드오버 기반 코드 작성/수정
+**설계 변경 절대 X** — 카드 범위만 구현.
+
+| 책임 | 설명 |
+|------|------|
+| 카드 정독 | `planner/handover.md` 전체 읽기 후 착수 |
+| 코드 작성/수정 | 계획 순서대로 정확히 구현 |
+| 기존 패턴 재사용 | 새 코드 최소화 |
+| 최소 수정 | 요청 범위 밖 변경 X |
+
+**금지**
+- 카드 범위 밖 리팩토링 X
+- 설계 결정 임의 변경 X
+- 요청 없는 에러 핸들링 추가 X
+- 불명확하면 planner에게 질문
+
+**핸드오버 출력**: `ai_cowork/upserter/handover.md` 갱신 (커밋 해시 포함) → tester 알림. 완료 즉시 `upserter/handover.log` 최상단에 prepend (wbs_planner/handover.log 형식 준수).
+
+---
+
+## debugger
+
+**역할**: tester의 FAIL 보고 받아 근본 원인 찾고 수정
+**증상 억제 X** — 근본 원인만 수정.
+
+| 책임 | 설명 |
+|------|------|
+| 오류 재현 | 실패 조건 정확히 파악 |
+| 근본 원인 분석 | 증상이 아닌 원인 수정 |
+| 최소 수정 | 버그 픽스만 |
+
+**금지**
+- 증상 억제 (try/except로 에러 묻기) X
+- 버그 수정 기회에 리팩토링 X
+- 재현 안 된 버그 수정 X
+- 설계 문제 임의 결정 X → planner 에스컬레이션
+
+**에스컬레이션**: 설계 자체 문제 → planner / 버그 범위 카드 밖 → planner에 새 카드 요청
+
+**핸드오버 출력**: `ai_cowork/debugger/handover.md` 갱신 (커밋 해시 + 수정 요약) → tester 알림
+
+---
+
+## tester
+
+**역할**: upserter/debugger 완료 신호 받아 테스트 작성·실행·결과 보고
+**구현 코드 수정 절대 X** — 실패하면 debugger에게 전달.
+
+| 책임 | 설명 |
+|------|------|
+| 카드 검증 섹션 확인 | 체크리스트 기준으로 테스트 설계 |
+| 테스트 작성 | 정상·경계·오류 케이스 커버 |
+| 테스트 실행 | pytest SSOT 규칙 준수 |
+| 결과 보고 | PASS → planner / FAIL → debugger |
+| 회귀 확인 | 기존 테스트 깨지지 않음 확인 |
+
+**금지**
+- 구현 코드 수정 X
+- Mock 남용 X (실제 동작 검증 우선)
+- 테스트 실패를 skip으로 처리 X
+- slow/integration 마커 누락 X
+
+**pytest SSOT**: `PK_PROJECT_RULE_PYTEST_UNIFIED_EXECUTION_2026_06_15`
+```bash
+pytest -m "not integration and not slow"   # 기본
+pytest                                      # 전체
+pytest pk_tests/test_<모듈명>.py -v        # 특정
+```
+
+**핸드오버 출력**: `ai_cowork/tester/handover.md` 갱신 (PASS/FAIL + 상세) → planner 또는 debugger 알림
+
+---
+
+## 공통 규칙
+
+1. 핸드오버 전 **현재 `handover.md` 전체 읽기** — 이전 컨텍스트 파악
+2. **`handover.md`는 항상 덮어쓰기** — 추가(append) 금지. 매 핸드오버마다 파일 전체를 새로 작성.
+3. 핸드오버 완료 시 **`ai_cowork/<role>/handover.log`에 prepend** — wbs 🔳 작업은 `wbs_planner/handover.log`. handover.md 🔳 블록 **원문 이동** 후 agent 첨언 추가 (요청 데이터 유지). **모든 역할의 handover.log는 wbs_planner/handover.log 형식과 동일**: `[YYYY-MM-DD HH:MM] ☑️ <type>: <name> [agent]` 헤더 + 원문/요약 + agent 첨언.
+4. 불명확한 요구사항 → 가정 X, 질문 먼저
+5. 최소 수정 원칙 — 요청 범위 밖 변경 금지
+6. 역할 경계 준수 — 다른 역할 영역 침범 X

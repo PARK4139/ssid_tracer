@@ -4,7 +4,7 @@ from rich.console import Group
 from rich.text import Text
 
 from ssid_analyzer import get_check_result, get_trace_verdict, get_trace_verdict_text
-from ssid_config import SHOW_ALL_DETECTED_WIFI_ENTRIES, SORT_OUTPUT_ASCENDING
+from ssid_config import SHOW_ALL_DETECTED_WIFI_ENTRIES
 from ssid_logger import maybe_write_log
 from ssid_renderer_base import (
     get_colored_text,
@@ -78,62 +78,44 @@ def print_grouped_wifi_entry_list(title, status_label, wifi_entries, color_name)
 
 def build_action_required_statistics_section(
     action_required_items,
+    detected_wifi_entries,
     live_confirmed_5g_count,
     live_confirmed_2_4g_count,
     dead_confirmed_5g_count,
     dead_confirmed_2_4g_count,
-    missing_5g_count,
-    missing_2_4g_count,
-    not_confirmed_5g_count,
-    not_confirmed_2_4g_count,
-    not_confirmed_unknown_count,
     scan_ok,
     scan_message,
 ):
+    confirmed_count = live_confirmed_5g_count + live_confirmed_2_4g_count
+    dead_confirmed_count = dead_confirmed_5g_count + dead_confirmed_2_4g_count
     return build_rich_section(
         title="STATISTICS",
         renderables=[
-            Text(f"Confirmed Count               : {live_confirmed_5g_count + live_confirmed_2_4g_count}"),
-            Text(f"  - Confirmed 5G Count        : {live_confirmed_5g_count}"),
-            Text(f"  - Confirmed 2.4G Count      : {live_confirmed_2_4g_count}"),
-            Text(f"Dead Confirmed Count          : {dead_confirmed_5g_count + dead_confirmed_2_4g_count}"),
-            Text(f"  - Dead Confirmed 5G Count   : {dead_confirmed_5g_count}"),
-            Text(f"  - Dead Confirmed 2.4G Count : {dead_confirmed_2_4g_count}"),
-            Text(f"Action Required Count         : {len(action_required_items)}"),
-            Text(f"  - Missing 5G Count          : {missing_5g_count}"),
-            Text(f"  - Missing 2.4G Count        : {missing_2_4g_count}"),
-            Text(f"  - Not Confirmed 5G Count    : {not_confirmed_5g_count}"),
-            Text(f"  - Not Confirmed 2.4G Count  : {not_confirmed_2_4g_count}"),
-            Text(f"  - Not Confirmed Unknown     : {not_confirmed_unknown_count}"),
-            Text(f"Scan Status                   : {'OK' if scan_ok else 'WARN'}"),
-            Text(f"Scan Message                  : {scan_message}"),
-            Text(f"Sort Mode                     : {'ASC' if SORT_OUTPUT_ASCENDING else 'RAW'}"),
-            Text("Detected SSID Sort Mode       : status"),
-            Text("Band Rule                     : 2.4G=Channel 1~14, 5G=Channel >=32"),
+            Text(f"Detected        : {len(detected_wifi_entries)}"),
+            Text(f"Confirmed       : {confirmed_count}"),
+            Text(f"Dead Confirmed  : {dead_confirmed_count}"),
+            Text(f"Action Required : {len(action_required_items)}"),
+            Text(f"Scan Status     : {'OK' if scan_ok else 'WARN'}"),
+            Text(f"Scan Message    : {scan_message}"),
         ],
         border_style="white",
     )
 
 
-def build_config_section(expected_5g_ssids, expected_2_4g_ssids, ignored_ssids, planned_ssids):
+def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ignored_ssids, planned_ssids):
+    expected_ssids = list(expected_5g_ssids) + list(expected_2_4g_ssids)
     renderables = [
-        Text(f"Expected 5G Count             : {len(expected_5g_ssids)}"),
-        Text(f"Expected 2.4G Count           : {len(expected_2_4g_ssids)}"),
-        Text(f"Ignored SSID Count            : {len(ignored_ssids)}"),
-        Text(f"Planned SSID Count            : {len(planned_ssids)}"),
+        Text(f"Selected Config : {config_name}"),
         Text(""),
-        Text("Expected 5G"),
+        Text(f"Expected({len(expected_ssids)})"),
     ]
 
-    renderables.extend(Text(f"  - {ssid}") for ssid in expected_5g_ssids)
+    renderables.extend(Text(f"  - {ssid}") for ssid in expected_ssids)
     renderables.append(Text(""))
-    renderables.append(Text("Expected 2.4G"))
-    renderables.extend(Text(f"  - {ssid}") for ssid in expected_2_4g_ssids)
-    renderables.append(Text(""))
-    renderables.append(Text("Planned"))
+    renderables.append(Text(f"Planned({len(planned_ssids)})"))
     renderables.extend(Text(f"  - {ssid}") for ssid in planned_ssids)
     renderables.append(Text(""))
-    renderables.append(Text("Ignored"))
+    renderables.append(Text(f"Ignored({len(ignored_ssids)})"))
     renderables.extend(Text(f"  - {ssid}") for ssid in ignored_ssids)
 
     return build_rich_section(
@@ -144,6 +126,7 @@ def build_config_section(expected_5g_ssids, expected_2_4g_ssids, ignored_ssids, 
 
 
 def build_result_screen(
+    config_name,
     expected_5g_ssids,
     expected_2_4g_ssids,
     ignored_ssids,
@@ -171,12 +154,6 @@ def build_result_screen(
         ignored_ssids=ignored_ssids,
         detected_wifi_entries=detected_wifi_entries,
     )
-
-    missing_5g_count = sum(1 for i in action_required_items if i["status_label"] == "MISSING_5G")
-    missing_2_4g_count = sum(1 for i in action_required_items if i["status_label"] == "MISSING_2_4G")
-    not_confirmed_5g_count = sum(1 for i in action_required_items if i["status_label"] == "NOT_CONFIRMED_5G")
-    not_confirmed_2_4g_count = sum(1 for i in action_required_items if i["status_label"] == "NOT_CONFIRMED_2_4G")
-    not_confirmed_unknown_count = sum(1 for i in action_required_items if i["status_label"] == "NOT_CONFIRMED_UNKNOWN")
 
     checked_at = time.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -218,20 +195,17 @@ def build_result_screen(
 
     statistics_section = build_action_required_statistics_section(
         action_required_items=action_required_items,
+        detected_wifi_entries=detected_wifi_entries,
         live_confirmed_5g_count=len(live_confirmed_5g_ssids),
         live_confirmed_2_4g_count=len(live_confirmed_2_4g_ssids),
         dead_confirmed_5g_count=len(dead_confirmed_5g_ssids),
         dead_confirmed_2_4g_count=len(dead_confirmed_2_4g_ssids),
-        missing_5g_count=missing_5g_count,
-        missing_2_4g_count=missing_2_4g_count,
-        not_confirmed_5g_count=not_confirmed_5g_count,
-        not_confirmed_2_4g_count=not_confirmed_2_4g_count,
-        not_confirmed_unknown_count=not_confirmed_unknown_count,
         scan_ok=scan_ok,
         scan_message=scan_message,
     )
 
     config_section = build_config_section(
+        config_name=config_name,
         expected_5g_ssids=expected_5g_ssids,
         expected_2_4g_ssids=expected_2_4g_ssids,
         ignored_ssids=ignored_ssids,
@@ -263,6 +237,7 @@ def build_result_screen(
 
 
 def print_result(
+    config_name,
     expected_5g_ssids,
     expected_2_4g_ssids,
     ignored_ssids,
@@ -274,6 +249,7 @@ def print_result(
 ):
     get_rich_console().print(
         build_result_screen(
+            config_name=config_name,
             expected_5g_ssids=expected_5g_ssids,
             expected_2_4g_ssids=expected_2_4g_ssids,
             ignored_ssids=ignored_ssids,

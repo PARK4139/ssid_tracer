@@ -18,11 +18,15 @@ from ssid_renderer import DISPLAY_SECTIONS, build_result_screen, get_rich_consol
 from ssid_renderer_result import print_trace_verdict
 from ssid_scanner import get_detected_wifi_entries_with_retry
 from ssid_utils import (
+    ensure_selected_ssid_config_name_written,
     get_band_from_channel,
-    get_unique_expected_2_4g_ssids,
-    get_unique_expected_5g_ssids,
-    get_unique_ignored_ssids,
-    get_unique_planned_ssids,
+    get_available_ssid_config_names,
+    get_completed_ssid_config_name,
+    get_selected_ssid_config_name,
+    get_unique_expected_2_4g_ssids_from_selected_config,
+    get_unique_expected_5g_ssids_from_selected_config,
+    get_unique_ignored_ssids_from_selected_config,
+    get_unique_planned_ssids_from_selected_config,
 )
 
 
@@ -87,38 +91,114 @@ def clear_console():
         os.system("clear")
 
 
+def ensure_value_completed(value, choices, prompt_message):
+    if value in choices:
+        return value
+
+    try:
+        from prompt_toolkit import prompt
+        from prompt_toolkit.completion import FuzzyWordCompleter
+
+        completed_value = prompt(
+            prompt_message,
+            completer=FuzzyWordCompleter(words=choices),
+            complete_while_typing=True,
+        ).strip()
+    except (EOFError, KeyboardInterrupt):
+        raise
+    except Exception:
+        print(prompt_message)
+        for index, choice in enumerate(choices, start=1):
+            print(f"  {index}. {choice}")
+        completed_value = input("> ").strip()
+
+    if completed_value in choices:
+        return completed_value
+
+    if completed_value.isdigit():
+        selected_index = int(completed_value) - 1
+        if 0 <= selected_index < len(choices):
+            return choices[selected_index]
+
+    return choices[0]
+
+
+def ensure_ssid_config_selected_interactively():
+    selected_ssid_config_name = ensure_value_completed(
+        value=None,
+        choices=get_available_ssid_config_names(),
+        prompt_message="Config> ",
+    )
+    return ensure_selected_ssid_config_name_written(ssid_config_name=selected_ssid_config_name)
+
+
+def get_current_ssid_configuration():
+    config_name = get_completed_ssid_config_name(ssid_config_name=get_selected_ssid_config_name())
+    return {
+        "config_name": config_name,
+        "expected_5g_ssids": get_unique_expected_5g_ssids_from_selected_config(),
+        "expected_2_4g_ssids": get_unique_expected_2_4g_ssids_from_selected_config(),
+        "ignored_ssids": get_unique_ignored_ssids_from_selected_config(),
+        "planned_ssids": get_unique_planned_ssids_from_selected_config(),
+    }
+
+
+def print_current_result_screen(console, current_ssid_configuration, detected_wifi_entries, scan_ok, scan_message, error_message, section_name):
+    clear_console()
+    console.print(
+        build_result_screen(
+            config_name=current_ssid_configuration["config_name"],
+            expected_5g_ssids=current_ssid_configuration["expected_5g_ssids"],
+            expected_2_4g_ssids=current_ssid_configuration["expected_2_4g_ssids"],
+            ignored_ssids=current_ssid_configuration["ignored_ssids"],
+            planned_ssids=current_ssid_configuration["planned_ssids"],
+            detected_wifi_entries=detected_wifi_entries,
+            scan_ok=scan_ok,
+            scan_message=scan_message,
+            error_message=error_message,
+            section_name=section_name,
+        )
+    )
+
+
 def ensure_wifi_expected_ssids_watched(section_name="all"):
     ensure_ansi_color_enabled()
     setup_console_drag()
+    ensure_selected_ssid_config_name_written(ssid_config_name=get_selected_ssid_config_name())
 
-    expected_5g_ssids = get_unique_expected_5g_ssids()
-    expected_2_4g_ssids = get_unique_expected_2_4g_ssids()
-    ignored_ssids = get_unique_ignored_ssids()
-    planned_ssids = get_unique_planned_ssids()
-
-    if len(expected_5g_ssids) <= 0 and len(expected_2_4g_ssids) <= 0:
-        print("No expected SSID defined")
-        sys.exit(1)
+    if section_name == "config":
+        ensure_ssid_config_selected_interactively()
 
     console = get_rich_console()
+    current_ssid_configuration = get_current_ssid_configuration()
+
+    print_current_result_screen(
+        console=console,
+        current_ssid_configuration=current_ssid_configuration,
+        detected_wifi_entries=[],
+        scan_ok=False,
+        scan_message="scan pending",
+        error_message="",
+        section_name=section_name,
+    )
 
     while True:
         loop_started_at = time.time()
+        current_ssid_configuration = get_current_ssid_configuration()
+
+        if len(current_ssid_configuration["expected_5g_ssids"]) <= 0 and len(current_ssid_configuration["expected_2_4g_ssids"]) <= 0:
+            print("No expected SSID defined")
+            sys.exit(1)
 
         detected_wifi_entries, scan_ok, scan_message, error_message = get_detected_wifi_entries_with_retry()
-        clear_console()
-        console.print(
-            build_result_screen(
-                expected_5g_ssids=expected_5g_ssids,
-                expected_2_4g_ssids=expected_2_4g_ssids,
-                ignored_ssids=ignored_ssids,
-                planned_ssids=planned_ssids,
-                detected_wifi_entries=detected_wifi_entries,
-                scan_ok=scan_ok,
-                scan_message=scan_message,
-                error_message=error_message,
-                section_name=section_name,
-            )
+        print_current_result_screen(
+            console=console,
+            current_ssid_configuration=current_ssid_configuration,
+            detected_wifi_entries=detected_wifi_entries,
+            scan_ok=scan_ok,
+            scan_message=scan_message,
+            error_message=error_message,
+            section_name=section_name,
         )
 
         elapsed_sec = time.time() - loop_started_at

@@ -1,3 +1,0 @@
-[YYYY-MM-DD HH:MM] [TESTER] [START] <task>
-[YYYY-MM-DD HH:MM] [CASE] <case_id> - <PASS|FAIL> - <reason>
-[YYYY-MM-DD HH:MM] [TESTER] [END] Pass:<n> Fail:<n>

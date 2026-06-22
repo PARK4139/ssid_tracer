@@ -85,6 +85,28 @@ PLANNED_SSIDS_RAW = [
     "R15-FEFA",
 ]
 
+CONFIG_60_SSIDS = {
+    "expected_5g_ssids": EXPECTED_5G_SSIDS_RAW,
+    "expected_2_4g_ssids": EXPECTED_2_4G_SSIDS_RAW,
+    "ignored_ssids": IGNORED_SSIDS_RAW,
+    "planned_ssids": PLANNED_SSIDS_RAW,
+}
+
+CONFIG_26_SSIDS = {
+    "expected_5g_ssids": EXPECTED_5G_SSIDS_RAW[:13],
+    "expected_2_4g_ssids": EXPECTED_2_4G_SSIDS_RAW[:13],
+    "ignored_ssids": IGNORED_SSIDS_RAW,
+    "planned_ssids": PLANNED_SSIDS_RAW,
+}
+
+SSID_CONFIGS = {
+    "config_26_ssids": CONFIG_26_SSIDS,
+    "config_60_ssids": CONFIG_60_SSIDS,
+}
+
+DEFAULT_SSID_CONFIG_NAME = "config_60_ssids"
+SELECTED_SSID_CONFIG_PATH = Path(__file__).parent / "pk_tmp" / "selected_ssid_config.txt"
+
 WATCH_INTERVAL_SEC = 3.0
 SCAN_SETTLE_SEC = 0.15
 NETSH_RETRY_COUNT = 2

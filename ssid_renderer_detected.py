@@ -119,11 +119,9 @@ def build_detected_ssid_section(
             f"{reason_text}"
         )
 
-        renderables.append(
-            Text(line, style=get_rich_style(get_detected_ssid_status_color_name(item=item, planned_ssid_set=planned_ssid_set)))
-        )
+        renderables.append(Text(line, style=get_rich_style("white")))
 
-    return build_rich_section(title="DETECTED SSID", renderables=renderables, border_style="cyan")
+    return build_rich_section(title="DETECTED SSID", renderables=renderables, border_style="white")
 
 
 def print_detected_ssid_list(

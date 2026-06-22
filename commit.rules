@@ -1,0 +1,63 @@
+# commit message rules
+# 진실소스: 이 파일
+
+---
+
+## 형식
+
+```
+{verb}: {subject}
+```
+
+### verb — ing형 고정
+
+| verb | 용도 |
+|------|------|
+| `adding` | 새 파일/기능 추가 |
+| `fixing` | 버그·오류 수정 |
+| `saving` | 자동 저장 / 체크포인트 |
+| `refactoring` | 동작 유지 + 구조 개선 |
+
+### subject — 우선순위
+
+1. wrapper 파일명 (예: `개발.업무생성.py`)
+2. function 명 (예: `get_commit_message_via_gemini_cli`)
+3. 설명 (예: `commit message rule`)
+
+---
+
+## 규칙
+
+- subject: wrapper명 우선 > function명 > 설명 (후순위)
+- 영문 subject + 한글 설명 병기 가능 (subject 줄에 한글 그대로 써도 OK)
+- 말투: caveman — 조사·경어·수식어 제거. 명사·동사만.
+- 본문(body): 왜 바꿨는지 비자명한 경우만. 자명하면 생략.
+
+---
+
+## 샘플
+
+```
+adding: 개발.업무생성.py
+```
+```
+adding: 개발.업무완료_로그확인.py
+```
+```
+fixing: get_commit_message_via_gemini_cli_headless_mode
+```
+```
+adding: commit message rule
+```
+```
+refactoring: ensure_git_repo_committed
+```
+```
+saving: 자동 저장 시점 기록
+```
+```
+fixing: 저장소_열기_via_5_ai_agents — cursor 페인 0x80070057 오류
+```
+```
+adding: 개발.claude_cli_최신버전_업데이트.py
+```

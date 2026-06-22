@@ -1,0 +1,7 @@
+[agents]
+ai_1 = "gemini_cli"
+ai_2 = "antigravity_cli"
+ai_3 = "codex_cli"
+ai_4 = "cursor_cli"
+ai_5 = "claude_cli"
+ai_6 = "claude_cli"

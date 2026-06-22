@@ -1,11 +1,14 @@
 from ssid_config import (
     CASE_SENSITIVE,
+    DEFAULT_SSID_CONFIG_NAME,
     EXPECTED_2_4G_SSIDS_RAW,
     EXPECTED_5G_SSIDS_RAW,
     IGNORED_SSIDS_RAW,
     PLANNED_SSIDS_RAW,
+    SELECTED_SSID_CONFIG_PATH,
     SKIP_TBD,
     SORT_OUTPUT_ASCENDING,
+    SSID_CONFIGS,
 )
 
 
@@ -77,6 +80,58 @@ def get_unique_ignored_ssids():
 
 def get_unique_planned_ssids():
     return get_unique_ssids(raw_ssids=PLANNED_SSIDS_RAW, skip_tbd=True)
+
+
+def get_available_ssid_config_names():
+    return list(SSID_CONFIGS.keys())
+
+
+def get_completed_ssid_config_name(ssid_config_name):
+    if ssid_config_name in SSID_CONFIGS:
+        return ssid_config_name
+    return DEFAULT_SSID_CONFIG_NAME
+
+
+def ensure_selected_ssid_config_name_written(ssid_config_name):
+    completed_ssid_config_name = get_completed_ssid_config_name(ssid_config_name=ssid_config_name)
+    SELECTED_SSID_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    SELECTED_SSID_CONFIG_PATH.write_text(completed_ssid_config_name, encoding="utf-8")
+    return completed_ssid_config_name
+
+
+def get_selected_ssid_config_name():
+    if not SELECTED_SSID_CONFIG_PATH.exists():
+        return ensure_selected_ssid_config_name_written(ssid_config_name=DEFAULT_SSID_CONFIG_NAME)
+
+    selected_ssid_config_name = SELECTED_SSID_CONFIG_PATH.read_text(encoding="utf-8").strip()
+    if selected_ssid_config_name in SSID_CONFIGS:
+        return selected_ssid_config_name
+
+    return ensure_selected_ssid_config_name_written(ssid_config_name=DEFAULT_SSID_CONFIG_NAME)
+
+
+def get_selected_ssid_config():
+    return SSID_CONFIGS[get_selected_ssid_config_name()]
+
+
+def get_unique_expected_5g_ssids_from_selected_config():
+    selected_ssid_config = get_selected_ssid_config()
+    return get_unique_ssids(raw_ssids=selected_ssid_config["expected_5g_ssids"], skip_tbd=SKIP_TBD)
+
+
+def get_unique_expected_2_4g_ssids_from_selected_config():
+    selected_ssid_config = get_selected_ssid_config()
+    return get_unique_ssids(raw_ssids=selected_ssid_config["expected_2_4g_ssids"], skip_tbd=SKIP_TBD)
+
+
+def get_unique_ignored_ssids_from_selected_config():
+    selected_ssid_config = get_selected_ssid_config()
+    return get_unique_ssids(raw_ssids=selected_ssid_config["ignored_ssids"], skip_tbd=True)
+
+
+def get_unique_planned_ssids_from_selected_config():
+    selected_ssid_config = get_selected_ssid_config()
+    return get_unique_ssids(raw_ssids=selected_ssid_config["planned_ssids"], skip_tbd=True)
 
 
 def get_band_from_channel(channel):

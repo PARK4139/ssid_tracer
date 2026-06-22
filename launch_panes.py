@@ -19,13 +19,13 @@ def _get_windows_terminal_arguments(python_exe: str = "python") -> list[str]:
         "new-tab",
         *_section_command("result", python_exe),
         ";",
-        "split-pane", "-V", "--size", "0.75",
+        "split-pane", "-V", "--size", "0.5",
         *_section_command("detected", python_exe),
         ";",
-        "split-pane", "-V", "--size", "0.6667",
+        "split-pane", "-H", "--size", "0.6667",
         *_section_command("statistics", python_exe),
         ";",
-        "split-pane", "-V", "--size", "0.5",
+        "split-pane", "-H", "--size", "0.5",
         *_section_command("config", python_exe),
     ]
 

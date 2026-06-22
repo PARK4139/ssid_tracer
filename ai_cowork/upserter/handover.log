@@ -1,7 +1,0 @@
-[2026-06-18] tester handover.md 수신
-[2026-06-18] Root cause: Live 생성 시 Console 1회 고정 → 터미널 폭 변경 미감지
-[2026-06-18] Fix: import shutil 추가
-[2026-06-18] Fix: ensure_wifi_expected_ssids_watched() outer while True 추가
-[2026-06-18] Fix: outer loop 진입 시 console, current_terminal_size 재생성
-[2026-06-18] Fix: inner loop 말미에 terminal size 비교 → 변경 시 break (Live 재시작)
-[2026-06-18] handover.md 작성 완료, next role: tester
