@@ -51,7 +51,7 @@ def test_result_section_only_renders_result_panel():
     text = build_text_for_section("result")
 
     assert "RESULT" in text
-    assert "DETECTED SSID" not in text
+    assert "DETECTED SSIDS" not in text
     assert "STATISTICS" not in text
     assert "CONFIG" not in text
 
@@ -59,8 +59,9 @@ def test_result_section_only_renders_result_panel():
 def test_detected_section_only_renders_detected_panel():
     text = build_text_for_section("detected")
 
-    assert "DETECTED SSID(2)" in text
-    assert "band=" not in text
+    assert "DETECTED SSIDS(2)" in text
+    assert "PRODUCT_5G CONFIRMED band=5G ch=36" in text
+    assert "PRODUCT_2G CONFIRMED band=2_4G ch=6" in text
     assert "bssid_count" not in text
     assert "RESULT" not in text
     assert "STATISTICS" not in text
@@ -81,7 +82,7 @@ def test_empty_detected_section_title_includes_zero_count():
         )
     )
 
-    assert "DETECTED SSID(0)" in text
+    assert "DETECTED SSIDS(0)" in text
 
 
 def test_statistics_section_only_renders_statistics_panel():
@@ -89,7 +90,7 @@ def test_statistics_section_only_renders_statistics_panel():
 
     assert "STATISTICS" in text
     assert "RESULT" not in text
-    assert "DETECTED SSID" not in text
+    assert "DETECTED SSIDS" not in text
     assert "CONFIG" not in text
 
 
@@ -100,7 +101,7 @@ def test_config_section_only_renders_config_panel():
     assert "Expected(2)" in text
     assert "Expected 5G" not in text
     assert "RESULT" not in text
-    assert "DETECTED SSID" not in text
+    assert "DETECTED SSIDS" not in text
     assert "STATISTICS" not in text
 
 
@@ -108,9 +109,14 @@ def test_config_section_merges_expected_planned_and_ignored_counts():
     text = build_text_for_section("config")
 
     assert "Expected(2)" in text
+    assert "01. PRODUCT_5G" in text
+    assert "02. PRODUCT_2G" in text
     assert "Planned(1)" in text
+    assert "01. PLANNED_WIFI" in text
     assert "Ignored(1)" in text
+    assert "01. OFFICE" in text
     assert "Expected 2.4G" not in text
+    assert "  - " not in text
 
 
 def test_config_55_ssids_has_55_expected_ssids_and_expected_inclusions():
@@ -200,6 +206,46 @@ def test_missing_selected_config_returns_not_tested_result_pane(monkeypatch):
     assert "RESULT" in text
     assert "Status               : NOT TESTED" in text
     assert '"NOT TESTED"' not in text
+
+
+def test_missing_selected_config_non_result_panes_do_not_render_result_panel(monkeypatch):
+    selected_config_path = ssid_config.SELECTED_SSID_CONFIG_PATH
+    original_config_text = selected_config_path.read_text(encoding="utf-8") if selected_config_path.exists() else None
+
+    try:
+        if selected_config_path.exists():
+            selected_config_path.unlink()
+
+        monkeypatch.setattr(tracer, "clear_console", lambda: None)
+        current_ssid_configuration = tracer.get_current_ssid_configuration()
+
+        expected_titles_by_section = {
+            "detected": "DETECTED SSIDS(0)",
+            "statistics": "STATISTICS",
+            "config": "CONFIG",
+        }
+
+        for section_name, expected_title in expected_titles_by_section.items():
+            console = Console(record=True, width=160, no_color=True)
+            tracer.print_current_result_screen(
+                console=console,
+                current_ssid_configuration=current_ssid_configuration,
+                detected_wifi_entries=[],
+                scan_ok=False,
+                scan_message="scan pending",
+                error_message="",
+                section_name=section_name,
+            )
+            text = console.export_text()
+
+            assert expected_title in text
+            assert "RESULT" not in text
+    finally:
+        if original_config_text is None:
+            if selected_config_path.exists():
+                selected_config_path.unlink()
+        else:
+            tracer.ensure_selected_ssid_config_name_written(ssid_config_name=original_config_text)
 
 
 def test_refresh_loop_does_not_use_rich_live_alternate_screen():

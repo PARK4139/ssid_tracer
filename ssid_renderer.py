@@ -110,13 +110,22 @@ def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ig
         Text(f"Expected({len(expected_ssids)})"),
     ]
 
-    renderables.extend(Text(f"  - {ssid}") for ssid in expected_ssids)
+    renderables.extend(
+        Text(f"  {index:02d}. {ssid}")
+        for index, ssid in enumerate(expected_ssids, start=1)
+    )
     renderables.append(Text(""))
     renderables.append(Text(f"Planned({len(planned_ssids)})"))
-    renderables.extend(Text(f"  - {ssid}") for ssid in planned_ssids)
+    renderables.extend(
+        Text(f"  {index:02d}. {ssid}")
+        for index, ssid in enumerate(planned_ssids, start=1)
+    )
     renderables.append(Text(""))
     renderables.append(Text(f"Ignored({len(ignored_ssids)})"))
-    renderables.extend(Text(f"  - {ssid}") for ssid in ignored_ssids)
+    renderables.extend(
+        Text(f"  {index:02d}. {ssid}")
+        for index, ssid in enumerate(ignored_ssids, start=1)
+    )
 
     return build_rich_section(
         title="CONFIG",

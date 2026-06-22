@@ -30,7 +30,7 @@ def get_rich_style(color_name):
 
 def build_rich_section(title, renderables, border_style="white"):
     if len(renderables) <= 0:
-        renderables = [Text("  -")]
+        renderables = [Text("  01.")]
     return Panel(
         Group(*renderables),
         title=title,

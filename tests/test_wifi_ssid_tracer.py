@@ -111,7 +111,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         output_text = output_buffer.getvalue()
 
         self.assertIn(
-            "DETECTED SSID",
+            "DETECTED SSIDS",
             output_text,
         )
         self.assertIn(
@@ -124,7 +124,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         )
         self.assertLess(
             output_text.index("RESULT"),
-            output_text.index("DETECTED SSID"),
+            output_text.index("DETECTED SSIDS"),
         )
 
     def test_print_trace_verdict_lists_failure_ssids(self):
@@ -154,8 +154,8 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         output_text = output_buffer.getvalue()
 
         self.assertIn("Failure SSIDS", output_text)
-        self.assertIn("- [MISSING] PRODUCT_5G", output_text)
-        self.assertIn("- [UNEXPECTED] NEIGHBOR_WIFI(channel=6)", output_text)
+        self.assertIn("01. [MISSING] PRODUCT_5G", output_text)
+        self.assertIn("02. [UNEXPECTED] NEIGHBOR_WIFI(channel=6)", output_text)
         self.assertNotIn("Failure Reason Count", output_text)
         self.assertNotIn("Failure Reasons", output_text)
 

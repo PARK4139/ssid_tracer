@@ -5,13 +5,13 @@ from ssid_renderer_base import build_rich_section, get_rich_console, get_rich_st
 
 def get_failure_ssid_renderables(failure_ssids):
     if len(failure_ssids) <= 0:
-        return [Text("  - [UNKNOWN] unknown reason", style=get_rich_style("white"))]
+        return [Text("  01. [UNKNOWN] unknown reason", style=get_rich_style("white"))]
 
     renderables = []
-    for failure_ssid in failure_ssids:
+    for index, failure_ssid in enumerate(failure_ssids, start=1):
         status_label = failure_ssid.get("status_label", "UNKNOWN")
         ssid = failure_ssid.get("ssid", "")
-        renderables.append(Text(f"  - [{status_label}] {ssid}", style=get_rich_style("white")))
+        renderables.append(Text(f"  {index:02d}. [{status_label}] {ssid}", style=get_rich_style("white")))
     return renderables
 
 

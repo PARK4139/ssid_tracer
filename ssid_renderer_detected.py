@@ -17,6 +17,22 @@ def get_detected_ssid_display_status_label(item, planned_ssid_set):
     return status_label
 
 
+def get_compact_detected_ssid_status_label(status_label):
+    if status_label.startswith("PLANNED_"):
+        return "PLANNED"
+    if "MISSING" in status_label:
+        return "MISSING"
+    if "NOT_CONFIRMED" in status_label:
+        return "UNEXPECTED"
+    if "DEAD" in status_label:
+        return "DEAD"
+    if "CONFIRMED" in status_label:
+        return "CONFIRMED"
+    if status_label == "IGNORED":
+        return "IGNORED"
+    return status_label
+
+
 def get_detected_ssid_status_color_name(item, planned_ssid_set):
     status_label = item["status_label"]
     comparable_ssid = normalize_ssid_for_compare(ssid=item.get("ssid", ""))
@@ -52,7 +68,7 @@ def get_detected_ssid_status_sort_rank(item, planned_ssid_set):
 
 
 def get_detected_ssid_section_title(detected_ssid_count):
-    return f"DETECTED SSID({detected_ssid_count})"
+    return f"DETECTED SSIDS({detected_ssid_count})"
 
 
 def build_detected_ssid_section(
@@ -110,12 +126,18 @@ def build_detected_ssid_section(
     renderables = []
     for index, item in enumerate(rows, start=1):
         channel_text = str(item.get("channel", "")) or "-"
-        status_label = get_detected_ssid_display_status_label(item=item, planned_ssid_set=planned_ssid_set)
+        status_label = get_compact_detected_ssid_status_label(
+            status_label=get_detected_ssid_display_status_label(
+                item=item,
+                planned_ssid_set=planned_ssid_set,
+            )
+        )
 
         line = (
             f"  {index:02d}. "
-            f"{status_label:<24} "
-            f"{item['ssid']:<32} "
+            f"{item['ssid']} "
+            f"{status_label} "
+            f"band={item.get('band', '')} "
             f"ch={channel_text}"
         )
 

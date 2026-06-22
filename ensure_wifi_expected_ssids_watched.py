@@ -171,8 +171,17 @@ def get_current_ssid_configuration():
 def print_current_result_screen(console, current_ssid_configuration, detected_wifi_entries, scan_ok, scan_message, error_message, section_name):
     clear_console()
     if current_ssid_configuration["config_name"] is None:
-        console.print(build_not_tested_result_section())
-        return
+        EVER_LIVE_CONFIRMED_SSID_BAND_SET.clear()
+        EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY.clear()
+
+        if section_name == "result":
+            console.print(build_not_tested_result_section())
+            return
+
+        current_ssid_configuration = {
+            **current_ssid_configuration,
+            "config_name": "NOT SET",
+        }
 
     console.print(
         build_result_screen(
@@ -188,6 +197,9 @@ def print_current_result_screen(console, current_ssid_configuration, detected_wi
             section_name=section_name,
         )
     )
+    if current_ssid_configuration["config_name"] == "NOT SET":
+        return
+
 
 
 def ensure_wifi_expected_ssids_watched(section_name="all"):
