@@ -9,7 +9,7 @@ _______________________________________________________________ 분배예정
     make Config pane selectable as interactive fzf-like selector via ensure_value_completed
     selector options: config_26_ssids, config_55_ssids
     selected config must apply to result/detected/statistics/config panes
-    merge Config pane Expected 5G and Expected 2.4G into Expected({ssid cnt})
+    merge Config pane Expected 5G and Expected 2.4G into Intended({ssid cnt})
     merge Config pane Planned band sections into Planned({ssid cnt})
     merge Config pane Ignored band sections into Ignored({ssid cnt})
     make STATISTICS pane simple

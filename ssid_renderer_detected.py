@@ -33,16 +33,6 @@ def get_compact_detected_ssid_status_label(status_label):
     return status_label
 
 
-def get_detected_ssid_status_color_name(item, planned_ssid_set):
-    status_label = get_detected_ssid_display_status_label(
-        item=item,
-        planned_ssid_set=planned_ssid_set,
-    )
-    if "CONFIRMED" in status_label and "DEAD" not in status_label:
-        return "green"
-    return "gray"
-
-
 def get_detected_ssid_status_sort_rank(item, planned_ssid_set):
     status_label = get_detected_ssid_display_status_label(item=item, planned_ssid_set=planned_ssid_set)
     prefixes = [
@@ -129,17 +119,7 @@ def build_detected_ssid_section(
             f"ch={channel_text}"
         )
 
-        renderables.append(
-            Text(
-                line,
-                style=get_rich_style(
-                    get_detected_ssid_status_color_name(
-                        item=item,
-                        planned_ssid_set=planned_ssid_set,
-                    )
-                ),
-            )
-        )
+        renderables.append(Text(line, style=get_rich_style("white")))
 
     return build_rich_section(title=title, renderables=renderables, border_style="white")
 

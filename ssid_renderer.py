@@ -107,7 +107,7 @@ def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ig
     renderables = [
         Text(f"Selected Config : {config_name}"),
         Text(""),
-        Text(f"Expected({len(expected_ssids)})"),
+        Text(f"Intended({len(expected_ssids)})"),
     ]
 
     renderables.extend(

@@ -6,7 +6,7 @@ import ssid_analyzer
 import ssid_config
 from ssid_utils import get_unique_ssids
 from ssid_renderer import build_result_screen
-from ssid_renderer_detected import build_detected_ssid_section, get_detected_ssid_status_color_name
+from ssid_renderer_detected import build_detected_ssid_section
 import ensure_wifi_expected_ssids_watched as tracer
 
 
@@ -127,27 +127,6 @@ def test_live_ssids_section_excludes_missing_and_dead_rows():
     assert "DEAD_DETECTED" not in text
 
 
-def test_detected_ssid_rows_are_green_only_for_live_confirmed_statuses():
-    planned_ssid_set = set()
-
-    assert get_detected_ssid_status_color_name(
-        item={"status_label": "CONFIRMED_5G", "ssid": "LIVE"},
-        planned_ssid_set=planned_ssid_set,
-    ) == "green"
-    assert get_detected_ssid_status_color_name(
-        item={"status_label": "CONFIRMED_2_4G", "ssid": "LIVE"},
-        planned_ssid_set=planned_ssid_set,
-    ) == "green"
-    assert get_detected_ssid_status_color_name(
-        item={"status_label": "DEAD_CONFIRMED_5G", "ssid": "DEAD"},
-        planned_ssid_set=planned_ssid_set,
-    ) == "gray"
-    assert get_detected_ssid_status_color_name(
-        item={"status_label": "MISSING_5G", "ssid": "MISSING"},
-        planned_ssid_set=planned_ssid_set,
-    ) == "gray"
-
-
 def test_statistics_section_only_renders_statistics_panel():
     text = build_text_for_section("statistics")
 
@@ -161,7 +140,8 @@ def test_config_section_only_renders_config_panel():
     text = build_text_for_section("config")
 
     assert "CONFIG" in text
-    assert "Expected(2)" in text
+    assert "Intended(2)" in text
+    assert "Expected(" not in text
     assert "Expected 5G" not in text
     assert "RESULT" not in text
     assert "LIVE SSIDS" not in text
@@ -171,7 +151,7 @@ def test_config_section_only_renders_config_panel():
 def test_config_section_merges_expected_planned_and_ignored_counts():
     text = build_text_for_section("config")
 
-    assert "Expected(2)" in text
+    assert "Intended(2)" in text
     assert "01. PRODUCT_5G" in text
     assert "02. PRODUCT_2G" in text
     assert "Planned(1)" in text
@@ -179,6 +159,7 @@ def test_config_section_merges_expected_planned_and_ignored_counts():
     assert "Ignored(1)" in text
     assert "01. OFFICE" in text
     assert "Expected 2.4G" not in text
+    assert "Expected(" not in text
     assert "  - " not in text
 
 
