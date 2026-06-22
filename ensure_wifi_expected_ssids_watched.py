@@ -6,7 +6,7 @@ import threading
 import time
 from ctypes import wintypes
 
-from ssid_config import ENABLE_ANSI_COLOR, WATCH_INTERVAL_SEC
+from ssid_config import ENABLE_ANSI_COLOR, SKIP_TBD, WATCH_INTERVAL_SEC
 from ssid_analyzer import (
     EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY,
     EVER_LIVE_CONFIRMED_SSID_BAND_SET,
@@ -23,10 +23,8 @@ from ssid_utils import (
     get_available_ssid_config_names,
     get_completed_ssid_config_name,
     get_selected_ssid_config_name,
-    get_unique_expected_2_4g_ssids_from_selected_config,
-    get_unique_expected_5g_ssids_from_selected_config,
-    get_unique_ignored_ssids_from_selected_config,
-    get_unique_planned_ssids_from_selected_config,
+    get_ssid_config_by_name,
+    get_unique_ssids,
 )
 
 
@@ -134,12 +132,13 @@ def ensure_ssid_config_selected_interactively():
 
 def get_current_ssid_configuration():
     config_name = get_completed_ssid_config_name(ssid_config_name=get_selected_ssid_config_name())
+    selected_ssid_config = get_ssid_config_by_name(ssid_config_name=config_name)
     return {
         "config_name": config_name,
-        "expected_5g_ssids": get_unique_expected_5g_ssids_from_selected_config(),
-        "expected_2_4g_ssids": get_unique_expected_2_4g_ssids_from_selected_config(),
-        "ignored_ssids": get_unique_ignored_ssids_from_selected_config(),
-        "planned_ssids": get_unique_planned_ssids_from_selected_config(),
+        "expected_5g_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["expected_5g_ssids"], skip_tbd=SKIP_TBD),
+        "expected_2_4g_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["expected_2_4g_ssids"], skip_tbd=SKIP_TBD),
+        "ignored_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["ignored_ssids"], skip_tbd=True),
+        "planned_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["planned_ssids"], skip_tbd=True),
     }
 
 

@@ -92,6 +92,42 @@ def test_config_section_merges_expected_planned_and_ignored_counts():
     assert "Expected 2.4G" not in text
 
 
+def test_missing_selected_config_defaults_to_nonempty_result_pane():
+    selected_config_path = ssid_config.SELECTED_SSID_CONFIG_PATH
+    original_config_text = selected_config_path.read_text(encoding="utf-8") if selected_config_path.exists() else None
+
+    try:
+        if selected_config_path.exists():
+            selected_config_path.unlink()
+
+        current_ssid_configuration = tracer.get_current_ssid_configuration()
+        text = render_text(
+            build_result_screen(
+                config_name=current_ssid_configuration["config_name"],
+                expected_5g_ssids=current_ssid_configuration["expected_5g_ssids"],
+                expected_2_4g_ssids=current_ssid_configuration["expected_2_4g_ssids"],
+                ignored_ssids=current_ssid_configuration["ignored_ssids"],
+                planned_ssids=current_ssid_configuration["planned_ssids"],
+                detected_wifi_entries=[],
+                scan_ok=False,
+                scan_message="scan pending",
+                error_message="",
+                section_name="result",
+            )
+        )
+    finally:
+        if original_config_text is None:
+            if selected_config_path.exists():
+                selected_config_path.unlink()
+        else:
+            tracer.ensure_selected_ssid_config_name_written(ssid_config_name=original_config_text)
+
+    assert current_ssid_configuration["config_name"] == "config_60_ssids"
+    assert len(current_ssid_configuration["expected_5g_ssids"]) > 0
+    assert "RESULT" in text
+    assert "FAILED" in text
+
+
 def test_refresh_loop_does_not_use_rich_live_alternate_screen():
     source_path = Path(tracer.__file__)
     source = source_path.read_text(encoding="utf-8")

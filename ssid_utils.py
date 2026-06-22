@@ -95,7 +95,9 @@ def get_completed_ssid_config_name(ssid_config_name):
 def ensure_selected_ssid_config_name_written(ssid_config_name):
     completed_ssid_config_name = get_completed_ssid_config_name(ssid_config_name=ssid_config_name)
     SELECTED_SSID_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    SELECTED_SSID_CONFIG_PATH.write_text(completed_ssid_config_name, encoding="utf-8")
+    temporary_selected_ssid_config_path = SELECTED_SSID_CONFIG_PATH.with_suffix(".tmp")
+    temporary_selected_ssid_config_path.write_text(completed_ssid_config_name, encoding="utf-8")
+    temporary_selected_ssid_config_path.replace(SELECTED_SSID_CONFIG_PATH)
     return completed_ssid_config_name
 
 
@@ -111,7 +113,11 @@ def get_selected_ssid_config_name():
 
 
 def get_selected_ssid_config():
-    return SSID_CONFIGS[get_selected_ssid_config_name()]
+    return get_ssid_config_by_name(ssid_config_name=get_selected_ssid_config_name())
+
+
+def get_ssid_config_by_name(ssid_config_name):
+    return SSID_CONFIGS[get_completed_ssid_config_name(ssid_config_name=ssid_config_name)]
 
 
 def get_unique_expected_5g_ssids_from_selected_config():
