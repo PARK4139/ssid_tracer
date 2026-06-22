@@ -144,7 +144,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
                         ],
                         "failure_ssids": [
                             {"status_label": "MISSING", "ssid": "PRODUCT_5G"},
-                            {"status_label": "UNEXPECTED", "ssid": "NEIGHBOR_WIFI(channel=6)"},
+                            {"status_label": "Unexpected", "ssid": "NEIGHBOR_WIFI(channel=6)"},
                         ],
                     }
                 )
@@ -155,7 +155,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
 
         self.assertIn("Failure SSIDS", output_text)
         self.assertIn("01. [MISSING] PRODUCT_5G", output_text)
-        self.assertIn("02. [UNEXPECTED] NEIGHBOR_WIFI(channel=6)", output_text)
+        self.assertIn("02. [Unexpected] NEIGHBOR_WIFI(channel=6)", output_text)
         self.assertNotIn("Failure Reason Count", output_text)
         self.assertNotIn("Failure Reasons", output_text)
 
@@ -185,7 +185,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             verdict_text,
         )
         self.assertIn(
-            {"status_label": "UNEXPECTED", "ssid": "NEIGHBOR_WIFI(channel=6)"},
+            {"status_label": "Unexpected", "ssid": "NEIGHBOR_WIFI(channel=6)"},
             trace_verdict["failure_ssids"],
         )
 

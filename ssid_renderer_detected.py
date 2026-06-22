@@ -17,7 +17,7 @@ def get_compact_detected_ssid_status_label(status_label):
     if "MISSING" in status_label:
         return "MISSING"
     if "NOT_CONFIRMED" in status_label:
-        return "UNEXPECTED"
+        return "Unexpected"
     if "DEAD" in status_label:
         return "DEAD"
     if "CONFIRMED" in status_label:

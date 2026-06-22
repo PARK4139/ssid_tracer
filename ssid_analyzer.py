@@ -295,14 +295,14 @@ def get_trace_verdict(
     if len(not_confirmed_ssids) > 0:
         failure_reasons.append(f"unexpected SSID(s): {', '.join(not_confirmed_ssids)}")
         failure_ssids.extend(
-            {"status_label": "UNEXPECTED", "ssid": ssid}
+            {"status_label": "Unexpected", "ssid": ssid}
             for ssid in not_confirmed_ssids
         )
 
     if len(not_confirmed_unknown_ssids) > 0:
         failure_reasons.append(f"unexpected unknown-band SSID(s): {', '.join(not_confirmed_unknown_ssids)}")
         failure_ssids.extend(
-            {"status_label": "UNEXPECTED_UNKNOWN", "ssid": ssid}
+            {"status_label": "Unexpected Unknown", "ssid": ssid}
             for ssid in not_confirmed_unknown_ssids
         )
 

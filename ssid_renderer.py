@@ -179,6 +179,7 @@ def build_result_screen(
 
     result_renderables = [
         build_trace_verdict_section(trace_verdict=trace_verdict),
+        Text(f"Selected Config                : {config_name}"),
         Text(f"Checked At                    : {checked_at}"),
     ]
 

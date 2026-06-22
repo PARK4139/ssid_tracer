@@ -1822,3 +1822,5 @@
 [2026-06-22 20:29:34] FAILED: unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=48), TP-Link_E8E4_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=3), TP-Link_E8E4(channel=11) | confirmed expected count: 2/2
 [2026-06-22 20:29:35] FAILED: unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=48), TP-Link_E8E4_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=3), TP-Link_E8E4(channel=11) | confirmed expected count: 2/2
 [2026-06-22 20:29:36] FAILED: unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=48), TP-Link_E8E4_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=3), TP-Link_E8E4(channel=11) | confirmed expected count: 2/2
+[2026-06-22 20:31:47] PASSED
+[2026-06-22 20:33:14] PASSED

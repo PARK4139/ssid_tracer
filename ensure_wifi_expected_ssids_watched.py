@@ -130,7 +130,7 @@ def ensure_ssid_config_selected_interactively():
     selected_ssid_config_name = ensure_value_completed(
         value=None,
         choices=get_available_ssid_config_names(),
-        prompt_message="Config> ",
+        prompt_message="Config(Press Tab)> ",
     )
     return ensure_selected_ssid_config_name_written(ssid_config_name=selected_ssid_config_name)
 
@@ -206,9 +206,6 @@ def ensure_wifi_expected_ssids_watched(section_name="all"):
     ensure_ansi_color_enabled()
     setup_console_drag()
 
-    if section_name == "config":
-        ensure_ssid_config_selected_interactively()
-
     console = get_rich_console()
     current_ssid_configuration = get_current_ssid_configuration()
 
@@ -224,6 +221,10 @@ def ensure_wifi_expected_ssids_watched(section_name="all"):
 
     while True:
         loop_started_at = time.time()
+
+        if section_name == "config":
+            ensure_ssid_config_selected_interactively()
+
         current_ssid_configuration = get_current_ssid_configuration()
 
         if current_ssid_configuration["config_name"] is None:

@@ -62,7 +62,10 @@ def build_not_tested_result_section():
     status_text.append("NOT TESTED", style=get_rich_style("white"))
     return build_rich_section(
         title="RESULT",
-        renderables=[status_text],
+        renderables=[
+            status_text,
+            Text("Selected Config      : NOT SET", style=get_rich_style("white")),
+        ],
         border_style=get_rich_style("white"),
     )
 
