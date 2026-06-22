@@ -131,10 +131,13 @@ def ensure_ssid_config_selected_interactively():
 
 
 def get_current_ssid_configuration():
-    config_name = get_completed_ssid_config_name(ssid_config_name=get_selected_ssid_config_name())
-    selected_ssid_config = get_ssid_config_by_name(ssid_config_name=config_name)
+    selected_ssid_config_name = get_selected_ssid_config_name()
+    is_ssid_config_selected = selected_ssid_config_name in get_available_ssid_config_names()
+    config_name = selected_ssid_config_name if is_ssid_config_selected else "NOT SET"
+    selected_ssid_config = get_ssid_config_by_name(ssid_config_name=selected_ssid_config_name)
     return {
         "config_name": config_name,
+        "is_ssid_config_selected": is_ssid_config_selected,
         "expected_5g_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["expected_5g_ssids"], skip_tbd=SKIP_TBD),
         "expected_2_4g_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["expected_2_4g_ssids"], skip_tbd=SKIP_TBD),
         "ignored_ssids": get_unique_ssids(raw_ssids=selected_ssid_config["ignored_ssids"], skip_tbd=True),
@@ -163,7 +166,6 @@ def print_current_result_screen(console, current_ssid_configuration, detected_wi
 def ensure_wifi_expected_ssids_watched(section_name="all"):
     ensure_ansi_color_enabled()
     setup_console_drag()
-    ensure_selected_ssid_config_name_written(ssid_config_name=get_selected_ssid_config_name())
 
     if section_name == "config":
         ensure_ssid_config_selected_interactively()
@@ -185,7 +187,7 @@ def ensure_wifi_expected_ssids_watched(section_name="all"):
         loop_started_at = time.time()
         current_ssid_configuration = get_current_ssid_configuration()
 
-        if len(current_ssid_configuration["expected_5g_ssids"]) <= 0 and len(current_ssid_configuration["expected_2_4g_ssids"]) <= 0:
+        if current_ssid_configuration["is_ssid_config_selected"] and len(current_ssid_configuration["expected_5g_ssids"]) <= 0 and len(current_ssid_configuration["expected_2_4g_ssids"]) <= 0:
             print("No expected SSID defined")
             sys.exit(1)
 

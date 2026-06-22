@@ -103,13 +103,13 @@ def ensure_selected_ssid_config_name_written(ssid_config_name):
 
 def get_selected_ssid_config_name():
     if not SELECTED_SSID_CONFIG_PATH.exists():
-        return ensure_selected_ssid_config_name_written(ssid_config_name=DEFAULT_SSID_CONFIG_NAME)
+        return ""
 
     selected_ssid_config_name = SELECTED_SSID_CONFIG_PATH.read_text(encoding="utf-8").strip()
     if selected_ssid_config_name in SSID_CONFIGS:
         return selected_ssid_config_name
 
-    return ensure_selected_ssid_config_name_written(ssid_config_name=DEFAULT_SSID_CONFIG_NAME)
+    return ""
 
 
 def get_selected_ssid_config():

@@ -157,20 +157,22 @@ def build_result_screen(
 
     checked_at = time.strftime("%Y-%m-%d %H:%M:%S")
 
-    trace_verdict = get_trace_verdict(
-        expected_5g_ssids=expected_5g_ssids,
-        expected_2_4g_ssids=expected_2_4g_ssids,
-        live_confirmed_5g_ssids=live_confirmed_5g_ssids,
-        live_confirmed_2_4g_ssids=live_confirmed_2_4g_ssids,
-        dead_confirmed_5g_ssids=dead_confirmed_5g_ssids,
-        dead_confirmed_2_4g_ssids=dead_confirmed_2_4g_ssids,
-        action_required_items=action_required_items,
-        scan_ok=scan_ok,
-        scan_message=scan_message,
-        error_message=error_message,
-    )
-
-    maybe_write_log(get_trace_verdict_text(trace_verdict))
+    if config_name == "NOT SET":
+        trace_verdict = {"status_label": "NOT_TESTED", "failure_reasons": []}
+    else:
+        trace_verdict = get_trace_verdict(
+            expected_5g_ssids=expected_5g_ssids,
+            expected_2_4g_ssids=expected_2_4g_ssids,
+            live_confirmed_5g_ssids=live_confirmed_5g_ssids,
+            live_confirmed_2_4g_ssids=live_confirmed_2_4g_ssids,
+            dead_confirmed_5g_ssids=dead_confirmed_5g_ssids,
+            dead_confirmed_2_4g_ssids=dead_confirmed_2_4g_ssids,
+            action_required_items=action_required_items,
+            scan_ok=scan_ok,
+            scan_message=scan_message,
+            error_message=error_message,
+        )
+        maybe_write_log(get_trace_verdict_text(trace_verdict))
 
     result_renderables = [
         build_trace_verdict_section(trace_verdict=trace_verdict),

@@ -13,6 +13,16 @@ def split_failure_reason(failure_reason):
 def build_trace_verdict_section(trace_verdict):
     status_label = trace_verdict.get("status_label", "FAILED")
 
+    if status_label == "NOT_TESTED":
+        return build_rich_section(
+            title="RESULT",
+            renderables=[
+                Text("Status               : NOT TESTED", style=get_rich_style("white")),
+                Text("Config               : NOT SET", style=get_rich_style("white")),
+            ],
+            border_style=get_rich_style("white"),
+        )
+
     if status_label == "PASSED":
         status_text = Text("Status : ")
         status_text.append("PASSED", style=get_rich_style("green"))

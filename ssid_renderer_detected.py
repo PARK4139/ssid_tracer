@@ -104,19 +104,13 @@ def build_detected_ssid_section(
     renderables = []
     for index, item in enumerate(rows, start=1):
         channel_text = str(item.get("channel", "")) or "-"
-        reason_text = item.get("reason", "")
         status_label = get_detected_ssid_display_status_label(item=item, planned_ssid_set=planned_ssid_set)
-
-        if reason_text != "":
-            reason_text = f" # {reason_text}"
 
         line = (
             f"  {index:02d}. "
-            f"{status_label:<30} "
+            f"{status_label:<24} "
             f"{item['ssid']:<32} "
-            f"band={item.get('band', ''):<7} "
-            f"channel={channel_text:<4}"
-            f"{reason_text}"
+            f"ch={channel_text}"
         )
 
         renderables.append(Text(line, style=get_rich_style("white")))

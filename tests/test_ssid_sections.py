@@ -58,6 +58,8 @@ def test_detected_section_only_renders_detected_panel():
     text = build_text_for_section("detected")
 
     assert "DETECTED SSID" in text
+    assert "band=" not in text
+    assert "bssid_count" not in text
     assert "RESULT" not in text
     assert "STATISTICS" not in text
     assert "CONFIG" not in text
@@ -92,7 +94,7 @@ def test_config_section_merges_expected_planned_and_ignored_counts():
     assert "Expected 2.4G" not in text
 
 
-def test_missing_selected_config_defaults_to_nonempty_result_pane():
+def test_missing_selected_config_renders_not_tested_result_pane():
     selected_config_path = ssid_config.SELECTED_SSID_CONFIG_PATH
     original_config_text = selected_config_path.read_text(encoding="utf-8") if selected_config_path.exists() else None
 
@@ -122,10 +124,11 @@ def test_missing_selected_config_defaults_to_nonempty_result_pane():
         else:
             tracer.ensure_selected_ssid_config_name_written(ssid_config_name=original_config_text)
 
-    assert current_ssid_configuration["config_name"] == "config_60_ssids"
+    assert current_ssid_configuration["config_name"] == "NOT SET"
     assert len(current_ssid_configuration["expected_5g_ssids"]) > 0
     assert "RESULT" in text
-    assert "FAILED" in text
+    assert "NOT TESTED" in text
+    assert "FAILED" not in text
 
 
 def test_refresh_loop_does_not_use_rich_live_alternate_screen():
