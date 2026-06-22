@@ -10,16 +10,10 @@ def is_action_required_status_label(status_label):
 
 
 def get_detected_ssid_display_status_label(item, planned_ssid_set):
-    status_label = item["status_label"]
-    comparable_ssid = normalize_ssid_for_compare(ssid=item.get("ssid", ""))
-    if is_action_required_status_label(status_label) and comparable_ssid in planned_ssid_set:
-        return f"PLANNED_{status_label}"
-    return status_label
+    return item["status_label"]
 
 
 def get_compact_detected_ssid_status_label(status_label):
-    if status_label.startswith("PLANNED_"):
-        return "PLANNED"
     if "MISSING" in status_label:
         return "MISSING"
     if "NOT_CONFIRMED" in status_label:
@@ -27,9 +21,9 @@ def get_compact_detected_ssid_status_label(status_label):
     if "DEAD" in status_label:
         return "DEAD"
     if "CONFIRMED" in status_label:
-        return "CONFIRMED"
+        return "INTENDED"
     if status_label == "IGNORED":
-        return "IGNORED"
+        return "Ignored"
     return status_label
 
 
@@ -38,8 +32,6 @@ def get_detected_ssid_status_sort_rank(item, planned_ssid_set):
     prefixes = [
         "MISSING_",
         "NOT_CONFIRMED_",
-        "PLANNED_MISSING_",
-        "PLANNED_NOT_CONFIRMED_",
         "DEAD_CONFIRMED_",
         "DEAD_DETECTED",
         "CONFIRMED_",

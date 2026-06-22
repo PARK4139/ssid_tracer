@@ -77,13 +77,7 @@ IGNORED_SSIDS_RAW = [
     "하니부",
 ]
 
-PLANNED_SSIDS_RAW = [
-    "Linksys00711",
-    "Cuby-A254-5G",
-    "Cuby-A254",
-    "_LinksysSetup99A",
-    "R15-FEFA",
-]
+PLANNED_SSIDS_RAW = []
 
 CONFIG_55_SSIDS_FOR_DEPRECATED = {
     "expected_5g_ssids": [
@@ -141,7 +135,14 @@ CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING = {
 CONFIG_2_SSIDS_AS_EB98_FOR_ROOM_SEPERATING = {
     "expected_5g_ssids": ["TP-Link_EB98_5G"],
     "expected_2_4g_ssids": ["TP-Link_EB98"],
-    "ignored_ssids": IGNORED_SSIDS_RAW,
+    "ignored_ssids": IGNORED_SSIDS_RAW + [
+        "iptime5G",
+        "MERCUSYS_BA30_5G",
+        "TP-Link_E8E4_5G",
+        "iptime",
+        "MERCUSYS_BA30",
+        "TP-Link_E8E4",
+    ],
     "planned_ssids": PLANNED_SSIDS_RAW,
 }
 

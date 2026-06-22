@@ -148,14 +148,14 @@ def test_config_section_only_renders_config_panel():
     assert "STATISTICS" not in text
 
 
-def test_config_section_merges_expected_planned_and_ignored_counts():
+def test_config_section_renders_intended_and_ignored_counts_without_planned():
     text = build_text_for_section("config")
 
     assert "Intended(2)" in text
     assert "01. PRODUCT_5G" in text
     assert "02. PRODUCT_2G" in text
-    assert "Planned(1)" in text
-    assert "01. PLANNED_WIFI" in text
+    assert "Planned" not in text
+    assert "PLANNED_WIFI" not in text
     assert "Ignored(1)" in text
     assert "01. OFFICE" in text
     assert "Expected 2.4G" not in text
@@ -230,6 +230,20 @@ def test_config_2_ssids_variants_are_available_for_e8e4_mesh_networking_and_eb98
     assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98_for_room_seperating"]["expected_2_4g_ssids"] == [
         "TP-Link_EB98"
     ]
+
+
+def test_config_2_ssids_as_eb98_for_room_seperating_ignores_neighbor_room_ssids():
+    ignored_ssids = ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98_for_room_seperating"]["ignored_ssids"]
+
+    for ssid in [
+        "iptime5G",
+        "MERCUSYS_BA30_5G",
+        "TP-Link_E8E4_5G",
+        "iptime",
+        "MERCUSYS_BA30",
+        "TP-Link_E8E4",
+    ]:
+        assert ssid in ignored_ssids
 
 
 def test_missing_selected_config_returns_not_tested_result_pane(monkeypatch):

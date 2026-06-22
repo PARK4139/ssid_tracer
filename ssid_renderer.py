@@ -92,8 +92,8 @@ def build_action_required_statistics_section(
         title="STATISTICS",
         renderables=[
             Text(f"Detected        : {len(detected_wifi_entries)}"),
-            Text(f"Confirmed       : {confirmed_count}"),
-            Text(f"Dead Confirmed  : {dead_confirmed_count}"),
+            Text(f"Intended        : {confirmed_count}"),
+            Text(f"Dead Intended   : {dead_confirmed_count}"),
             Text(f"Action Required : {len(action_required_items)}"),
             Text(f"Scan Status     : {'OK' if scan_ok else 'WARN'}"),
             Text(f"Scan Message    : {scan_message}"),
@@ -113,12 +113,6 @@ def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ig
     renderables.extend(
         Text(f"  {index:02d}. {ssid}")
         for index, ssid in enumerate(expected_ssids, start=1)
-    )
-    renderables.append(Text(""))
-    renderables.append(Text(f"Planned({len(planned_ssids)})"))
-    renderables.extend(
-        Text(f"  {index:02d}. {ssid}")
-        for index, ssid in enumerate(planned_ssids, start=1)
     )
     renderables.append(Text(""))
     renderables.append(Text(f"Ignored({len(ignored_ssids)})"))
