@@ -178,15 +178,13 @@ def build_result_screen(
         maybe_write_log(get_trace_verdict_text(trace_verdict))
 
     result_renderables = [
-        build_trace_verdict_section(trace_verdict=trace_verdict),
-        Text(f"Selected Config                : {config_name}"),
-        Text(f"Checked At                    : {checked_at}"),
+        build_trace_verdict_section(
+            trace_verdict=trace_verdict,
+            config_name=config_name,
+            checked_at=checked_at,
+            error_message=error_message,
+        ),
     ]
-
-    if error_message:
-        result_renderables.append(
-            Text(f"Error Message                 : {error_message}", style=get_rich_style("red"))
-        )
 
     detected_section = build_detected_ssid_section(
         live_confirmed_5g_ssids=live_confirmed_5g_ssids,
