@@ -33,6 +33,8 @@ def test_windows_terminal_arguments_create_expected_section_panes():
     assert args.count("detected") == 2
     assert args.count("statistics") == 2
     assert args.count("config") == 2
+    assert args.index("config") < args.index("detected")
+    assert args.index("detected") < args.index("statistics")
     assert "cmd.exe" not in args
     assert "/k" not in args
 
