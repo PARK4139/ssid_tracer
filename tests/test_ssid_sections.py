@@ -217,6 +217,21 @@ def test_config_26_ssids_uses_13_expected_pairs_with_5g_suffix_for_same_names():
     ]
 
 
+def test_config_2_ssids_variants_are_available_for_e8e4_mesh_networking_and_eb98():
+    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_e8e4_for_mesh_networking"]["expected_5g_ssids"] == [
+        "TP-Link_E8E4_5G"
+    ]
+    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_e8e4_for_mesh_networking"]["expected_2_4g_ssids"] == [
+        "TP-Link_E8E4"
+    ]
+    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98"]["expected_5g_ssids"] == [
+        "TP-Link_EB98_5G"
+    ]
+    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98"]["expected_2_4g_ssids"] == [
+        "TP-Link_EB98"
+    ]
+
+
 def test_missing_selected_config_returns_not_tested_result_pane(monkeypatch):
     selected_config_path = ssid_config.SELECTED_SSID_CONFIG_PATH
     original_config_text = selected_config_path.read_text(encoding="utf-8") if selected_config_path.exists() else None

@@ -131,9 +131,25 @@ CONFIG_26_SSIDS = {
     "planned_ssids": PLANNED_SSIDS_RAW,
 }
 
+CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING = {
+    "expected_5g_ssids": ["TP-Link_E8E4_5G"],
+    "expected_2_4g_ssids": ["TP-Link_E8E4"],
+    "ignored_ssids": IGNORED_SSIDS_RAW,
+    "planned_ssids": PLANNED_SSIDS_RAW,
+}
+
+CONFIG_2_SSIDS_AS_EB98 = {
+    "expected_5g_ssids": ["TP-Link_EB98_5G"],
+    "expected_2_4g_ssids": ["TP-Link_EB98"],
+    "ignored_ssids": IGNORED_SSIDS_RAW,
+    "planned_ssids": PLANNED_SSIDS_RAW,
+}
+
 SSID_CONFIGS = {
     "config_26_ssids": CONFIG_26_SSIDS,
     "config_55_ssids": CONFIG_55_SSIDS,
+    "config_2_ssids_as_e8e4_for_mesh_networking": CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING,
+    "config_2_ssids_as_eb98": CONFIG_2_SSIDS_AS_EB98,
 }
 
 DEFAULT_SSID_CONFIG_NAME = "config_55_ssids"
