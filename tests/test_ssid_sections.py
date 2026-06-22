@@ -30,7 +30,7 @@ def build_text_for_section(section_name):
     ssid_analyzer.EVER_DETECTED_WIFI_ENTRY_BY_GROUP_KEY.clear()
     return render_text(
         build_result_screen(
-            config_name="config_55_ssids",
+            config_name="config_55_ssids_for_deprecated",
             expected_5g_ssids=["PRODUCT_5G"],
             expected_2_4g_ssids=["PRODUCT_2G"],
             ignored_ssids=["OFFICE"],
@@ -163,8 +163,8 @@ def test_config_section_merges_expected_planned_and_ignored_counts():
     assert "  - " not in text
 
 
-def test_config_55_ssids_has_55_expected_ssids_and_expected_inclusions():
-    selected_config = ssid_config.SSID_CONFIGS["config_55_ssids"]
+def test_config_55_ssids_for_deprecated_has_55_expected_ssids_and_expected_inclusions():
+    selected_config = ssid_config.SSID_CONFIGS["config_55_ssids_for_deprecated"]
     expected_5g_ssids = get_unique_ssids(
         raw_ssids=selected_config["expected_5g_ssids"],
         skip_tbd=ssid_config.SKIP_TBD,
@@ -182,8 +182,8 @@ def test_config_55_ssids_has_55_expected_ssids_and_expected_inclusions():
     assert "Keenetic-1947" not in expected_2_4g_ssids
 
 
-def test_config_26_ssids_uses_13_expected_pairs_with_5g_suffix_for_same_names():
-    selected_config = ssid_config.SSID_CONFIGS["config_26_ssids"]
+def test_config_26_ssids_for_exhivition_uses_13_expected_pairs_with_5g_suffix_for_same_names():
+    selected_config = ssid_config.SSID_CONFIGS["config_26_ssids_for_exhivition"]
 
     assert selected_config["expected_5g_ssids"] == [
         "ASUS_F6_5G",
@@ -224,10 +224,10 @@ def test_config_2_ssids_variants_are_available_for_e8e4_mesh_networking_and_eb98
     assert ssid_config.SSID_CONFIGS["config_2_ssids_as_e8e4_for_mesh_networking"]["expected_2_4g_ssids"] == [
         "TP-Link_E8E4"
     ]
-    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98"]["expected_5g_ssids"] == [
+    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98_for_room_seperating"]["expected_5g_ssids"] == [
         "TP-Link_EB98_5G"
     ]
-    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98"]["expected_2_4g_ssids"] == [
+    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98_for_room_seperating"]["expected_2_4g_ssids"] == [
         "TP-Link_EB98"
     ]
 

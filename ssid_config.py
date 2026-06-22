@@ -85,7 +85,7 @@ PLANNED_SSIDS_RAW = [
     "R15-FEFA",
 ]
 
-CONFIG_55_SSIDS = {
+CONFIG_55_SSIDS_FOR_DEPRECATED = {
     "expected_5g_ssids": [
         ssid for ssid in EXPECTED_5G_SSIDS_RAW[:30] if ssid != "Keenetic-1947"
     ],
@@ -96,7 +96,7 @@ CONFIG_55_SSIDS = {
     "planned_ssids": PLANNED_SSIDS_RAW,
 }
 
-CONFIG_26_SSIDS = {
+CONFIG_26_SSIDS_FOR_EXHIVITION = {
     "expected_5g_ssids": [
         "ASUS_F6_5G",
         "NETGEAR11-5G",
@@ -138,7 +138,7 @@ CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING = {
     "planned_ssids": PLANNED_SSIDS_RAW,
 }
 
-CONFIG_2_SSIDS_AS_EB98 = {
+CONFIG_2_SSIDS_AS_EB98_FOR_ROOM_SEPERATING = {
     "expected_5g_ssids": ["TP-Link_EB98_5G"],
     "expected_2_4g_ssids": ["TP-Link_EB98"],
     "ignored_ssids": IGNORED_SSIDS_RAW,
@@ -146,13 +146,13 @@ CONFIG_2_SSIDS_AS_EB98 = {
 }
 
 SSID_CONFIGS = {
-    "config_26_ssids": CONFIG_26_SSIDS,
-    "config_55_ssids": CONFIG_55_SSIDS,
+    "config_26_ssids_for_exhivition": CONFIG_26_SSIDS_FOR_EXHIVITION,
+    "config_55_ssids_for_deprecated": CONFIG_55_SSIDS_FOR_DEPRECATED,
     "config_2_ssids_as_e8e4_for_mesh_networking": CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING,
-    "config_2_ssids_as_eb98": CONFIG_2_SSIDS_AS_EB98,
+    "config_2_ssids_as_eb98_for_room_seperating": CONFIG_2_SSIDS_AS_EB98_FOR_ROOM_SEPERATING,
 }
 
-DEFAULT_SSID_CONFIG_NAME = "config_55_ssids"
+DEFAULT_SSID_CONFIG_NAME = "config_55_ssids_for_deprecated"
 SELECTED_SSID_CONFIG_PATH = Path(__file__).parent / "pk_tmp" / "selected_ssid_config.txt"
 
 WATCH_INTERVAL_SEC = 3.0

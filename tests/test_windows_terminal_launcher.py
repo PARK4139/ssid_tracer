@@ -89,7 +89,7 @@ def test_launcher_passes_python_with_rich_to_panes():
 def test_launcher_resets_selected_config_before_opening_panes(tmp_path):
     launcher = load_launcher_module()
     selected_config_path = tmp_path / "selected_ssid_config.txt"
-    selected_config_path.write_text("config_26_ssids", encoding="utf-8")
+    selected_config_path.write_text("config_26_ssids_for_exhivition", encoding="utf-8")
 
     launcher._SELECTED_SSID_CONFIG_PATH = selected_config_path
     launcher._reset_selected_ssid_config()
