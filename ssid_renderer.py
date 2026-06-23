@@ -88,23 +88,21 @@ def build_action_required_statistics_section(
 ):
     confirmed_count = live_confirmed_5g_count + live_confirmed_2_4g_count
     dead_confirmed_count = dead_confirmed_5g_count + dead_confirmed_2_4g_count
-    return build_rich_section(
-        title="STATISTICS",
-        renderables=[
-            Text(f"Detected        : {len(detected_wifi_entries)}"),
-            Text(f"Intended        : {confirmed_count}"),
-            Text(f"Dead Intended   : {dead_confirmed_count}"),
-            Text(f"Action Required : {len(action_required_items)}"),
-            Text(f"Scan Status     : {'OK' if scan_ok else 'WARN'}"),
-            Text(f"Scan Message    : {scan_message}"),
-        ],
-        border_style="white",
+    return Group(
+        Text("# STATISTICS"),
+        Text(f"Detected        : {len(detected_wifi_entries)}"),
+        Text(f"Intended        : {confirmed_count}"),
+        Text(f"Dead Intended   : {dead_confirmed_count}"),
+        Text(f"Action Required : {len(action_required_items)}"),
+        Text(f"Scan Status     : {'OK' if scan_ok else 'WARN'}"),
+        Text(f"Scan Message    : {scan_message}"),
     )
 
 
 def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ignored_ssids, planned_ssids):
     expected_ssids = list(expected_5g_ssids) + list(expected_2_4g_ssids)
     renderables = [
+        Text("# CONFIG"),
         Text(f"Selected Config : {config_name}"),
         Text(""),
         Text(f"Intended({len(expected_ssids)})"),
@@ -121,11 +119,7 @@ def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ig
         for index, ssid in enumerate(ignored_ssids, start=1)
     )
 
-    return build_rich_section(
-        title="CONFIG",
-        renderables=renderables,
-        border_style="white",
-    )
+    return Group(*renderables)
 
 
 def build_result_screen(

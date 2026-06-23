@@ -1,0 +1,294 @@
+[2026-06-23 13:02:43] FAILED: missing expected SSID(s): TP-Link_EB98_5G | confirmed expected count: 1/2
+[2026-06-23 13:02:44] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:02:44] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:02:44] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:03:45] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:03:45] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:03:45] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:04:47] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:04:48] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:04:48] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:05:50] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:05:50] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:05:50] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:06:37] PASSED
+[2026-06-23 13:06:50] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:06:54] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:06:55] FAILED: unexpected SSID(s): 주한이아빠13(channel=149) | confirmed expected count: 2/2
+[2026-06-23 13:07:15] PASSED
+[2026-06-23 13:07:15] PASSED
+[2026-06-23 13:07:17] PASSED
+[2026-06-23 13:08:16] PASSED
+[2026-06-23 13:08:16] PASSED
+[2026-06-23 13:08:18] PASSED
+[2026-06-23 13:09:18] PASSED
+[2026-06-23 13:09:18] PASSED
+[2026-06-23 13:09:21] PASSED
+[2026-06-23 13:10:18] PASSED
+[2026-06-23 13:10:18] PASSED
+[2026-06-23 13:10:23] PASSED
+[2026-06-23 13:11:21] PASSED
+[2026-06-23 13:11:21] PASSED
+[2026-06-23 13:11:23] PASSED
+[2026-06-23 13:12:21] PASSED
+[2026-06-23 13:12:21] PASSED
+[2026-06-23 13:12:26] PASSED
+[2026-06-23 13:13:24] PASSED
+[2026-06-23 13:13:24] PASSED
+[2026-06-23 13:13:26] PASSED
+[2026-06-23 13:14:27] PASSED
+[2026-06-23 13:14:27] PASSED
+[2026-06-23 13:14:29] PASSED
+[2026-06-23 13:15:27] PASSED
+[2026-06-23 13:15:27] PASSED
+[2026-06-23 13:15:30] PASSED
+[2026-06-23 13:16:30] PASSED
+[2026-06-23 13:16:30] PASSED
+[2026-06-23 13:16:32] PASSED
+[2026-06-23 13:16:53] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:16:54] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:16:54] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:17:53] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:17:54] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:17:54] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:18:54] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:18:55] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:18:55] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=108), Anyang WiFi Secure(channel=108) | confirmed expected count: 2/2
+[2026-06-23 13:19:10] PASSED
+[2026-06-23 13:19:10] PASSED
+[2026-06-23 13:19:12] PASSED
+[2026-06-23 13:20:12] PASSED
+[2026-06-23 13:20:12] PASSED
+[2026-06-23 13:20:14] PASSED
+[2026-06-23 13:21:12] PASSED
+[2026-06-23 13:21:12] PASSED
+[2026-06-23 13:21:14] PASSED
+[2026-06-23 13:22:12] PASSED
+[2026-06-23 13:22:12] PASSED
+[2026-06-23 13:22:14] PASSED
+[2026-06-23 13:23:12] PASSED
+[2026-06-23 13:23:12] PASSED
+[2026-06-23 13:23:17] PASSED
+[2026-06-23 13:24:15] PASSED
+[2026-06-23 13:24:15] PASSED
+[2026-06-23 13:24:20] PASSED
+[2026-06-23 13:25:16] PASSED
+[2026-06-23 13:25:16] PASSED
+[2026-06-23 13:25:20] PASSED
+[2026-06-23 13:26:16] PASSED
+[2026-06-23 13:26:18] PASSED
+[2026-06-23 13:26:21] PASSED
+[2026-06-23 13:27:16] PASSED
+[2026-06-23 13:27:21] PASSED
+[2026-06-23 13:27:24] PASSED
+[2026-06-23 13:28:19] PASSED
+[2026-06-23 13:28:22] PASSED
+[2026-06-23 13:28:25] PASSED
+[2026-06-23 13:29:21] PASSED
+[2026-06-23 13:29:24] PASSED
+[2026-06-23 13:29:26] PASSED
+[2026-06-23 13:30:21] PASSED
+[2026-06-23 13:30:27] PASSED
+[2026-06-23 13:30:29] PASSED
+[2026-06-23 13:31:24] PASSED
+[2026-06-23 13:31:27] PASSED
+[2026-06-23 13:31:32] PASSED
+[2026-06-23 13:32:24] PASSED
+[2026-06-23 13:32:30] PASSED
+[2026-06-23 13:32:32] PASSED
+[2026-06-23 13:33:27] PASSED
+[2026-06-23 13:33:30] PASSED
+[2026-06-23 13:33:35] PASSED
+[2026-06-23 13:34:27] PASSED
+[2026-06-23 13:34:33] PASSED
+[2026-06-23 13:34:35] PASSED
+[2026-06-23 13:35:30] PASSED
+[2026-06-23 13:35:33] PASSED
+[2026-06-23 13:35:38] PASSED
+[2026-06-23 13:36:30] PASSED
+[2026-06-23 13:36:36] PASSED
+[2026-06-23 13:36:41] PASSED
+[2026-06-23 13:37:33] PASSED
+[2026-06-23 13:37:39] PASSED
+[2026-06-23 13:37:41] PASSED
+[2026-06-23 13:38:34] PASSED
+[2026-06-23 13:38:40] PASSED
+[2026-06-23 13:38:42] PASSED
+[2026-06-23 13:39:37] PASSED
+[2026-06-23 13:39:42] PASSED
+[2026-06-23 13:39:45] PASSED
+[2026-06-23 13:40:39] PASSED
+[2026-06-23 13:40:42] PASSED
+[2026-06-23 13:40:47] PASSED
+[2026-06-23 13:41:40] PASSED
+[2026-06-23 13:41:43] PASSED
+[2026-06-23 13:41:48] PASSED
+[2026-06-23 13:42:42] PASSED
+[2026-06-23 13:42:46] PASSED
+[2026-06-23 13:42:50] PASSED
+[2026-06-23 13:43:42] PASSED
+[2026-06-23 13:43:49] PASSED
+[2026-06-23 13:43:51] PASSED
+[2026-06-23 13:44:43] PASSED
+[2026-06-23 13:44:51] PASSED
+[2026-06-23 13:44:52] PASSED
+[2026-06-23 13:45:43] PASSED
+[2026-06-23 13:45:54] PASSED
+[2026-06-23 13:45:55] PASSED
+[2026-06-23 13:46:43] PASSED
+[2026-06-23 13:46:54] PASSED
+[2026-06-23 13:46:58] PASSED
+[2026-06-23 13:47:46] PASSED
+[2026-06-23 13:47:57] PASSED
+[2026-06-23 13:47:58] PASSED
+[2026-06-23 13:48:49] PASSED
+[2026-06-23 13:49:00] PASSED
+[2026-06-23 13:49:01] PASSED
+[2026-06-23 13:49:52] PASSED
+[2026-06-23 13:50:00] PASSED
+[2026-06-23 13:50:01] PASSED
+[2026-06-23 13:50:55] PASSED
+[2026-06-23 13:51:03] PASSED
+[2026-06-23 13:51:04] PASSED
+[2026-06-23 13:51:12] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=112) | confirmed expected count: 2/2
+[2026-06-23 13:51:13] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=112) | confirmed expected count: 2/2
+[2026-06-23 13:51:13] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=112) | confirmed expected count: 2/2
+[2026-06-23 13:52:14] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=112) | confirmed expected count: 2/2
+[2026-06-23 13:52:15] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=112) | confirmed expected count: 2/2
+[2026-06-23 13:52:15] FAILED: unexpected SSID(s): Anyang WiFi Free(channel=112) | confirmed expected count: 2/2
+[2026-06-23 13:53:11] PASSED
+[2026-06-23 13:53:12] PASSED
+[2026-06-23 13:53:12] PASSED
+[2026-06-23 13:54:12] PASSED
+[2026-06-23 13:54:13] PASSED
+[2026-06-23 13:54:14] PASSED
+[2026-06-23 13:55:12] PASSED
+[2026-06-23 13:55:13] PASSED
+[2026-06-23 13:55:15] PASSED
+[2026-06-23 13:56:13] PASSED
+[2026-06-23 13:56:13] PASSED
+[2026-06-23 13:56:18] PASSED
+[2026-06-23 13:57:13] PASSED
+[2026-06-23 13:57:13] PASSED
+[2026-06-23 13:57:18] PASSED
+[2026-06-23 13:58:16] PASSED
+[2026-06-23 13:58:16] PASSED
+[2026-06-23 13:58:20] PASSED
+[2026-06-23 13:59:16] PASSED
+[2026-06-23 13:59:16] PASSED
+[2026-06-23 13:59:21] PASSED
+[2026-06-23 14:00:19] PASSED
+[2026-06-23 14:00:19] PASSED
+[2026-06-23 14:00:21] PASSED
+[2026-06-23 14:01:19] PASSED
+[2026-06-23 14:01:19] PASSED
+[2026-06-23 14:01:24] PASSED
+[2026-06-23 14:02:22] PASSED
+[2026-06-23 14:02:22] PASSED
+[2026-06-23 14:02:27] PASSED
+[2026-06-23 14:03:22] PASSED
+[2026-06-23 14:03:22] PASSED
+[2026-06-23 14:03:30] PASSED
+[2026-06-23 14:04:25] PASSED
+[2026-06-23 14:04:25] PASSED
+[2026-06-23 14:04:33] PASSED
+[2026-06-23 14:05:25] PASSED
+[2026-06-23 14:05:25] PASSED
+[2026-06-23 14:05:33] PASSED
+[2026-06-23 14:06:25] PASSED
+[2026-06-23 14:06:25] PASSED
+[2026-06-23 14:06:35] PASSED
+[2026-06-23 14:07:28] PASSED
+[2026-06-23 14:07:28] PASSED
+[2026-06-23 14:07:36] PASSED
+[2026-06-23 14:08:30] PASSED
+[2026-06-23 14:08:31] PASSED
+[2026-06-23 14:08:38] PASSED
+[2026-06-23 14:09:31] PASSED
+[2026-06-23 14:09:31] PASSED
+[2026-06-23 14:09:39] PASSED
+[2026-06-23 14:10:31] PASSED
+[2026-06-23 14:10:34] PASSED
+[2026-06-23 14:10:39] PASSED
+[2026-06-23 14:11:36] PASSED
+[2026-06-23 14:11:37] PASSED
+[2026-06-23 14:11:40] PASSED
+[2026-06-23 14:12:38] PASSED
+[2026-06-23 14:12:38] PASSED
+[2026-06-23 14:12:40] PASSED
+[2026-06-23 14:12:56] PASSED
+[2026-06-23 14:13:38] PASSED
+[2026-06-23 14:13:40] PASSED
+[2026-06-23 14:13:40] PASSED
+[2026-06-23 14:14:38] PASSED
+[2026-06-23 14:14:41] PASSED
+[2026-06-23 14:14:42] PASSED
+[2026-06-23 14:15:39] PASSED
+[2026-06-23 14:15:42] PASSED
+[2026-06-23 14:15:42] PASSED
+[2026-06-23 14:16:40] PASSED
+[2026-06-23 14:16:43] PASSED
+[2026-06-23 14:16:43] PASSED
+[2026-06-23 14:17:43] PASSED
+[2026-06-23 14:17:45] PASSED
+[2026-06-23 14:17:45] PASSED
+[2026-06-23 14:18:43] PASSED
+[2026-06-23 14:18:46] PASSED
+[2026-06-23 14:18:46] PASSED
+[2026-06-23 14:19:18] PASSED
+[2026-06-23 14:19:45] PASSED
+[2026-06-23 14:19:49] PASSED
+[2026-06-23 14:19:50] PASSED
+[2026-06-23 14:20:48] PASSED
+[2026-06-23 14:20:50] PASSED
+[2026-06-23 14:20:51] PASSED
+[2026-06-23 14:21:49] PASSED
+[2026-06-23 14:21:52] PASSED
+[2026-06-23 14:21:52] PASSED
+[2026-06-23 14:22:51] PASSED
+[2026-06-23 14:22:55] PASSED
+[2026-06-23 14:22:55] PASSED
+[2026-06-23 14:24:33] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:24:35] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:24:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:24:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:25:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:25:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:25:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:26:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:26:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:26:36] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:26:52] PASSED
+[2026-06-23 14:27:39] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:27:39] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:27:39] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:28:39] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:28:39] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:28:42] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:29:40] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:29:40] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:29:43] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:30:40] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:30:40] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:30:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:31:40] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:31:40] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:31:49] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:32:43] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:32:43] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:32:52] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:33:43] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:33:43] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:33:55] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:34:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:34:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:34:58] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:35:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:35:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:35:58] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:36:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:36:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:37:01] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:37:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:37:46] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26
+[2026-06-23 14:38:05] FAILED: missing expected SSID(s): ASUS_00_EBR63_5G, ASUS_60_5G, ASUS_C8_5G, ASUS_F6_5G, Linksys00711_5G, NETGEAR11-5G, NETGEAR56-5G, Tenda_EFE220_5G, Tenda_EFFAA0_5G, TP-Link_35E8_5G, TP-Link_3B54_5G, TP-Link_5GHz_138BD2, TP-Link_A2B2_5G, ASUS_00_EBR63, ASUS_60, ASUS_C8, ASUS_F6, Linksys00711, NETGEAR11, NETGEAR56, Tenda_EFE220, Tenda_EFFAA0, TP-Link_2.4GHz_138BD1, TP-Link_35E8, TP-Link_3B54, TP-Link_A2B2 | unexpected SSID(s): iptime5G(channel=36), MERCUSYS_BA30_5G(channel=40), TP-Link_E8E4_5G(channel=48), TP-Link_EB98_5G(channel=48), iptime(channel=4), MERCUSYS_BA30(channel=6), TP-Link_E8E4(channel=11), TP-Link_EB98(channel=11) | confirmed expected count: 0/26

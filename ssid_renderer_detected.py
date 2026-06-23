@@ -1,7 +1,8 @@
+from rich.console import Group
 from rich.text import Text
 
 from ssid_config import SHOW_IGNORED_SSIDS
-from ssid_renderer_base import build_rich_section, get_rich_console, get_rich_style
+from ssid_renderer_base import get_rich_console, get_rich_style
 from ssid_utils import get_grouped_wifi_entries_by_ssid_and_band, get_sort_key, normalize_ssid_for_compare
 
 
@@ -89,11 +90,8 @@ def build_detected_ssid_section(
     rows = sorted(rows, key=lambda row: tuple(f(row) for f in sort_key_fields))
 
     title = get_detected_ssid_section_title(detected_ssid_count=len(rows))
+    renderables = [Text(f"# {title}")]
 
-    if len(rows) <= 0:
-        return build_rich_section(title=title, renderables=[], border_style="white")
-
-    renderables = []
     for index, item in enumerate(rows, start=1):
         channel_text = str(item.get("channel", "")) or "-"
         status_label = get_compact_detected_ssid_status_label(
@@ -113,7 +111,7 @@ def build_detected_ssid_section(
 
         renderables.append(Text(line, style=get_rich_style("white")))
 
-    return build_rich_section(title=title, renderables=renderables, border_style="white")
+    return Group(*renderables)
 
 
 def print_detected_ssid_list(

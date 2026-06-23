@@ -111,11 +111,11 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         output_text = output_buffer.getvalue()
 
         self.assertIn(
-            "LIVE SSIDS",
+            "# LIVE SSIDS",
             output_text,
         )
         self.assertIn(
-            "RESULT",
+            "# RESULT",
             output_text,
         )
         self.assertIn(
@@ -123,8 +123,8 @@ class WifiSsidTracerTestCase(unittest.TestCase):
             output_text,
         )
         self.assertLess(
-            output_text.index("RESULT"),
-            output_text.index("LIVE SSIDS"),
+            output_text.index("# RESULT"),
+            output_text.index("# LIVE SSIDS"),
         )
 
     def test_print_trace_verdict_lists_failure_ssids(self):
@@ -143,8 +143,10 @@ class WifiSsidTracerTestCase(unittest.TestCase):
                             "unexpected 2.4G SSID(s): NEIGHBOR_WIFI(channel=6)",
                         ],
                         "failure_ssids": [
-                            {"status_label": "MISSING", "ssid": "PRODUCT_5G"},
-                            {"status_label": "Unexpected", "ssid": "NEIGHBOR_WIFI(channel=6)"},
+                            {"status_label": "Unexpected", "ssid": "Z_NEIGHBOR_WIFI(channel=6)"},
+                            {"status_label": "MISSING", "ssid": "Z_PRODUCT_5G"},
+                            {"status_label": "MISSING", "ssid": "A_PRODUCT_5G"},
+                            {"status_label": "Unexpected", "ssid": "A_NEIGHBOR_WIFI(channel=6)"},
                         ],
                     }
                 )
@@ -154,8 +156,10 @@ class WifiSsidTracerTestCase(unittest.TestCase):
         output_text = output_buffer.getvalue()
 
         self.assertIn("Failure SSIDS", output_text)
-        self.assertIn("01. [MISSING] PRODUCT_5G", output_text)
-        self.assertIn("02. [Unexpected] NEIGHBOR_WIFI(channel=6)", output_text)
+        self.assertIn("01. [Unexpected] A_NEIGHBOR_WIFI(channel=6)", output_text)
+        self.assertIn("02. [Unexpected] Z_NEIGHBOR_WIFI(channel=6)", output_text)
+        self.assertIn("03. [MISSING] A_PRODUCT_5G", output_text)
+        self.assertIn("04. [MISSING] Z_PRODUCT_5G", output_text)
         self.assertNotIn("Failure Reason Count", output_text)
         self.assertNotIn("Failure Reasons", output_text)
 

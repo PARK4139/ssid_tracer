@@ -51,24 +51,24 @@ def build_text_for_section(section_name):
 def test_result_section_only_renders_result_panel():
     text = build_text_for_section("result")
 
-    assert "RESULT" in text
+    assert "# RESULT" in text
     assert "Selected Config                :" in text
     assert "config_55_ssids_for_deprecated" in text
-    assert "LIVE SSIDS" not in text
-    assert "STATISTICS" not in text
-    assert "CONFIG" not in text
+    assert "# LIVE SSIDS" not in text
+    assert "# STATISTICS" not in text
+    assert "# CONFIG" not in text
 
 
 def test_detected_section_only_renders_detected_panel():
     text = build_text_for_section("detected")
 
-    assert "LIVE SSIDS(2)" in text
+    assert "# LIVE SSIDS(2)" in text
     assert "PRODUCT_5G INTENDED band=5G ch=36" in text
     assert "PRODUCT_2G INTENDED band=2_4G ch=6" in text
     assert "bssid_count" not in text
-    assert "RESULT" not in text
-    assert "STATISTICS" not in text
-    assert "CONFIG" not in text
+    assert "# RESULT" not in text
+    assert "# STATISTICS" not in text
+    assert "# CONFIG" not in text
 
 
 def test_empty_detected_section_title_includes_zero_count():
@@ -85,7 +85,7 @@ def test_empty_detected_section_title_includes_zero_count():
         )
     )
 
-    assert "LIVE SSIDS(0)" in text
+    assert "# LIVE SSIDS(0)" in text
 
 
 def test_live_ssids_section_excludes_missing_and_dead_rows():
@@ -122,7 +122,7 @@ def test_live_ssids_section_excludes_missing_and_dead_rows():
         )
     )
 
-    assert "LIVE SSIDS(1)" in text
+    assert "# LIVE SSIDS(1)" in text
     assert "LIVE_UNEXPECTED Unexpected band=5G ch=36" in text
     assert "MISSING_5G" not in text
     assert "DEAD_5G" not in text
@@ -133,22 +133,22 @@ def test_live_ssids_section_excludes_missing_and_dead_rows():
 def test_statistics_section_only_renders_statistics_panel():
     text = build_text_for_section("statistics")
 
-    assert "STATISTICS" in text
-    assert "RESULT" not in text
-    assert "LIVE SSIDS" not in text
-    assert "CONFIG" not in text
+    assert "# STATISTICS" in text
+    assert "# RESULT" not in text
+    assert "# LIVE SSIDS" not in text
+    assert "# CONFIG" not in text
 
 
 def test_config_section_only_renders_config_panel():
     text = build_text_for_section("config")
 
-    assert "CONFIG" in text
+    assert "# CONFIG" in text
     assert "Intended(2)" in text
     assert "Expected(" not in text
     assert "Expected 5G" not in text
-    assert "RESULT" not in text
-    assert "LIVE SSIDS" not in text
-    assert "STATISTICS" not in text
+    assert "# RESULT" not in text
+    assert "# LIVE SSIDS" not in text
+    assert "# STATISTICS" not in text
 
 
 def test_config_section_renders_intended_and_ignored_counts_without_planned():

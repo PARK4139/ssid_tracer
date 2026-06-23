@@ -2,23 +2,38 @@ from rich.console import Group
 from rich.text import Text
 
 from ssid_renderer_base import get_rich_console, get_rich_style
+from ssid_utils import get_sort_key
 
 
 def get_failure_ssid_renderables(failure_ssids):
     if len(failure_ssids) <= 0:
         return [Text("    01. [UNKNOWN] unknown reason", style=get_rich_style("white"))]
 
-    renderables = []
-    for index, failure_ssid in enumerate(failure_ssids, start=1):
+    status_label_order = []
+    grouped_failure_ssids = {}
+    for failure_ssid in failure_ssids:
         status_label = failure_ssid.get("status_label", "UNKNOWN")
-        ssid = failure_ssid.get("ssid", "")
-        renderables.append(Text(f"    {index:02d}. [{status_label}] {ssid}", style=get_rich_style("white")))
+        if status_label not in grouped_failure_ssids:
+            grouped_failure_ssids[status_label] = []
+            status_label_order.append(status_label)
+        grouped_failure_ssids[status_label].append(failure_ssid)
+
+    renderables = []
+    index = 1
+    for status_label in status_label_order:
+        for failure_ssid in sorted(
+            grouped_failure_ssids[status_label],
+            key=lambda item: get_sort_key(value=item.get("ssid", "")),
+        ):
+            ssid = failure_ssid.get("ssid", "")
+            renderables.append(Text(f"    {index:02d}. [{status_label}] {ssid}", style=get_rich_style("white")))
+            index += 1
     return renderables
 
 
 def build_trace_verdict_section(trace_verdict, config_name=None, checked_at=None, error_message=""):
     status_label = trace_verdict.get("status_label", "FAILED")
-    renderables = [Text("------------------------ RESULT ------------------------", style=get_rich_style("white"))]
+    renderables = [Text("# RESULT", style=get_rich_style("white"))]
 
     status_text = Text("Status               : ")
     if status_label == "PASSED":
@@ -30,8 +45,7 @@ def build_trace_verdict_section(trace_verdict, config_name=None, checked_at=None
     renderables.append(status_text)
 
     if config_name is not None:
-        renderables.append(Text("Selected Config                :", style=get_rich_style("white")))
-        renderables.append(Text(str(config_name), style=get_rich_style("white")))
+        renderables.append(Text(f"Selected Config                : {config_name}", style=get_rich_style("white")))
 
     if checked_at is not None:
         renderables.append(Text(f"Checked At                    : {checked_at}", style=get_rich_style("white")))

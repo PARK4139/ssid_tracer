@@ -75,6 +75,7 @@ IGNORED_SSIDS_RAW = [
     "NETGEAR90-5G",
     "NETGEAR90",
     "하니부",
+    "주한이아빠13",
 ]
 
 PLANNED_SSIDS_RAW = []
