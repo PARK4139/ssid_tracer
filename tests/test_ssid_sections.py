@@ -155,12 +155,12 @@ def test_config_section_renders_intended_and_ignored_counts_without_planned():
     text = build_text_for_section("config")
 
     assert "Intended(2)" in text
-    assert "01. PRODUCT_5G" in text
-    assert "02. PRODUCT_2G" in text
+    assert "01. [5G] PRODUCT_5G" in text
+    assert "02. [2_4G] PRODUCT_2G" in text
     assert "Planned" not in text
     assert "PLANNED_WIFI" not in text
     assert "Ignored(1)" in text
-    assert "01. OFFICE" in text
+    assert "01. [Ignored] OFFICE" in text
     assert "Expected 2.4G" not in text
     assert "Expected(" not in text
     assert "  - " not in text
@@ -192,7 +192,7 @@ def test_config_28_ssids_for_exhivition_merges_26_exhivition_with_e8e4_mesh_pair
     assert "config_2_ssids_as_e8e4_for_mesh_networking" not in ssid_config.SSID_CONFIGS
 
     assert selected_config["expected_5g_ssids"] == [
-        "ASUS_F6_5G",
+        "ASUS_F6",
         "NETGEAR11-5G",
         "NETGEAR56-5G",
         "Tenda_EFFAA0_5G",
@@ -201,7 +201,7 @@ def test_config_28_ssids_for_exhivition_merges_26_exhivition_with_e8e4_mesh_pair
         "TP-Link_5GHz_138BD2",
         "TP-Link_3B54_5G",
         "ASUS_00_EBR63_5G",
-        "ASUS_C8_5G",
+        "ASUS_C8",
         "ASUS_60_5G",
         "Tenda_EFE220_5G",
         "Linksys00711_5G",

@@ -93,7 +93,7 @@ CONFIG_55_SSIDS_FOR_DEPRECATED = {
 
 CONFIG_28_SSIDS_FOR_EXHIVITION = {
     "expected_5g_ssids": [
-        "ASUS_F6_5G",
+        "ASUS_F6",
         "NETGEAR11-5G",
         "NETGEAR56-5G",
         "Tenda_EFFAA0_5G",
@@ -102,7 +102,7 @@ CONFIG_28_SSIDS_FOR_EXHIVITION = {
         "TP-Link_5GHz_138BD2",
         "TP-Link_3B54_5G",
         "ASUS_00_EBR63_5G",
-        "ASUS_C8_5G",
+        "ASUS_C8",
         "ASUS_60_5G",
         "Tenda_EFE220_5G",
         "Linksys00711_5G",

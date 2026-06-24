@@ -100,22 +100,25 @@ def build_action_required_statistics_section(
 
 
 def build_config_section(config_name, expected_5g_ssids, expected_2_4g_ssids, ignored_ssids, planned_ssids):
-    expected_ssids = list(expected_5g_ssids) + list(expected_2_4g_ssids)
+    expected_rows = (
+        [(ssid, "5G") for ssid in expected_5g_ssids]
+        + [(ssid, "2_4G") for ssid in expected_2_4g_ssids]
+    )
     renderables = [
         Text("# CONFIG"),
         Text(f"Selected Config : {config_name}"),
         Text(""),
-        Text(f"Intended({len(expected_ssids)})"),
+        Text(f"Intended({len(expected_rows)})"),
     ]
 
     renderables.extend(
-        Text(f"  {index:02d}. {ssid}")
-        for index, ssid in enumerate(expected_ssids, start=1)
+        Text(f"    {index:02d}. [{band}] {ssid}")
+        for index, (ssid, band) in enumerate(expected_rows, start=1)
     )
     renderables.append(Text(""))
     renderables.append(Text(f"Ignored({len(ignored_ssids)})"))
     renderables.extend(
-        Text(f"  {index:02d}. {ssid}")
+        Text(f"    {index:02d}. [Ignored] {ssid}")
         for index, ssid in enumerate(ignored_ssids, start=1)
     )
 
