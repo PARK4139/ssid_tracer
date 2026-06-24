@@ -45,10 +45,7 @@ def build_trace_verdict_section(trace_verdict, config_name=None, checked_at=None
     renderables.append(status_text)
 
     if config_name is not None:
-        renderables.append(Text(f"Selected Config                : {config_name}", style=get_rich_style("white")))
-
-    if checked_at is not None:
-        renderables.append(Text(f"Checked At                    : {checked_at}", style=get_rich_style("white")))
+        renderables.append(Text(f"Selected Config: {config_name}", style=get_rich_style("white")))
 
     if error_message:
         renderables.append(Text(f"Error Message                 : {error_message}", style=get_rich_style("red")))
@@ -56,8 +53,9 @@ def build_trace_verdict_section(trace_verdict, config_name=None, checked_at=None
     if status_label == "PASSED":
         renderables.append(Text("All expected SSIDs are intended.", style=get_rich_style("white")))
     elif status_label == "FAILED":
-        renderables.append(Text("Failure SSIDS", style=get_rich_style("white")))
-        renderables.extend(get_failure_ssid_renderables(failure_ssids=trace_verdict.get("failure_ssids", [])))
+        failure_ssids = trace_verdict.get("failure_ssids", [])
+        renderables.append(Text(f"Failure SSIDS({len(failure_ssids)})", style=get_rich_style("white")))
+        renderables.extend(get_failure_ssid_renderables(failure_ssids=failure_ssids))
 
     return Group(*renderables)
 

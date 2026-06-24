@@ -1,5 +1,3 @@
-import time
-
 from rich.console import Group
 from rich.text import Text
 
@@ -155,8 +153,6 @@ def build_result_screen(
         detected_wifi_entries=detected_wifi_entries,
     )
 
-    checked_at = time.strftime("%Y-%m-%d %H:%M:%S")
-
     if config_name == "NOT SET":
         trace_verdict = {"status_label": "NOT_TESTED", "failure_reasons": []}
     else:
@@ -178,7 +174,6 @@ def build_result_screen(
         build_trace_verdict_section(
             trace_verdict=trace_verdict,
             config_name=config_name,
-            checked_at=checked_at,
             error_message=error_message,
         ),
     ]

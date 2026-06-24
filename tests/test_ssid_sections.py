@@ -52,8 +52,9 @@ def test_result_section_only_renders_result_panel():
     text = build_text_for_section("result")
 
     assert "# RESULT" in text
-    assert "Selected Config                :" in text
+    assert "Selected Config: config_55_ssids_for_deprecated" in text
     assert "config_55_ssids_for_deprecated" in text
+    assert "Checked At" not in text
     assert "# LIVE SSIDS" not in text
     assert "# STATISTICS" not in text
     assert "# CONFIG" not in text
@@ -280,8 +281,7 @@ def test_missing_selected_config_returns_not_tested_result_pane(monkeypatch):
     assert current_ssid_configuration["expected_5g_ssids"] == []
     assert "RESULT" in text
     assert "Status               : NOT TESTED" in text
-    assert "Selected Config                :" in text
-    assert "NOT SET" in text
+    assert "Selected Config: NOT SET" in text
     assert '"NOT TESTED"' not in text
 
 

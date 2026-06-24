@@ -155,7 +155,7 @@ class WifiSsidTracerTestCase(unittest.TestCase):
 
         output_text = output_buffer.getvalue()
 
-        self.assertIn("Failure SSIDS", output_text)
+        self.assertIn("Failure SSIDS(4)", output_text)
         self.assertIn("01. [Unexpected] A_NEIGHBOR_WIFI(channel=6)", output_text)
         self.assertIn("02. [Unexpected] Z_NEIGHBOR_WIFI(channel=6)", output_text)
         self.assertIn("03. [MISSING] A_PRODUCT_5G", output_text)
