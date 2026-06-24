@@ -63,8 +63,8 @@ def test_detected_section_only_renders_detected_panel():
     text = build_text_for_section("detected")
 
     assert "# LIVE SSIDS(2)" in text
-    assert "PRODUCT_5G INTENDED band=5G ch=36" in text
-    assert "PRODUCT_2G INTENDED band=2_4G ch=6" in text
+    assert "[INTENDED] PRODUCT_5G(channel=36)" in text
+    assert "[INTENDED] PRODUCT_2G(channel=6)" in text
     assert "bssid_count" not in text
     assert "# RESULT" not in text
     assert "# STATISTICS" not in text
@@ -123,7 +123,7 @@ def test_live_ssids_section_excludes_missing_and_dead_rows():
     )
 
     assert "# LIVE SSIDS(1)" in text
-    assert "LIVE_UNEXPECTED Unexpected band=5G ch=36" in text
+    assert "[Unexpected] LIVE_UNEXPECTED(channel=36)" in text
     assert "MISSING_5G" not in text
     assert "DEAD_5G" not in text
     assert "DEAD_2G" not in text
@@ -185,8 +185,11 @@ def test_config_55_ssids_for_deprecated_has_55_expected_ssids_and_expected_inclu
     assert "Keenetic-1947" not in expected_2_4g_ssids
 
 
-def test_config_26_ssids_for_exhivition_uses_13_expected_pairs_with_5g_suffix_for_same_names():
-    selected_config = ssid_config.SSID_CONFIGS["config_26_ssids_for_exhivition"]
+def test_config_28_ssids_for_exhivition_merges_26_exhivition_with_e8e4_mesh_pair():
+    selected_config = ssid_config.SSID_CONFIGS["config_28_ssids_for_exhivition"]
+
+    assert "config_26_ssids_for_exhivition" not in ssid_config.SSID_CONFIGS
+    assert "config_2_ssids_as_e8e4_for_mesh_networking" not in ssid_config.SSID_CONFIGS
 
     assert selected_config["expected_5g_ssids"] == [
         "ASUS_F6_5G",
@@ -202,6 +205,7 @@ def test_config_26_ssids_for_exhivition_uses_13_expected_pairs_with_5g_suffix_fo
         "ASUS_60_5G",
         "Tenda_EFE220_5G",
         "Linksys00711_5G",
+        "TP-Link_E8E4_5G",
     ]
     assert selected_config["expected_2_4g_ssids"] == [
         "ASUS_F6",
@@ -217,16 +221,11 @@ def test_config_26_ssids_for_exhivition_uses_13_expected_pairs_with_5g_suffix_fo
         "ASUS_60",
         "Tenda_EFE220",
         "Linksys00711",
+        "TP-Link_E8E4",
     ]
 
 
-def test_config_2_ssids_variants_are_available_for_e8e4_mesh_networking_and_eb98():
-    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_e8e4_for_mesh_networking"]["expected_5g_ssids"] == [
-        "TP-Link_E8E4_5G"
-    ]
-    assert ssid_config.SSID_CONFIGS["config_2_ssids_as_e8e4_for_mesh_networking"]["expected_2_4g_ssids"] == [
-        "TP-Link_E8E4"
-    ]
+def test_config_2_ssids_variant_is_available_for_eb98():
     assert ssid_config.SSID_CONFIGS["config_2_ssids_as_eb98_for_room_seperating"]["expected_5g_ssids"] == [
         "TP-Link_EB98_5G"
     ]

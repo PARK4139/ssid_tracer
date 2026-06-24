@@ -91,7 +91,7 @@ CONFIG_55_SSIDS_FOR_DEPRECATED = {
     "planned_ssids": PLANNED_SSIDS_RAW,
 }
 
-CONFIG_26_SSIDS_FOR_EXHIVITION = {
+CONFIG_28_SSIDS_FOR_EXHIVITION = {
     "expected_5g_ssids": [
         "ASUS_F6_5G",
         "NETGEAR11-5G",
@@ -106,6 +106,7 @@ CONFIG_26_SSIDS_FOR_EXHIVITION = {
         "ASUS_60_5G",
         "Tenda_EFE220_5G",
         "Linksys00711_5G",
+        "TP-Link_E8E4_5G",
     ],
     "expected_2_4g_ssids": [
         "ASUS_F6",
@@ -121,14 +122,8 @@ CONFIG_26_SSIDS_FOR_EXHIVITION = {
         "ASUS_60",
         "Tenda_EFE220",
         "Linksys00711",
+        "TP-Link_E8E4",
     ],
-    "ignored_ssids": IGNORED_SSIDS_RAW,
-    "planned_ssids": PLANNED_SSIDS_RAW,
-}
-
-CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING = {
-    "expected_5g_ssids": ["TP-Link_E8E4_5G"],
-    "expected_2_4g_ssids": ["TP-Link_E8E4"],
     "ignored_ssids": IGNORED_SSIDS_RAW,
     "planned_ssids": PLANNED_SSIDS_RAW,
 }
@@ -148,9 +143,8 @@ CONFIG_2_SSIDS_AS_EB98_FOR_ROOM_SEPERATING = {
 }
 
 SSID_CONFIGS = {
-    "config_26_ssids_for_exhivition": CONFIG_26_SSIDS_FOR_EXHIVITION,
+    "config_28_ssids_for_exhivition": CONFIG_28_SSIDS_FOR_EXHIVITION,
     "config_55_ssids_for_deprecated": CONFIG_55_SSIDS_FOR_DEPRECATED,
-    "config_2_ssids_as_e8e4_for_mesh_networking": CONFIG_2_SSIDS_AS_E8E4_FOR_MESH_NETWORKING,
     "config_2_ssids_as_eb98_for_room_seperating": CONFIG_2_SSIDS_AS_EB98_FOR_ROOM_SEPERATING,
 }
 

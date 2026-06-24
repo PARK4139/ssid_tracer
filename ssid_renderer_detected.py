@@ -102,11 +102,10 @@ def build_detected_ssid_section(
         )
 
         line = (
-            f"  {index:02d}. "
-            f"{item['ssid']} "
-            f"{status_label} "
-            f"band={item.get('band', '')} "
-            f"ch={channel_text}"
+            f"    {index:02d}. "
+            f"[{status_label}] "
+            f"{item['ssid']}"
+            f"(channel={channel_text})"
         )
 
         renderables.append(Text(line, style=get_rich_style("white")))
